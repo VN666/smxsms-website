@@ -7,6 +7,7 @@
 <script>
 import hDropDownList from "./h-dropDownList.vue";
 import menu from "../config/menu";
+
 export default {
 	name: "hNavigator",
 	data () {

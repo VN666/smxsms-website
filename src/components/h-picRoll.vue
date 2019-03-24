@@ -1,15 +1,19 @@
 <template>
-	<div class="picRoll">
-		<div class="vector">
-			<div class="gallery" :class="{animation: animation}" ref="gallery">
-				<img v-for="item in imgArr" :src="item" />
+	<div class="picRoll" @mouseenter="mouseFn" @mouseleave="mouseFn">
+		<div class="vector"
+			:style="{width:len*100+'%',transform:`translateX(-${currentIndex/len*100+'%'}`,transition:`${isResetIndex?'':`transform ${transitionInterval/1000}s`}`}"
+		>
+			<div class="item" v-for="(item,index) in imgArr" :key="index"
+				:style="{width:100/len+'%',backgroundImage:`url(${item.src})`}">
 			</div>
 		</div>
-		<div class="btn" @click="moveLeft">
-			<div>左</div>
-		</div>
-		<div class="btn2" @click="moveRight">
-			<div>右</div>
+		<div class="btn btnL" @click="move('L')" v-if="showBtn&&isBtn"><span v-html="'<'"></span></div>
+		<div class="btn btnR" @click="move('R')" v-if="showBtn&&isBtn"><span v-html="'>'"></span></div>
+		<div class="cirBtn" v-if="isCirBtn">
+			<div v-for="n in imgs.length" @mouseenter="cirBtn(n)"
+				:class="{'hover':n===currentIndex||(n===1&&currentIndex===len-1)||(n===imgs.length&&currentIndex===0)}"
+			>
+			</div>
 		</div>
 	</div>
 </template>
@@ -18,65 +22,91 @@
 
 export default {
 	name: "picRoll",
+	props: {
+		imgs: {
+			type: Array,
+			required: true
+		},
+		interval: {
+			type: Number,
+			default: 5000
+		},
+		isBtn: {
+			type: Boolean,
+			default: true
+		},
+		isCirBtn: {
+			type: Boolean,
+			default: true
+		}
+	},
 	data () {
 		return {
-			imgArr: [
-				require("../assets/img1.jpg"),
-				require("../assets/img2.jpg"),
-				require("../assets/img3.jpg"),
-				require("../assets/img4.jpg"),
-				/*require("../assets/img5.jpg"),
-				require("../assets/img6.jpg"),*/
-			],
-			index: 0,
-			len: 0,
-			animation: true,
-			el: null,
-			lock: false
+			showBtn: false,
+			currentIndex: 1,
+			transitionInterval: 1000,
+			isResetIndex: false,
+			isTransitioning: false,
+			timer: null
 		};
 	},
-	mounted () {
-		this.init();
+	created () {
+		this.startMove();
 	},
 	methods: {
-		init () {
-			this.el = this.$refs.gallery;
-			this.len = this.imgArr.length;
-			if (this.len > 1) {
-				let first = this.imgArr[0];
-				let last = this.imgArr[this.len - 1];
-				this.imgArr.push(first);
-				this.imgArr.unshift(last);
-				this.index = 1;
-				this.el.style.cssText = `left: -${this.distance}px`;
+		startMove () {
+			this.timer = setInterval(() => {
+				this.move("R");
+			}, this.interval);
+		},
+		stopMove () {
+			clearInterval(this.timer);
+		},
+		move (direction) {
+			if (this.isTransitioning) return;
+			if (direction === "R") {
+				this.currentIndex++;
+			} else {
+				this.currentIndex--;
 			}
 		},
-		moveLeft () {
-			// if (this.lock) return;
-			this.animation = true;
-			console.log(this.index);
-			this.index += 1;
-			this.el.style.cssText = `left: -${this.distance}px`;
-			if (this.index === this.len + 1) {
-				this.el.addEventListener("transitionend", () => {
-					console.log("*****");
-					this.animation = false;
-					this.index = 1;
-					this.el.style.cssText = `left: -${this.distance}px`;
-					this.lock = false;
-				}, false);
+		mouseFn (e) {
+			if (e.type === "mouseenter") {
+				this.showBtn = true;
+				this.stopMove();
+			} else {
+				this.showBtn = false;
+				this.startMove();
 			}
 		},
-		moveRight () {
-			this.index -= 1;
-			this.el.style.cssText = `left: -${this.distance}px`;
+		cirBtn (n) {
+			this.currentIndex = n;
 		}
 	},
 	computed: {
-		distance () {
-			return 1280 * this.index;
+		len () {
+			return this.imgArr.length;
+		},
+		imgArr () {
+			return [this.imgs[this.imgs.length - 1], ...this.imgs, this.imgs[0]];
 		}
-	}
+	},
+	watch: {
+		currentIndex (newIndex, oldIndex) {
+			if ((newIndex === 1 && oldIndex === this.len - 1) || (newIndex === this.len - 2 && oldIndex === 0)) {
+				this.isResetIndex = true;
+				return;
+			}
+			this.isResetIndex = false;
+			this.isTransitioning = true;
+			setTimeout(() => {
+				if (this.currentIndex === this.len - 1) this.currentIndex = 1;
+				if (this.currentIndex === 0) this.currentIndex = this.len - 2;
+				this.isTransitioning = false;
+			}, this.transitionInterval);
+
+		}
+	},
 };
 
 </script>
@@ -84,60 +114,59 @@ export default {
 <style lang="scss" scoped>
 	.picRoll {
 		position: relative;
-		width: 1280px;
-		height: 360px;
-		line-height: 360px;
-		background: yellow;
-		margin: 0 auto;
-		.btn {
-			position: absolute;
-			height: 100px;
-			left: 0;
-			top: 500px;
-			line-height: 100px;
-			width: 100px;
-			border: 1px solid black;
-			z-index: 2000;
-		}
-		.btn2 {
-			position: absolute;
-			height: 100px;
-			top: 500px;
-			right: 0;
-			line-height: 100px;
-			width: 100px;
-			border: 1px solid black;
-			cursor: pointer;
-			background: red;
-			z-index: 2000;
-		}
+		width: 100%;
+		height: 100%;
+		border-radius: 0px 0px 5px 5px;
+		overflow: hidden;
 		.vector {
 			position: relative;
-			width: 1280px;
-			height: 360px;
-			line-height: 360px;
-			overflow: hidden;
-			.gallery {
-				position: absolute;
-				height: 360px;
-				left: 0;
-				line-height: 360px;
-				white-space: nowrap;
-				display: flex;
-				flex-direction: row;
-				flex-wrap: nowrap;
-				&.animation {
-					transition: left ease 1s;
+			height: 100%;
+			.item {
+				display: inline-block;
+				height: 100%;
+				background: #CCCCCC no-repeat center/cover;
+			}
+		}
+		.cirBtn {
+			position: absolute;
+			width: 100%;
+			height: 12px;
+			line-height: 12px;
+			bottom: 8px;
+			text-align: center;
+			div {
+				display: inline-block;
+				width: 12px;
+				height: 12px;
+				margin: 0px 5px;
+				border-radius: 6px;
+				background: #FFFFFF;
+				opacity: 0.7;
+				cursor: pointer;
+				&.hover {
+					background: #338BF0;
+					opacity: 1;
 				}
-				img {
-					position: relative;
-					float: left;
-					margin: 0;
-					height: 360px;
-					width: 1280px;
-					line-height: 1280px;
-					flex: 1;
-				}
+			}
+		}
+		.btn {
+			position: absolute;
+			height: 100%;
+			width: 50px;
+			top: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			&.btnL {
+				left: 0px;
+			}
+			&.btnR {
+				right: 0px;
+			}
+			span {
+				font-size: 48px;
+				opacity: 0.7;
+				cursor: pointer;
 			}
 		}
 	}
