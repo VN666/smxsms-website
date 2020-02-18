@@ -11,10 +11,12 @@ const req = axios.create({
 
 
 req.interceptors.request.use((req) => {
-
 	if (false) {
-
 		req.headers["Authorization"] = Vue.prototype.$utils.getToken();
+	}
+
+	if (req.reqType === "formData") {
+		req.headers["Content-Type"] = "multipart/form-data";
 	}
 	return req;
 }, (err) => {

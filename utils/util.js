@@ -17,9 +17,24 @@ const timeFormate = (date) => {
 	return date.getFullYear() + "-" + String((Number(date.getMonth()) + 1)).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0") + " " + String(date.getHours()).padStart(2, "0") + ":" + String(date.getMinutes()).padStart(2, "0") + ":" + String(date.getSeconds()).padStart(2, "0")
 }
 
+const getFileName = (file) => file.substr(0, file.lastIndexOf("."));
+
+const getFileExt = (file) => file.substring(file.lastIndexOf(".") + 1, file.length);
+
+const downloadFile = (filePath) => {
+	let a = document.createElement("a");
+	a.setAttribute("href", filePath);
+	if (["png", "jpeg", "jpg", "gif", "svg"].includes(getFileExt(filePath)))
+		a.setAttribute("target", "_blank");
+	a.click();
+};
+
 export default {
 	getStrLength,
-	timeFormate
+	timeFormate,
+	getFileName,
+	getFileExt,
+	downloadFile
 };
 
 

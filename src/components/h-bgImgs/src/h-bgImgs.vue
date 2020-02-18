@@ -1,6 +1,6 @@
 <template>
 	<div class="bgImgs">
-		<h-picRoll :imgs="imgs" :isCirBtn="true" :isPrompt="false"></h-picRoll>
+		<h-picRoll :imgs="bgImgs" :isCirBtn="true" :isPrompt="false"></h-picRoll>
 	</div>
 </template>
 
@@ -10,36 +10,28 @@ export default {
 	name: "h-bgImgs",
 	data () {
 		return {
-			imgs: [
-				{
-					title: "市二中找平代课教师启事",
-					src: "/static/index/img2.jpg"
-				},
-				{
-					title: "二、2017年市二中七年级新生招生简章",
-					src: "/static/index/img2.jpg"
-				},
-				{
-					title: "e44",
-					src: "/static/index/img3.jpg"
-				},
-				{
-					title: "4",
-					src: "/static/index/img4.jpg"
-				},
-				{
-					title: "5",
-					src: "/static/index/img5.jpg"
-				},
-				{
-					title: "6",
-					src: "/static/index/img6.jpg"
-				},
-				{
-					title: "7",
-					src: "/static/index/img7.jpg"
+			bgImgs: []
+		}
+	},
+	mounted () {
+		this.requestData();
+	},
+	methods: {
+		requestData () {
+			this.$http({
+				method: "post",
+				url: this.$api.bg_imgs_query,
+				data: {
+					pageNo: 1,
+					pageSize: 50
 				}
-			]
+			}).then((res) => {
+				this.bgImgs = res.data.list;
+				this.bgImgs.forEach((item) => {
+					item.src = item.picSrc;
+					item.title = item.id;
+				});
+			});
 		}
 	}
 }

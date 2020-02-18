@@ -8,14 +8,11 @@
 import Tinymce from "tinymce/tinymce";
 import "tinymce/themes/silver/theme.min.js";
 import "tinymce/skins/ui/oxide/skin.min.css";
-
 import "tinymce/plugins/image";
 import "tinymce/plugins/imagetools";
 import "tinymce/plugins/table";
 import "tinymce/plugins/autoresize";
-
 import "@/src/components/zh_CN.js";
-
 import axios from "axios";
 
 export default {
@@ -39,6 +36,10 @@ export default {
 		value: {
 			type: String,
 			default: ""
+		},
+		category: {
+			type: String,
+			default: ""
 		}
 	},
 	mounted () {
@@ -55,13 +56,11 @@ export default {
 	},
 	watch: {
 		value (val) {
-			console.log(val);
 			this.$nextTick(() => Tinymce.get(this.id).setContent(val));
 		}
 	},
 	methods: {
 		init () {
-			const _this = this;
 			Tinymce.init({
 				selector: "#" + this.id,
 				language_url: "./zh_CN.js",
@@ -77,13 +76,38 @@ export default {
 				},
 				width: this.width,
 				height: this.height,
+				autoresize_max_height: this.height * 2,
+        		autoresize_min_height: this.height,
+        		/*style_formats: [
+			        {title: '背景颜色', block: 'p', styles: {'background-color': '#F2F2F2'}},
+			    ],
+			    content_style: `
+					p {background-color: #F2F2F2}
+					span {background-color: #F2F2F2}
+					table {background-color: #F2F2F2}
+					div {background-color: #F2F2F2}
+			    `,*/
+			    style_formats_merge: true,
+			    style_formats_autohide: true,
+			    paste_postprocess: (editor, fragment) => {
+			    	const allDivs = fragment.node.getElementsByTagName("div");
+			    	const allSpans = fragment.node.getElementsByTagName("span");
+			    	const allTables= fragment.node.getElementsByTagName("table");
+			    	const allP = fragment.node.getElementsByTagName("p");
+			    	[allDivs, allSpans, allTables, allP].forEach((tag) => {
+			    		tag.forEach((item) => {
+			    			item.style["background-color"] = "#F2F2F2";
+			    		});
+			    	});
+			    },
 				images_upload_handler: (blobInfo, success, failure) => {
 					let formData = new FormData();
 					const headerConfig = { headers: { 'Content-Type': 'multipart/form-data' }};
 					formData.append("file", blobInfo.blob());
-					axios.post("https://shamiao.xyz/api/upload/news", formData, headerConfig).then((res) => {
-
-							success(res.data.url);
+					formData.append("category", this.category);
+					axios.post(this.$api.imgs_upload, formData, headerConfig).then((res) => {
+						this.$emit("getPicSrc", res.data.url);
+						success(res.data.url);
 					});
 				},
 				images_upload_credentias: true

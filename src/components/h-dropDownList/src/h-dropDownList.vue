@@ -1,8 +1,8 @@
 <template>
 	<div class="dropDownList" @mouseover="hMouseOver" @mouseout="hMouseOut">
-		<span @click="doClick(menuData.router)">{{menuData.title}}</span>
+		<span @click="doClick(menuData.router, 0)">{{menuData.title}}</span>
 		<ul v-show="showUl">
-			<li v-for="(item, index) in menuData.children" :key="index" @click="doClick(item.router)">{{item.title}}</li>
+			<li v-for="(item, index) in menuData.children" :key="index" @click="doClick(item.router, index)">{{item.title}}</li>
 		</ul>
 	</div>
 </template>
@@ -24,8 +24,9 @@ export default {
 		hMouseOut () {
 			this.showUl = false;
 		},
-		doClick (path) {
-			this.$router.push({ path: path });
+		doClick (path, index) {
+			if (this.$route.path !== path)
+				this.$router.push({ path: path, query:{index: index }});
 		}
 	}
 }

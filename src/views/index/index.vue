@@ -6,23 +6,25 @@
 			<div class="wPicRoll"><h-bgImgs></h-bgImgs></h-picRoll></div>
 			<div class="wNotice">
 				<span class="title">通知公告</span>
-				<span class="content"><h-notice :notices="notices"></h-notice></span>
-				<span class="more"><img src="@/src/assets/icons/share-square-o.png" /></span>
+				<span class="content">
+					<h-notice :notices="noticeData|filterNotice" v-if="noticeData.length" @noticeClick="noticeClick"></h-notice>
+				</span>
+				<span class="more" @click="goPathQuery('/news/notice-list', '', 1)"><img src="@/src/assets/icons/share-square-o.png" /></span>
 			</div>
 			<div class="wNews">
-				<div class="newsPic">
-					<h-picRoll :imgs="news|filterNews" :customStyle="picRollStyle" :isBtn="false" :isCirBtn="false" :interval="3000" :transitionStyle="'fade'"></h-picRoll>
+				<div class="newsPic" v-if="newsData.length">
+					<h-picRoll :imgs="newsData|filterNews" :customStyle="picRollStyle" :isBtn="false" :isCirBtn="false" :interval="3000" :transitionStyle="'fade'" @itemClick="itemClick"></h-picRoll>
 				</div>
 				<div class="newsContent">
 					<div class="title">
 						<span class="word">新闻快讯</span>
-						<span class="icon">>> more</span>
+						<span class="icon" @click="goPathQuery('/news/campus-list', '', 0)">>> more</span>
 					</div>
 					<ul class="newsUl">
-						<li v-for="(item,index) in news" v-if="index<8">
+						<li v-for="(item,index) in newsData" v-if="index<8" @click="goPathQuery('/news/campus-detail', item.id, 0)">
 							<img src="../../assets/icons/angle-right.png" />
-							<span class="itemTitle">{{item.title}}</span>
-							<span class="itemDate">{{item.date}}</span>
+							<span class="itemTitle">{{item.headline}}</span>
+							<span class="itemDate">{{item.timecreate | timeCut}}</span>
 						</li>
 					</ul>
 				</div>
@@ -111,11 +113,24 @@ export default {
 	name: "index",
 	filters: {
 		filterNews (val) {
-			return val.filter((val) => val.src);
+			val.forEach((item) => {
+				item.src = item.picSrc;
+				item.title = item.headline;
+			});
+			return val.filter((val) => val.picSrc);
+		},
+		filterNotice (val) {
+			val.forEach((item) => {
+				item.title = item.headline;
+			});
+			return val;
 		}
 	},
 	data () {
 		return {
+			newsData: [],
+			noticeData: [],
+
 			linkMenu: null,
 			imgs: [
 				{
@@ -226,10 +241,50 @@ export default {
 			return this.proverb.substr(0, 150) + "...";
 		}
 	},
+	mounted () {
+		this.requestData();
+	},
 	methods: {
 		goPath (path) {
-			console.log(path);
 			this.$router.push({ path: path });
+		},
+		goPathQuery (path, id, index) {
+			this.$router.push({ path: path, query: {id: id, index: index }});
+		},
+		itemClick (id) {
+			this.goPathQuery("/news/campus-detail", id, 0);
+		},
+		noticeClick (notice) {
+			console.log(notice);
+			this.goPathQuery("/news/notice-detail", notice.id, 1);
+		},
+		async requestData () {
+			let [ newsData, noticeData ] = await Promise.all([
+				this.requestNews(),
+				this.requestNotice()
+			]);
+			this.newsData = newsData.data.list;
+			this.noticeData = noticeData.data.list;
+		},
+		requestNews () {
+			return this.$http({
+				method: "post",
+				url: this.$api.news_campus_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 8
+				}
+			});
+		},
+		requestNotice () {
+			return this.$http({
+				method: "post",
+				url: this.$api.news_notice_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
+			})
 		}
 	},
 	created () {

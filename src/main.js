@@ -11,6 +11,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import http from "./config/http.js";
 import api from "./config/api.js";
 import hComponents from "@/src/components/index.js";
+import "@/src/filters/index.js";
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);

@@ -5,4 +5,5 @@ const install = (Vue) => {
 	Vue.prototype.$utils = util;
 }
 
+
 export default install;

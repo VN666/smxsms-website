@@ -13,11 +13,11 @@
 	      			<template slot="title">
 	      				<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
 	      			</template>
-					<el-menu-item v-for="(subItem, subKey) in item.children" :index="subItem.code" :key="subItem.code">
+					<el-menu-item v-for="(subItem, subKey) in item.children" :index="subItem.code" :key="subItem.code" @click="goPath(subItem.path)">
 						{{ subItem.title }}
 					</el-menu-item>
 	      		</el-submenu>
-	      		<el-menu-item v-else :index="item.code">
+	      		<el-menu-item v-else :index="item.code" @click="goHome(item)">
 	      			<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
 	      		</el-menu-item>
 	    	</el-menu>
@@ -79,7 +79,18 @@ export default {
 			}).catch(() => {
 				console.log("取消");
 			});
-      }
+      	},
+      	goPath (path) {
+      		this.$router.push({ path: path });
+      	},
+      	goHome (item) {
+      		if (item.code === "admin_home") {
+      			this.$router.push({ path: "/index" });
+      		}
+      		if (item.code === "admin_bg") {
+      			this.$router.push({ path: "admin-bg" });
+      		}
+      	}
 	}
 }
 

@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="prompt" v-if="isPrompt">
-			<span class="title">{{imgArr[currentIndex].title}}</span>
+			<span class="title" @click="itemClick(imgArr[currentIndex].id)">{{imgArr[currentIndex].title}}</span>
 			<ul>
 				<li v-for="(item,index) in imgs"
 					:class="{'hover':index+1===currentIndex||(index+1===1&&currentIndex===len-1)||(index+1===imgs.length&&currentIndex===0)}"
@@ -116,7 +116,10 @@ export default {
 		},
 		promptLi (index) {
 			this.currentIndex = index;
-		}
+		},
+		itemClick (id) {
+			this.$emit("itemClick", id);
+		},
 	},
 	computed: {
 		len () {

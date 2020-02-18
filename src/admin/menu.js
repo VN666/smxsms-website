@@ -1,7 +1,14 @@
 export const menu = [
 	{
-		title: "背景图片",
-		code: "admin_image",
+		title: "返回门户",
+		code: "admin_home",
+		icon: "el-icon-s-home",
+		path: "index"
+	},
+	{
+		title: "背景封面",
+		code: "admin_bg",
+		path: "admin_bg",
 		icon: "el-icon-picture",
 		path: ""
 	},
@@ -11,23 +18,23 @@ export const menu = [
 		icon: "el-icon-notebook-2",
 		children: [
 			{
-				title: "校园快讯",
-				path: "",
+				title: "新闻快讯",
+				path: "campus-list",
 				code: "admin_news_campus"
 			},
 			{
 				title: "通知公告",
-				path: "",
+				path: "notice-list",
 				code: "admin_news_notice"
 			},
 			{
 				title: "媒体报道",
-				path: "",
+				path: "media-list",
 				code: "admin_news_media"
 			},
 			{
 				title: "招生信息",
-				path: "",
+				path: "enroll-list",
 				code: "admin_news_recruit"
 			}
 		]

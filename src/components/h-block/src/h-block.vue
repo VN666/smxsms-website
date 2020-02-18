@@ -12,15 +12,16 @@
 						<span></span>{{menuData.title}}
 					</div>
 					<ul class="subTitle">
-						<li v-for="(item, index) in menuData.children" :class="{'active':currentIndex===index}" :key="index" @click="subTitleClick(index)">{{item.title}}</li>
+						<li v-for="(item, index) in menuData.children" :class="{'active':currentIndex===index}" :key="index" @click="subTitleClick(item.router, index)">{{item.title}}</li>
 					</ul>
 				</div>
 				<div class="list">
 					<div class="location">
 						<img src="@/src/assets/icons/school.png" />
 						<span>您现在的位置：</span>
-						<span>网站首页</span>
-						<span>{{menuData.children[currentIndex].title}}</span>
+						<span @click="goHome">网站首页</span>
+						<span @click="goPath">{{menuData.children[currentIndex].title}}</span>
+						<span>{{/list/.exec($route.path) ? "列表" : "正文"}}</span>
 					</div>
 					<div class="line"></div>
 					<slot name="area"></slot>
@@ -31,7 +32,7 @@
 					<ul>
 						<li>登录</li>
 						<li>注册</li>
-						<li>管理员入口</li>
+						<li @click="$router.push({ path: '/admin'})">管理员入口</li>
 					</ul>
 					<div class="line"></div>
 					<img src="@/src/assets/icons/qq.png" />
@@ -53,23 +54,36 @@
 
 export default {
 	name: "h-block",
-	props: ["menuData"],
+	props: {
+		menuData: {
+			type: Object,
+			default: () => {}
+		}
+	},
 	data () {
 		return {
 			currentIndex: 0
 		};
 	},
 	mounted () {
-		this.currentIndex = parseInt(this.$route.params.index);
+		this.currentIndex = parseInt(this.$route.query.index);
 	},
 	methods: {
-		subTitleClick (index) {
-			this.currentIndex = index;
+		subTitleClick (path, index) {
+			if (this.$route.path !== path)
+				this.$router.push({path: path, query: {index: index }});
+		},
+		goHome () {
+			this.$router.push({ path: "/index" });
+		},
+		goPath () {
+			if (this.$route.path !== this.menuData.children[this.currentIndex].router)
+				this.$router.push({ path: this.menuData.children[this.currentIndex].router, query: { index: this.currentIndex }});
 		}
 	},
 	watch: {
 		"$route" (to, from) {
-			this.currentIndex = parseInt(this.$route.params.index);
+			this.currentIndex = parseInt(this.$route.query.index);
 		}
 	}
 }
@@ -146,9 +160,11 @@ export default {
 						cursor: pointer;
 						&:hover {
 							background: #1070CC;
+							color: #C1D4E6;
 						}
 						&.active {
 							background: #1070CC;
+							color: #C1D4E6;
 						}
 					}
 				}
@@ -156,7 +172,7 @@ export default {
 			.list {
 				position: relative;
 				width: 1008px;
-				padding-right: 24px;
+				padding-right: 0px;
 				.location {
 					position: relative;
 					width: 100%;
@@ -174,6 +190,13 @@ export default {
 						&:after {
 							content: "/";
 							margin: 0px 8px;
+							color: #666666;
+						}
+					}
+					span:nth-of-type(n+2):not(:last-child) {
+						cursor: pointer;
+						&:hover {
+							color: #338BF0;
 						}
 					}
 					span:last-child {

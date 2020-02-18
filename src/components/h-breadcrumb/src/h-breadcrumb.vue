@@ -2,7 +2,7 @@
 	<div class="breadcrumb">
 		<div class="location">
 			<img src="@/src/assets/icons/school.png" />
-			<span>您现在的位置1：</span>
+			<span>您现在的位置：</span>
 			<span v-for="item in bread" :key="item">{{item}}</span>
 			<span class="back" @click="goBack">
 				<el-button size="mini" plain style="hieght: 24px;"><i class="el-icon-back el-icon--left"></i>返回</el-button>

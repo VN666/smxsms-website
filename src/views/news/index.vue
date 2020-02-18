@@ -1,7 +1,9 @@
 <template>
 	<div class="news">
 		<h-block :menuData="menuData">
-			<div slot="area" :menuData="menuData"></div>
+			<div slot="area">
+				<router-view></router-view>
+			</div>
 		</h-block>
 	</div>
 </template>
@@ -20,20 +22,8 @@ export default {
 	},
 	created () {
 		this.menuData = menu[2];
-		console.log(this.menuData);
-		this.requestData();
 	},
-	methods: {
-		requestData () {
-			this.$http({
-				method: "post",
-				url: this.$api.news_campus_query
-			}).then((res) => {
-				this.resData = res.data[1];
-				console.log(res.data[1]);
-			})
-		}
-	}
+	methods: {}
 }
 
 </script>
@@ -43,5 +33,10 @@ export default {
 		position: relative;
 		width: 100%;
 		height: 100%;
+		.area {
+			position: relative;
+			height: auto;
+			width: 100%;
+		}
 	}
 </style>

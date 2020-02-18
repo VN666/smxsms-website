@@ -1,27 +1,27 @@
 <template>
 	<div class="campus_add">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['新闻动态', '校园快讯', '新增']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '新闻动态', '新闻快讯', '新增']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">
-			<el-form ref="addForm" :form="addForm" label-position="right" label-width="70px">
+			<el-form ref="addForm" :form="addForm" :model="addForm" :rules="rules" label-position="right" label-width="70px">
 				<el-row :gutter="32" ref="row1">
 					<el-col :span="8">
-						<el-form-item label="标题">
+						<el-form-item label="标题" prop="headline">
 							<el-input v-model="addForm.headline"></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="8">
 						<el-form-item label="副标题">
-							<el-input v-model="addForm.subTitle"></el-input>
+							<el-input v-model="addForm.subTitle" :disabled="true"></el-input>
 						</el-form-item>
 					</el-col>
 				</el-row>
 
 				<el-row :gutter="32" ref="row2">
 					<el-col :span="4">
-						<el-form-item label="作者">
+						<el-form-item label="作者" prop="author">
 							<el-input v-model="addForm.author"></el-input>
 						</el-form-item>
 					</el-col>
@@ -53,26 +53,27 @@
 							<el-input v-model="addForm.originDes"></el-input>
 						</el-form-item>
 					</el-col>
-
-					<el-col :span="8">
-						<el-form-item label="操作">
-							<el-button @click="submit">保存</el-button>
-						</el-form-item>
-					</el-col>
 				</el-row>
 
 				<el-row>
-					<el-form-item label="正文">
-						<div class="content_inner" :style="{height:`${hTinymceHeight}px`,width: `${hTinymceWidth}px`}">
+					<el-form-item label="正文" prop="content">
+						<div class="content_inner" :style="{minHeight:`${hTinymceHeight}px`,width: `${hTinymceWidth}px`}">
 							<h-tinymce
 								:width="hTinymceWidth"
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
+								category="news"
+								@getPicSrc="getPicSrc"
 							></h-tinymce>
 						</div>
 
 					</el-form-item>
+				</el-row>
+
+				<el-row ref="row4" style="text-align: center;">
+					<el-button @click="beforeSubmit" style="padding: 12px 40px;" type="primary" :loading="isSaving">保存</el-button>
+					<el-button @click="goBack" style="padding: 12px 40px;">取消</el-button>
 				</el-row>
 
 			</el-form>
@@ -83,15 +84,13 @@
 
 <script>
 
-import axios from "axios";
-
 export default {
 	name: "campus_add",
 	data () {
 		return {
 			labelPosition: "left",
 			hTinymceHeight: 0,
-			hTinymceWidth: 80,
+			hTinymceWidth: 0,
 			addForm: {
 				headline: "",
 				subTitle: "",
@@ -101,8 +100,22 @@ export default {
 				origin: "",
 				originDes: "",
 				isTop: false,
-				content: ""
-			}
+				content: "",
+				picSrc: "",
+				checked: true
+			},
+			rules: {
+				headline: [
+					{ required: true, message: "标题不能为空", trigger: "blur" },
+				],
+				author: [
+					{ required: true, message: "作者不能为空", trigger: "blur" }
+				],
+				content: [
+					{ required: true, message: "正文不能为空", trigger: "blur" }
+				]
+			},
+			isSaving: false
 		};
 	},
 	mounted () {
@@ -113,17 +126,52 @@ export default {
 		window.removeEventListener("resize", this.resize, false);
 	},
 	methods: {
+		getPicSrc (src) {
+			if (!this.addForm.picSrc) {
+				this.addForm.picSrc = src;
+			}
+		},
 		resize () {
-			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row2.$el.clientHeight - 32;
+			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row3.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
 			this.hTinymceWidth = this.$el.clientWidth * 0.9;
 		},
+		beforeSubmit () {
+			this.$refs["addForm"].validate((valid) => {
+				if (valid) {
+					this.submit();
+				} else {
+					return false;
+				}
+			});
+		},
 		submit () {
+			this.isSaving = true;
 			this.$http({
 				method: "post",
 				data: this.addForm,
 				url: this.$api.news_campus_add
 			}).then((res) => {
-			})
+				this.isSaving = false;
+				if (res.code === 200) {
+					this.$message({
+			          	message: res.msg,
+			          	type: "success",
+			          	duration: 2000,
+			          	onClose: this.goBack
+			        });
+				} else {
+					this.$message({
+						message: res.msg,
+						type: "error",
+						duration: 2000
+					});
+				}
+			}).catch((err) => {
+				this.isSaving = false;
+			});
+		},
+		goBack () {
+			this.$router.push({ path: "campus-list" });
 		}
 	}
 }
@@ -148,6 +196,7 @@ export default {
 			position: relative;
 			width: 100%;
 			height: auto;
+			overflow-y: auto;
 			padding: 16px;
 			.content_inner {
 				position: relative;

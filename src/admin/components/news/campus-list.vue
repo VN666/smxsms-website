@@ -1,7 +1,7 @@
 <template>
 	<div class="campus_list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['新闻动态', '校园快讯', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '新闻动态', '新闻快讯', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">
@@ -15,19 +15,19 @@
 				<el-row>
 					<el-col :span="4">
 						<el-form-item label="新闻标题">
-							<el-input v-model="filters.keyword" placeholder="新闻标题" size="mini"></el-input>
+							<el-input v-model="filters.headline" placeholder="新闻标题" size="mini" clearable></el-input>
 						</el-form-item>
 					</el-col>
 
 					<el-col :span="4">
 						<el-form-item label="作者">
-							<el-input v-model="filters.author" placeholder="作者" size="mini"></el-input>
+							<el-input v-model="filters.author" placeholder="作者" size="mini" clearable></el-input>
 						</el-form-item>
 					</el-col>
 
 					<el-col :span="4">
 						<el-form-item label="发布人">
-							<el-input v-model="filters.publisher" placeholder="发布人" size="mini"></el-input>
+							<el-input v-model="filters.publisher" placeholder="发布人" size="mini" clearable></el-input>
 						</el-form-item>
 					</el-col>
 
@@ -49,8 +49,8 @@
 
 					<el-col :span="4">
 						<el-form-item style="text-align:right">
-							<el-button type="primary" size="mini">查 询</el-button>
-							<el-button size="mini">重 置</el-button>
+							<el-button type="primary" size="mini" @click="requestData">查 询</el-button>
+							<el-button size="mini" @click="reset">重 置</el-button>
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -59,18 +59,23 @@
 
 		<div class="table_wrap" :style="{height:tableMaxHeight+'px'}" stripe>
 			<el-table :data="tableData" height="100%" stripe :header-cell-style="{background:'#F5F5F5',color:'#606266'}">
-				<el-table-column type="index" label="序号" width="50"></el-table-column>
-				<el-table-column label="标题" prop="headline" minwidth="100"></el-table-column>
-				<el-table-column label="作者" prop="author" width="120"></el-table-column>
+				<el-table-column type="index" label="序号" width="50">
+					<template slot-scope="scope">
+						{{ (scope.$index + 1) + (page.pageNo - 1) * page.pageSize }}
+					</template>
+				</el-table-column>
+				<el-table-column label="标题" prop="headline" min-width="100" show-overflow-tooltip></el-table-column>
+				<el-table-column label="作者" prop="author" width="120" show-overflow-tooltip></el-table-column>
 				<el-table-column label="内容" prop="content" min-width="120" show-overflow-tooltip></el-table-column>
 				<el-table-column label="阅读数" prop="views" width="120"></el-table-column>
-				<el-table-column label="发布人" prop="publisher" width="120"></el-table-column>
-				<el-table-column label="发布日期" prop="timecreate" width="160"></el-table-column>
-				<el-table-column label="操作" width="180">
+				<el-table-column label="发布人" prop="publisher" width="120" show-overflow-tooltip></el-table-column>
+				<el-table-column label="发布日期" prop="timecreate" width="170"></el-table-column>
+				<el-table-column label="操作" width="210">
 					<template slot-scope="scope">
-				        <el-button type="text" size="small">编辑</el-button>
-				        <el-button type="text" size="mini">查看</el-button>
-				        <el-button type="text" size="mini">删除</el-button>
+				        <el-button type="text" size="mini" @click="goEdit(scope.row.id)">编辑</el-button>
+				        <el-button type="text" size="mini" @click="beforeDel(scope.row.id, scope.$index)">删除</el-button>
+				        <el-button type="text" size="mini" @click="changeIsTop(scope.row.id, 1, scope.row.timecreate)" :class="{isTop: scope.row.isTop}">置顶</el-button>
+				        <el-button type="text" size="mini" @click="changeIsTop(scope.row.id, 0, scope.row.timecreate)" :disabled="!scope.row.isTop">取消置顶</el-button>
 				     </template>
 				</el-table-column>
 			</el-table>
@@ -85,14 +90,12 @@
 	      		:page-size="page.pageSize"
 	      		layout="total, sizes, prev, pager, next, jumper"
 	      		:total="page.total">
-	    </el-pagination>
+	    	</el-pagination>
 		</div>
 	</div>
 </template>
 
 <script>
-
-import { tableData } from "./table";
 
 export default {
 	name: "campus_list",
@@ -100,7 +103,7 @@ export default {
 		return {
 			timeValue: "",
 			filters: {
-				keyword: "",
+				headline: "",
 				publisher: "",
 				author: "",
 				startTime: "",
@@ -108,7 +111,7 @@ export default {
 			},
 			page: {
 				pageNo: 1,
-				pageSize: 10,
+				pageSize: 20,
 				total: 0
 
 			},
@@ -118,6 +121,12 @@ export default {
 		};
 	},
 	methods: {
+		reset () {
+			let keys = Object.keys(this.filters);
+			keys.forEach((key) => this.filters[key] = "");
+			this.page.pageNo = 1;
+			this.requestData();
+		},
 		timeChange () {
 			this.filters.startTime = this.timeValue[0];
 			this.filters.endTime = this.timeValue[1];
@@ -125,9 +134,11 @@ export default {
 		handleSizeChange (size) {
             this.page.pageNo = 1;
             this.page.pageSize = size;
+            this.requestData();
         },
         handlePageChange (page) {
             this.page.pageNo = page;
+            this.requestData();
         },
         resize () {
         	this.tableMaxHeight = this.$el.clientHeight - this.$refs.option_wrap.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.page_wrap.clientHeight - 16;
@@ -141,12 +152,85 @@ export default {
         },
         goPath (path) {
         	this.$router.push({ path: path });
+        },
+        goEdit (id) {
+        	this.$router.push({ name: "campusEdit", params: { id: id }});
+        },
+        changeIsTop (id, isTop, timecreate) {
+        	this.$http({
+        		method: "post",
+        		url: this.$api.news_campus_changeIsTop,
+        		data: {
+        			id: id,
+        			isTop: isTop,
+        			timecreate: timecreate
+        		}
+        	}).then((res) => {
+        		this.$message({
+		          	message: res.msg,
+		          	type: "success",
+		          	duration: 2000
+		        });
+		        this.page.pageNo = 1;
+		        this.requestData();
+        	});
+        },
+        beforeDel (id, index) {
+        	this.$confirm("是否删除该条信息，删除后将无法恢复", "提示", {
+        		confirmButtonText: "确定",
+        		cancelButtonText: "取消",
+        		type: "warning"
+        	}).then(() => this.deleteRow(id, index));
+        },
+        deleteRow (id, index) {
+        	let order = (index + 1) + (this.page.pageNo - 1) * this.page.pageSize;
+        	this.$http({
+        		method: "post",
+        		url: this.$api.news_campus_del,
+        		data: { id: id }
+        	}).then((res) => {
+        		if (res.code === 200) {
+        			this.$message({
+			          	message: res.msg,
+			          	type: "success",
+			          	duration: 2000
+			        });
+			        if (order === this.page.total && index === 0) {
+			        	this.page.pageNo = this.page.pageNo > 1 ? this.page.pageNo - 1 : this.page.pageNo;
+			        }
+			        this.requestData();
+        		} else {
+        			this.$message({
+						message: res.msg,
+						type: "error",
+						duration: 2000
+					});
+        		}
+        	});
+        },
+        requestData () {
+        	this.$http({
+        		method: "post",
+        		url: this.$api.news_campus_query,
+        		data: {
+        			pageNo: this.page.pageNo,
+        			pageSize: this.page.pageSize,
+        			headline: this.filters.headline,
+        			author: this.filters.author,
+        			publisher: this.filters.publisher,
+        			startTime: this.filters.startTime,
+        			endTime: this.filters.endTime
+        		}
+        	}).then((res) => {
+        		this.tableData = res.data.list;
+        		this.page.total = res.data.total;
+        	});
         }
 	},
 	mounted () {
 		this.resize();
 		window.addEventListener("resize", this.resize, false);
-		this.tableData = tableData.data.list;
+		this.requestData();
 	},
 	beforeDestory () {
 		window.removeEventListener("resize", this.resize, false);
@@ -201,6 +285,9 @@ export default {
 		}
 		.table_wrap {
 			padding: 0px 16px;
+			.isTop {
+				color: #E6A23C;
+			}
 		}
 		.page_wrap {
 			position: absolute;

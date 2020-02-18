@@ -38,27 +38,27 @@ const menu = [
 	},
 	{
 		title: "新闻动态",
-		router: "/news/0",
+		router: "/news",
 		code: "",
 		children: [
 			{
-				title: "校园快讯",
-				router: "/news/0",
+				title: "新闻快讯",
+				router: "/news/campus-list",
 				code: ""
 			},
 			{
 				title: "通知公告",
-				router: "/news/1",
+				router: "/news/notice-list",
 				code: ""
 			},
 			{
 				title: "媒体报道",
-				router: "/news/2",
+				router: "/news/media-list",
 				code: ""
 			},
 			{
 				title: "招生信息",
-				router: "/news/3",
+				router: "/news/enroll-list",
 				code: ""
 			}
 		]

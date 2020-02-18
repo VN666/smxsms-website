@@ -33,12 +33,12 @@ export default {
 			default: 3000
 		}
 	},
-	created () {
+	mounted () {
 		this.startMove();
 	},
 	methods: {
 		goNotice (notice) {
-			console.log(notice);
+			this.$emit("noticeClick", notice);
 		},
 		startMove () {
 			this.timer = setInterval(() => {
