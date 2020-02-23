@@ -32,7 +32,7 @@
 					</el-col>
 					<el-col :span="5">
 						<el-form-item label="日期">
-							<el-date-picker v-model="addForm.timecreate" type="datetime" placeholder="选择日期时间"></el-date-picker>
+							<el-date-picker v-model="addForm.timecreate" type="datetime" placeholder="选择日期时间" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
 						</el-form-item>
 					</el-col>
 					<el-col :span="4">
@@ -64,6 +64,7 @@
 								ref="hTinymce"
 								v-model="addForm.content"
 								category="news"
+								@getPicSrc="getPicSrc"
 							></h-tinymce>
 						</div>
 
@@ -91,7 +92,7 @@ export default {
 		return {
 			labelPosition: "left",
 			hTinymceHeight: 0,
-			hTinymceWidth: 80,
+			hTinymceWidth: 0,
 			addForm: {
 				headline: "",
 				subTitle: "",
@@ -101,7 +102,9 @@ export default {
 				origin: "",
 				originDes: "",
 				isTop: "",
-				content: ""
+				content: "",
+				picSrc: "",
+				id: ""
 			},
 			rules: {
 				headline: [
@@ -128,6 +131,9 @@ export default {
 		window.removeEventListener("resize", this.resize, false);
 	},
 	methods: {
+		getPicSrc (src) {
+			this.addForm.picSrc.push(src);
+		},
 		requestData (id) {
 			this.$http({
 				method: "post",
@@ -149,6 +155,10 @@ export default {
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
+					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
+					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
+						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
+					});
 					this.submit();
 				} else {
 					return false;
@@ -208,13 +218,6 @@ export default {
 					border-color: #409EFF;
 				}
 			}
-		}
-		.edit_wrap {
-			position: relative;
-			width: 100%;
-			height: 400px;
-			margin-top: 20px;
-			border: 1px solid #DEDEDE;
 		}
 	}
 </style>

@@ -8,7 +8,7 @@
 			<div class="item views"><span>阅读数 </span><span>{{content.views}}</span></div>
 		</div>
 		<div class="detail-content" v-html="$options.filters.bgFilter(content.content)"></div>
-		<div class="detail-download" v-if="content.fileListSrc[0]">
+		<div class="detail-download" v-if="content.fileListSrc.length">
 			<div class="download-des">附件</div>
 			<div class="download-file">
 				<div class="download-item" v-for="(item, index) in content.fileListSrc" @click="downLoad(item)"><img src="@/src/assets/icons/download-icon.png" />{{ item.match(/news\/(\S*)-oss-/)[1] + "." + $utils.getFileExt(item) }}</div>
@@ -24,7 +24,9 @@ export default {
 	data () {
 		return {
 			id: "",
-			content: () => {}
+			content: {
+				fileListSrc: []
+			}
 		};
 	},
 	created () {
@@ -45,7 +47,6 @@ export default {
 			})
 		},
 		downLoad (path) {
-			console.log(path);
 			this.$utils.downloadFile(path);
 		}
 	}
@@ -62,9 +63,11 @@ export default {
 	.detail-headline {
 		position: relative;
 		text-align: center;
-		font-weight: bold;
-		font-size: 24px;
-		color: #404040;
+		font-family: 宋体;
+	    color: #333333;
+	    letter-spacing: 0pt;
+	    font-size: 34pt;
+	    background: #f2f2f2;
 	}
 	.detail-source {
 		position: relative;

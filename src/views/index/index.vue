@@ -38,11 +38,11 @@
 				<div class="wLineR">
 					<div class="title">
 						<span class="word">校长寄语</span>
-						<span class="icon">>> more</span>
+						<span class="icon" @click="goPathQuery('/about/proverb-content', '', 2)">>> more</span>
 					</div>
 					<p class="proverb">
-						<img src="../../assets/headmaster.png" />
-						{{calcProverb}}
+						<img :src="proverbData.headSrc" />
+						{{proverbData.content | removeHtmlTag | picText}}
 					</p>
 				</div>
 			</div>
@@ -57,10 +57,10 @@
 						<span class="word">联系我们</span>
 					</div>
 					<div class="contact">
-						<p>招生咨询电话：0398-28XXXXX</p>
-						<p>招生咨询邮箱：smxXXXX@163.com</p>
-						<p>地址：三门峡市黄河路中段</p>
-						<p>邮编：472000</p>
+						<p>电话：{{ contactData.phone }}</p>
+						<p>邮箱：{{ contactData.email }}</p>
+						<p>地址：{{ contactData.address }}</p>
+						<p>邮编：{{ contactData.postCode }}</p>
 					</div>
 				</div>
 			</div>
@@ -114,22 +114,32 @@ export default {
 	filters: {
 		filterNews (val) {
 			val.forEach((item) => {
-				item.src = item.picSrc;
+				item.src = item.picSrc[0];
 				item.title = item.headline;
 			});
-			return val.filter((val) => val.picSrc);
+			return val.filter((val) => val.picSrc[0]);
 		},
 		filterNotice (val) {
 			val.forEach((item) => {
 				item.title = item.headline;
 			});
 			return val;
+		},
+		picText (text) {
+			return text.substring(0, 145) + "...";
 		}
 	},
 	data () {
 		return {
 			newsData: [],
 			noticeData: [],
+			contactData: {
+				phone: "",
+				email: "",
+				address: "",
+				postCode: ""
+			},
+			proverbData: "",
 
 			linkMenu: null,
 			imgs: [
@@ -236,11 +246,6 @@ export default {
 			proverb: "崔新来，男，汉族，1964年8月生，中共党员，中学英语高级教师。1989年毕业于河南师范大学外语系，同年分配到三门峡市第四中学（原水电十一局中学）任教，2005年任业务副校长，2012年任市二中党支部书记，2013年8月任市二中校长。从教二十多年来，曾多次被评为三门峡市先进教育工作者；1995年、1996年连续两年被评为三门峡市优秀班主任；1999年被评为三门峡市“跨世纪园丁工程”骨干教师；2001年被评为十一局优秀党员；2002年被评为“十一局杰出青年”；2003年被评为市级骨干教师，2004年被评为三门峡市优秀教师；2009年被评为“学校管理上台阶先进个人”；2010年被评为“岗位管理标兵”。"
 		}
 	},
-	computed: {
-		calcProverb () {
-			return this.proverb.substr(0, 150) + "...";
-		}
-	},
 	mounted () {
 		this.requestData();
 	},
@@ -255,16 +260,19 @@ export default {
 			this.goPathQuery("/news/campus-detail", id, 0);
 		},
 		noticeClick (notice) {
-			console.log(notice);
 			this.goPathQuery("/news/notice-detail", notice.id, 1);
 		},
 		async requestData () {
-			let [ newsData, noticeData ] = await Promise.all([
+			let [ newsData, noticeData, contactData, proverbData ] = await Promise.all([
 				this.requestNews(),
-				this.requestNotice()
+				this.requestNotice(),
+				this.requestContact(),
+				this.requestProverb()
 			]);
 			this.newsData = newsData.data.list;
 			this.noticeData = noticeData.data.list;
+			this.contactData = contactData.data;
+			this.proverbData = proverbData.data;
 		},
 		requestNews () {
 			return this.$http({
@@ -285,6 +293,19 @@ export default {
 					pageSize: 20
 				}
 			})
+		},
+		requestContact () {
+			return this.$http({
+				method: "post",
+				url: this.$api.news_contact_query
+			});
+		},
+		requestProverb () {
+			return this.$http({
+				method: "post",
+				url: this.$api.about_proverb_queryById,
+				data: { addViews: false }
+			});
 		}
 	},
 	created () {

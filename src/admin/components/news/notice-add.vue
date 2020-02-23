@@ -31,7 +31,7 @@
 					</el-col>
 					<el-col :span="5">
 						<el-form-item label="日期">
-							<el-date-picker v-model="addForm.timecreate" type="datetime" placeholder="选择日期时间"></el-date-picker>
+							<el-date-picker v-model="addForm.timecreate" type="datetime" placeholder="选择日期时间" value-format="yyyy-MM-dd HH:mm:ss"></el-date-picker>
 						</el-form-item>
 					</el-col>
 					<el-col :span="4">
@@ -142,6 +142,9 @@ export default {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
 					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
+					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
+						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
+					});
 					this.submit();
 				} else {
 					return false;

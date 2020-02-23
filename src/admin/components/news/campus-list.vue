@@ -65,15 +65,15 @@
 					</template>
 				</el-table-column>
 				<el-table-column label="标题" prop="headline" min-width="100" show-overflow-tooltip></el-table-column>
-				<el-table-column label="作者" prop="author" width="120" show-overflow-tooltip></el-table-column>
-				<el-table-column label="内容" prop="content" min-width="120" show-overflow-tooltip></el-table-column>
-				<el-table-column label="阅读数" prop="views" width="120"></el-table-column>
-				<el-table-column label="发布人" prop="publisher" width="120" show-overflow-tooltip></el-table-column>
-				<el-table-column label="发布日期" prop="timecreate" width="170"></el-table-column>
+				<el-table-column label="作者" prop="author" width="150" show-overflow-tooltip></el-table-column>
+				<el-table-column label="来源" prop="department" width="150" show-overflow-tooltip></el-table-column>
+				<el-table-column label="阅读数" prop="views" width="150"></el-table-column>
+				<el-table-column label="发布人" prop="publisher" width="150" show-overflow-tooltip></el-table-column>
+				<el-table-column label="发布日期" prop="timecreate" width="200"></el-table-column>
 				<el-table-column label="操作" width="210">
 					<template slot-scope="scope">
 				        <el-button type="text" size="mini" @click="goEdit(scope.row.id)">编辑</el-button>
-				        <el-button type="text" size="mini" @click="beforeDel(scope.row.id, scope.$index)">删除</el-button>
+				        <el-button type="text" size="mini" @click="beforeDel(scope.row, scope.$index)">删除</el-button>
 				        <el-button type="text" size="mini" @click="changeIsTop(scope.row.id, 1, scope.row.timecreate)" :class="{isTop: scope.row.isTop}">置顶</el-button>
 				        <el-button type="text" size="mini" @click="changeIsTop(scope.row.id, 0, scope.row.timecreate)" :disabled="!scope.row.isTop">取消置顶</el-button>
 				     </template>
@@ -113,7 +113,6 @@ export default {
 				pageNo: 1,
 				pageSize: 20,
 				total: 0
-
 			},
 			tableData: [],
 			tableMaxHeight: 0,
@@ -175,19 +174,19 @@ export default {
 		        this.requestData();
         	});
         },
-        beforeDel (id, index) {
+        beforeDel (row, index) {
         	this.$confirm("是否删除该条信息，删除后将无法恢复", "提示", {
         		confirmButtonText: "确定",
         		cancelButtonText: "取消",
         		type: "warning"
-        	}).then(() => this.deleteRow(id, index));
+        	}).then(() => this.deleteRow(row, index));
         },
-        deleteRow (id, index) {
+        deleteRow (row, index) {
         	let order = (index + 1) + (this.page.pageNo - 1) * this.page.pageSize;
         	this.$http({
         		method: "post",
         		url: this.$api.news_campus_del,
-        		data: { id: id }
+        		data: { id: row.id, picSrc: row.picSrc }
         	}).then((res) => {
         		if (res.code === 200) {
         			this.$message({

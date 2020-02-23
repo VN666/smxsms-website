@@ -79,16 +79,14 @@ export default {
 				autoresize_max_height: this.height * 2,
         		autoresize_min_height: this.height,
         		/*style_formats: [
-			        {title: '背景颜色', block: 'p', styles: {'background-color': '#F2F2F2'}},
+			        {title: '背景颜色', block: 'span', styles: {'background-color': '#F2F2F2'}},
 			    ],
 			    content_style: `
-					p {background-color: #F2F2F2}
 					span {background-color: #F2F2F2}
-					table {background-color: #F2F2F2}
-					div {background-color: #F2F2F2}
 			    `,*/
 			    style_formats_merge: true,
 			    style_formats_autohide: true,
+			    paste_data_images: true,
 			    paste_postprocess: (editor, fragment) => {
 			    	const allDivs = fragment.node.getElementsByTagName("div");
 			    	const allSpans = fragment.node.getElementsByTagName("span");
@@ -101,6 +99,7 @@ export default {
 			    	});
 			    },
 				images_upload_handler: (blobInfo, success, failure) => {
+					this.$message({message: "建议图片最大宽度不要超过1008", type: "warning", duration: 3000});
 					let formData = new FormData();
 					const headerConfig = { headers: { 'Content-Type': 'multipart/form-data' }};
 					formData.append("file", blobInfo.blob());

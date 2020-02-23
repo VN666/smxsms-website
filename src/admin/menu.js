@@ -8,9 +8,61 @@ export const menu = [
 	{
 		title: "背景封面",
 		code: "admin_bg",
-		path: "admin_bg",
-		icon: "el-icon-picture",
-		path: ""
+		path: "admin-bg",
+		icon: "el-icon-picture"
+	},
+	{
+		title: "关于二中",
+		code: "admin_about",
+		path: "admin-about",
+		icon: "el-icon-school",
+		children: [
+			{
+				title: "学校简介",
+				path: "profile-content",
+				code: "about_profile_contetn"
+			},
+			{
+				title: "学校领导",
+				path: "leader-list",
+				code: "about_leader_list"
+			},
+			{
+				title: "校长寄语",
+				path: "proverb-content",
+				code: "about_proverb_content"
+			},
+			{
+				title: "内部机构",
+				path: "organization-content",
+				code: "about_organization_content"
+			},
+			{
+				title: "师资概况",
+				path: "team-content",
+				code: "about_team_content"
+			},
+			{
+				title: "名师风采",
+				path: "outstanding-list",
+				code: "about_outstanding_list"
+			},
+			{
+				title: "学校荣誉",
+				path: "honor-list",
+				code: "about_honor_list"
+			},
+			{
+				title: "二中校史",
+				path: "history-content",
+				code: "about_history_content"
+			},
+			{
+				title: "校园风貌",
+				path: "landscape-list",
+				code: "about_landscape_list"
+			}
+		]
 	},
 	{
 		title: "新闻动态",
@@ -42,29 +94,36 @@ export const menu = [
 	{
 		title: "党团工会",
 		path: "",
-		code: "admin_party",
+		code: "admin_group",
 		icon: "el-icon-star-on",
 		children: [
 			{
 				title: "党建动态",
-				path: "",
-				code: "admin_party_trend"
+				path: "party-list",
+				code: "admin_group_party"
 			},
 			{
 				title: "团建工作",
-				path: "",
-				code: "admin_party_youth"
+				path: "ccyl-list",
+				code: "admin_group_ccyl"
 			},
 			{
 				title: "工会活动",
-				path: "",
-				code: "admin_party_union"
+				path: "union-list",
+				code: "admin_group_union"
 			},
 			{
 				title: "创先争优",
-				path: "",
-				code: "admin_party_honour"
+				path: "excellent-list",
+				code: "admin_group_excellent"
 			}
 		]
+	},
+	{
+		title: "联系我们",
+		path: "admin_contact",
+		icon: "el-icon-phone",
+		path: "admin-contact",
+		code: "admin_contact"
 	}
 ];

@@ -11,28 +11,40 @@ const menu = [
 		code: "smxsmx_about",
 		children: [
 			{
-				title: "学校简介"
+				title: "学校简介",
+				router: "/about/profile-content"
 			},
 			{
-				title: "学校领导"
+				title: "学校领导",
+				router: "/about/leader-list"
 			},
 			{
-				title: "内部机构"
+				title: "校长寄语",
+				router: "/about/proverb-content"
 			},
 			{
-				title: "师资队伍"
+				title: "内部机构",
+				router: "/about/organization-content"
 			},
 			{
-				title: "学校荣誉"
+				title: "师资概况",
+				router: "/about/team-content"
 			},
 			{
-				title: "二中校史"
+				title: "名师风采",
+				router: "/about/outstanding-list"
 			},
 			{
-				title: "校园文化"
+				title: "学校荣誉",
+				router: "/about/honor-list"
 			},
 			{
-				title: "校园风貌"
+				title: "二中校史",
+				router: "/about/history-content"
+			},
+			{
+				title: "校园风貌",
+				router: "/about/landscape-list"
 			}
 		]
 	},
@@ -65,27 +77,27 @@ const menu = [
 	},
 	{
 		title: "党团工会",
-		router: "",
+		router: "/group",
 		code: "",
 		children: [
 			{
 				title: "党建动态",
-				router: "",
+				router: "/group/party-list",
 				code: ""
 			},
 			{
 				title: "团建工作",
-				router: "",
+				router: "/group/ccyl-list",
 				code: ""
 			},
 			{
 				title: "工会活动",
-				router: "",
+				router: "/group/union-list",
 				code: ""
 			},
 			{
 				title: "创先争优",
-				router: "",
+				router: "/group/excellent-list",
 				code: ""
 			}
 		]

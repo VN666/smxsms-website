@@ -4,23 +4,25 @@
 			<div class="menu_logo">
 				<svg t="1568486588891" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8093" width="32" height="32"><path d="M906.666667 270.933333l-140.8-138.666666c-12.8-12.8-32-21.333333-51.2-21.333334s-38.4 8.533333-49.066667 21.333334l-140.8 140.8C503.466667 298.666667 490.666667 330.666667 490.666667 362.666667c0 21.333333 4.266667 130.133333 10.666666 142.933333 4.266667 6.4 10.666667 14.933333 19.2 19.2 12.8 6.4 125.866667 14.933333 149.333334 17.066667h6.4c32-2.133333 64-19.2 66.133333-21.333334 6.4-4.266667 12.8-8.533333 17.066667-12.8l140.8-140.8c12.8-12.8 21.333333-29.866667 21.333333-49.066666 2.133333-17.066667-4.266667-34.133333-14.933333-46.933334z m-46.933334 57.6l-115.2 115.2c-6.4 6.4-17.066667 6.4-21.333333 0l-134.4-132.266666c-2.133333-2.133333-4.266667-6.4-4.266667-10.666667s2.133333-8.533333 4.266667-10.666667l117.333333-117.333333c2.133333-2.133333 4.266667-4.266667 8.533334-4.266667 2.133333 0 6.4 2.133333 8.533333 4.266667l138.666667 140.8c2.133333 4.266667 2.133333 10.666667-2.133334 14.933333z m-179.2 157.866667h-4.266666l-74.666667-6.4c0-12.8-6.4-25.6-12.8-32-8.533333-8.533333-21.333333-14.933333-36.266667-17.066667l-4.266666-72.533333v-2.133333l132.266666 130.133333zM341.333333 196.266667H185.6c-46.933333 0-85.333333 38.4-85.333333 85.333333v155.733333c0 46.933333 38.4 85.333333 85.333333 85.333334H341.333333c46.933333 0 85.333333-38.4 85.333334-85.333334v-155.733333c0-46.933333-38.4-85.333333-85.333334-85.333333z m0 262.4H185.6c-12.8 0-21.333333-8.533333-21.333333-21.333334v-155.733333c0-12.8 8.533333-21.333333 21.333333-21.333333H341.333333c12.8 0 21.333333 8.533333 21.333334 21.333333v155.733333c0 12.8-10.666667 21.333333-21.333334 21.333334zM401.066667 614.4c-14.933333-17.066667-38.4-25.6-59.733334-25.6H185.6c-46.933333 0-85.333333 38.4-85.333333 85.333333v155.733334c0 46.933333 38.4 85.333333 85.333333 85.333333H341.333333c46.933333 0 83.2-36.266667 83.2-85.333333v-155.733334c0-23.466667-8.533333-44.8-23.466666-59.733333z m-59.733334 234.666667H185.6c-12.8 0-21.333333-8.533333-21.333333-21.333334v-155.733333c0-12.8 8.533333-21.333333 21.333333-21.333333H341.333333c12.8 0 21.333333 10.666667 21.333334 21.333333v155.733333c0 12.8-8.533333 21.333333-21.333334 21.333334zM729.6 586.666667h-155.733333c-23.466667 0-44.8 8.533333-59.733334 25.6-14.933333 14.933333-23.466667 36.266667-21.333333 59.733333v155.733333c0 44.8 36.266667 81.066667 83.2 85.333334h155.733333c46.933333 0 85.333333-38.4 85.333334-85.333334v-155.733333c-2.133333-44.8-42.666667-85.333333-87.466667-85.333333z m21.333333 85.333333v155.733333c0 12.8-10.666667 21.333333-21.333333 21.333334H576c-12.8 0-21.333333-8.533333-21.333333-21.333334v-155.733333c0-12.8 8.533333-21.333333 21.333333-21.333333h155.733333c12.8 0 19.2 8.533333 19.2 21.333333z" fill="#FFFFFF" p-id="8094"></path></svg>
 			</div>
-			<el-menu
-				default-active="admin_news_campus"
-	      		background-color="#424F63"
-	      		text-color="#FFFFFF"
-	      		active-text-color="#FFD04B">
-	      		<el-submenu v-for="(item, key) in menu" :index="item.code" v-if="item.children" :key="item.code">
-	      			<template slot="title">
-	      				<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
-	      			</template>
-					<el-menu-item v-for="(subItem, subKey) in item.children" :index="subItem.code" :key="subItem.code" @click="goPath(subItem.path)">
-						{{ subItem.title }}
-					</el-menu-item>
-	      		</el-submenu>
-	      		<el-menu-item v-else :index="item.code" @click="goHome(item)">
-	      			<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
-	      		</el-menu-item>
-	    	</el-menu>
+			<div class="menu_content">
+				<el-menu
+					default-active="admin_news_campus"
+		      		background-color="#424F63"
+		      		text-color="#FFFFFF"
+		      		active-text-color="#FFD04B">
+		      		<el-submenu v-for="(item, key) in menu" :index="item.code" v-if="item.children" :key="item.code">
+		      			<template slot="title">
+		      				<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
+		      			</template>
+						<el-menu-item v-for="(subItem, subKey) in item.children" :index="subItem.code" :key="subItem.code" @click="goPath(subItem.path)">
+							{{ subItem.title }}
+						</el-menu-item>
+		      		</el-submenu>
+		      		<el-menu-item v-else :index="item.code" @click="goHome(item)">
+		      			<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
+		      		</el-menu-item>
+		    	</el-menu>
+			</div>
 		</div>
 
 		<div class="header_wrapper">
@@ -88,7 +90,11 @@ export default {
       			this.$router.push({ path: "/index" });
       		}
       		if (item.code === "admin_bg") {
-      			this.$router.push({ path: "admin-bg" });
+      			this.$router.push({ path: item.path });
+      		}
+      		if (item.code === "admin_contact") {
+      			console.log(item.path);
+      			this.$router.push({ path: item.path });
       		}
       	}
 	}
@@ -205,6 +211,12 @@ export default {
 					height: 32px;
 					margin-left: 8px;
 				}
+			}
+			.menu_content {
+				position: relative;
+				width: 100%;
+				height: calc(100% - 48px);
+				overflow-y: auto;
 			}
 		}
 	}

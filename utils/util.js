@@ -29,12 +29,24 @@ const downloadFile = (filePath) => {
 	a.click();
 };
 
+const pickImgSrc = (htmlStr) => {
+	const imgReg = /<img.*?(?:>|\/>)/gi;
+	const srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+	let srcArr = [];
+	let imgArr = htmlStr.match(imgReg) || [];
+	imgArr.forEach((item) => {
+		srcArr.push(item.match(srcReg)[1]);
+	});
+	return srcArr;
+};
+
 export default {
 	getStrLength,
 	timeFormate,
 	getFileName,
 	getFileExt,
-	downloadFile
+	downloadFile,
+	pickImgSrc
 };
 
 

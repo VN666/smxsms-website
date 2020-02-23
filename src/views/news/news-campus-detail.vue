@@ -52,9 +52,12 @@ export default {
 	.detail-headline {
 		position: relative;
 		text-align: center;
-		font-weight: bold;
-		font-size: 24px;
-		color: #404040;
+		font-family: 宋体;
+	    color: #333333;
+	    letter-spacing: 0pt;
+	    font-size: 34pt;
+	    background: #f2f2f2;
+
 	}
 	.detail-source {
 		position: relative;

@@ -1,6 +1,6 @@
 <template>
 	<div class="bgImgs">
-		<h-picRoll :imgs="bgImgs" :isCirBtn="true" :isPrompt="false"></h-picRoll>
+		<h-picRoll :imgs="bgImgs" :isCirBtn="true" :isPrompt="false" v-if="show"></h-picRoll>
 	</div>
 </template>
 
@@ -10,7 +10,8 @@ export default {
 	name: "h-bgImgs",
 	data () {
 		return {
-			bgImgs: []
+			bgImgs: [],
+			show: false
 		}
 	},
 	mounted () {
@@ -31,6 +32,7 @@ export default {
 					item.src = item.picSrc;
 					item.title = item.id;
 				});
+				this.show = true;
 			});
 		}
 	}

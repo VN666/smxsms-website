@@ -21,7 +21,7 @@
 					</div>
 					<div class="item-option">
 						<div class="option-item" @click="preview(item.picSrc)"><i class="el-icon-view"></i>预览</div>
-						<div class="option-item" @click="del(item.id, item.picSrc)"><i class="el-icon-delete"></i>删除</div>
+						<div class="option-item" @click="beforeDel(item.id, item.picSrc)"><i class="el-icon-delete"></i>删除</div>
 						<div class="option-item" @click="moveUp(item, index)"><i class="el-icon-top"></i>上移</div>
 						<div class="option-item" @click="moveDown(item, index)"><i class="el-icon-bottom"></i>下移</div>
 					</div>
@@ -37,8 +37,6 @@
 </template>
 
 <script>
-
-import axios from "axios";
 
 export default {
 	name: "bgIndex",
@@ -106,7 +104,14 @@ export default {
 				});
 			}
 		},
-		del (id, src) {
+		beforeDel (id, src) {
+			this.$confirm("是否删除该条信息，删除后将无法恢复", "提示", {
+        		confirmButtonText: "确定",
+        		cancelButtonText: "取消",
+        		type: "warning"
+        	}).then(() => this.deleteRow(id, src));
+		},
+		deleteRow (id, src) {
 			this.$http({
 				method: "post",
 				url: this.$api.bg_imgs_del,
@@ -129,7 +134,7 @@ export default {
 		},
 		beforeUpload (file) {
 			const ext = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length);
-			const accept = ["png", "jpeg", "jpg", "gif", "svg"];
+			const accept = ["png", "jpeg", "jpg", "gif", "svg", "webp", "JPEG"];
 			this.$http({
 				method: "post",
 				url: this.$api.bg_imgs_getTotal
@@ -148,7 +153,7 @@ export default {
 		},
 		upload (file) {
 			let formData = new FormData();
-			let order = this.bgImgsData.length ? this.bgImgsData[0].order + 1 : 0;
+			let order = this.bgImgsData.length ? parseInt(this.bgImgsData[0].order) + 1 : 0;
 			formData.append("file", file.raw);
 			formData.append("category", "bg");
 			formData.append("order", order);
