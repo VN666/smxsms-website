@@ -37,13 +37,13 @@ export default {
 		};
 	},
 	mounted () {
-		// this.requestData();
+		this.requestData();
 	},
 	methods: {
 		requestData () {
 			this.$http({
 				method: "post",
-				url: this.$api.news_union_queryList,
+				url: this.$api.group_union_queryList,
 				data: {
 					pageNo: this.page.pageNo,
 					pageSize: this.page.pageSize
@@ -63,7 +63,7 @@ export default {
             this.requestData();
         },
         goDetail (id) {
-        	this.$router.push({ path: "/news/union-detail", query: {id: id, index: 1}});
+        	this.$router.push({ path: "/group/union-detail", query: {id: id, index: 2}});
         }
 	}
 }

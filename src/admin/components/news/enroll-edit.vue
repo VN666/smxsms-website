@@ -1,7 +1,7 @@
 <template>
 	<div class="enroll-edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '新闻动态', '通知公告', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '新闻动态', '招生信息', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

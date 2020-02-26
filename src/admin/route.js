@@ -41,6 +41,76 @@ import union_edit from "./components/group/union-edit";
 import excellent_list from "./components/group/excellent-list";
 import excellent_add from "./components/group/excellent-add";
 import excellent_edit from "./components/group/excellent-edit";
+/** 教学科研 */
+import research_list from "./components/education/research-list";
+import research_add from "./components/education/research-add";
+import research_edit from "./components/education/research-edit";
+import case_list from "./components/education/case-list";
+import case_add from "./components/education/case-add";
+import case_edit from "./components/education/case-edit";
+import summary_list from "./components/education/summary-list";
+import summary_add from "./components/education/summary-add";
+import summary_edit from "./components/education/summary-edit";
+import ppt_list from "./components/education/ppt-list";
+import ppt_add from "./components/education/ppt-add";
+import ppt_edit from "./components/education/ppt-edit";
+import paper_list from "./components/education/paper-list";
+import paper_add from "./components/education/paper-add";
+import paper_edit from "./components/education/paper-edit";
+import feature_list from "./components/education/feature-list";
+import feature_add from "./components/education/feature-add";
+import feature_edit from "./components/education/feature-edit";
+/** 学生天地 */
+import activity_list from "./components/student/activity-list";
+import activity_add from "./components/student/activity-add";
+import activity_edit from "./components/student/activity-edit";
+import prize_list from "./components/student/prize-list";
+import prize_add from "./components/student/prize-add";
+import prize_edit from "./components/student/prize-edit";
+import flag_list from "./components/student/flag-list";
+import flag_add from "./components/student/flag-add";
+import flag_edit from "./components/student/flag-edit";
+import exhibition_list from "./components/student/exhibition-list";
+import exhibition_add from "./components/student/exhibition-add";
+import exhibition_edit from "./components/student/exhibition-edit";
+import graduation_list from "./components/student/graduation-list";
+import graduation_add from "./components/student/graduation-add";
+import graduation_edit from "./components/student/graduation-edit";
+/** 家长学校 */
+import pratice_list from "./components/parent/pratice-list";
+import pratice_add from "./components/parent/pratice-add";
+import pratice_edit from "./components/parent/pratice-edit";
+import knowledge_list from "./components/parent/knowledge-list";
+import knowledge_add from "./components/parent/knowledge-add";
+import knowledge_edit from "./components/parent/knowledge-edit";
+import communication_list from "./components/parent/communication-list";
+import communication_add from "./components/parent/communication-add";
+import communication_edit from "./components/parent/communication-edit";
+/** 七彩校园 */
+import display_list from "./components/school/display-list";
+import display_add from "./components/school/display-add";
+import display_edit from "./components/school/display-edit";
+/** 幸福教育 */
+import idea_list from "./components/happy/idea-list";
+import idea_add from "./components/happy/idea-add";
+import idea_edit from "./components/happy/idea-edit";
+import speech_list from "./components/happy/speech-list";
+import speech_add from "./components/happy/speech-add";
+import speech_edit from "./components/happy/speech-edit";
+import exercise_list from "./components/happy/exercise-list";
+import exercise_add from "./components/happy/exercise-add";
+import exercise_edit from "./components/happy/exercise-edit";
+/** 为您服务 */
+import guide_list from "./components/service/guide-list";
+import guide_add from "./components/service/guide-add";
+import guide_edit from "./components/service/guide-edit";
+import guarantee_list from "./components/service/guarantee-list";
+import guarantee_add from "./components/service/guarantee-add";
+import guarantee_edit from "./components/service/guarantee-edit";
+import computer_list from "./components/service/computer-list";
+import computer_add from "./components/service/computer-add";
+import computer_edit from "./components/service/computer-edit";
+
 
 
 export default [
@@ -236,6 +306,321 @@ export default [
 				path: "excellent-edit",
 				name: "excellentEdit",
 				component: excellent_edit
+			},
+			{
+				path: "research-list",
+				name: "researchList",
+				component: research_list
+			},
+			{
+				path: "research-add",
+				name: "researchAdd",
+				component: research_add
+			},
+			{
+				path: "research-edit",
+				name: "researchEdit",
+				component: research_edit
+			},
+			{
+				path: "case-list",
+				name: "caseList",
+				component: case_list
+			},
+			{
+				path: "case-add",
+				name: "caseAdd",
+				component: case_add
+			},
+			{
+				path: "case-eidt",
+				name: "caseEdit",
+				component: case_edit
+			},
+			{
+				path: "summary-list",
+				name: "summaryList",
+				component: summary_list
+			},
+			{
+				path: "summary-add",
+				name: "summaryAdd",
+				component: summary_add
+			},
+			{
+				path: "summary-edit",
+				name: "summaryEdit",
+				component: summary_edit
+			},
+			{
+				path: "ppt-list",
+				name: "pptList",
+				component: ppt_list
+			},
+			{
+				path: "ppt-add",
+				name: "pptAdd",
+				component: ppt_add
+			},
+			{
+				path: "ppt-edit",
+				name: "pptEdit",
+				component: ppt_edit
+			},
+			{
+				path: "paper-list",
+				name: "paperList",
+				component: paper_list
+			},
+			{
+				path: "paper-add",
+				name: "paperAdd",
+				component: paper_add
+			},
+			{
+				path: "paper-edit",
+				name: "paperEdit",
+				component: paper_edit
+			},
+			{
+				path: "feature-list",
+				name: "featureList",
+				component: feature_list
+			},
+			{
+				path: "feature-add",
+				name: "featureAdd",
+				component: feature_add
+			},
+			{
+				path: "feature-edit",
+				name: "featureEdit",
+				component: feature_edit
+			},
+			{
+				path: "activity-list",
+				name: "activityList",
+				component: activity_list
+			},
+			{
+				path: "activity-add",
+				name: "activityAdd",
+				component: activity_add
+			},
+			{
+				path: "activity-edit",
+				name: "activityEdit",
+				component: activity_edit
+			},
+			{
+				path: "prize-list",
+				name: "prizeList",
+				component: prize_list
+			},
+			{
+				path: "prize-add",
+				name: "prizeAdd",
+				component: prize_add
+			},
+			{
+				path: "prize-edit",
+				name: "prizeEdit",
+				component: prize_edit
+			},
+			{
+				path: "flag-list",
+				name: "flagList",
+				component: flag_list
+			},
+			{
+				path: "flag-add",
+				name: "flagAdd",
+				component: flag_add
+			},
+			{
+				path: "flag-edit",
+				name: "flagEdit",
+				component: flag_edit
+			},
+			{
+				path: "exhibition-list",
+				name: "exhibitionList",
+				component: exhibition_list
+			},
+			{
+				path: "exhibition-add",
+				name: "exhibitionAdd",
+				component: exhibition_add
+			},
+			{
+				path: "exhibition-edit",
+				name: "exhibitionEdit",
+				component: exhibition_edit
+			},
+			{
+				path: "graduation-list",
+				name: "graduationList",
+				component: graduation_list
+			},
+			{
+				path: "graduation-add",
+				name: "graduationAdd",
+				component: graduation_add
+			},
+			{
+				path: "graduation-edit",
+				name: "graduationEdit",
+				component: graduation_edit
+			},
+			{
+				path: "pratice-list",
+				name: "praticeList",
+				component: pratice_list
+			},
+			{
+				path: "pratice-add",
+				name: "praticeAdd",
+				component: pratice_add
+			},
+			{
+				path: "pratice-edit",
+				name: "praticeEdit",
+				component: pratice_edit
+			},
+			{
+				path: "knowledge-list",
+				name: "knowledgeList",
+				component: knowledge_list
+			},
+			{
+				path: "knowledge-add",
+				name: "knowledgeAdd",
+				component: knowledge_add
+			},
+			{
+				path: "knowledge-edit",
+				name: "knowledgeEdit",
+				component: knowledge_edit
+			},
+			{
+				path: "communication-list",
+				name: "communicationList",
+				component: communication_list
+			},
+			{
+				path: "communication-add",
+				name: "communicationAdd",
+				component: communication_add
+			},
+			{
+				path: "communication-edit",
+				name: "communicationEdit",
+				component: communication_edit
+			},
+			{
+				path: "display-list",
+				name: "displayList",
+				component: display_list
+			},
+			{
+				path: "display-add",
+				name: "displayAdd",
+				component: display_add
+			},
+			{
+				path: "display-edit",
+				name: "displayEdit",
+				component: display_edit
+			},
+			{
+				path: "idea-list",
+				name: "ideaList",
+				component: idea_list
+			},
+			{
+				path: "idea-add",
+				name: "ideaAdd",
+				component: idea_add
+			},
+			{
+				path: "idea-edit",
+				name: "ideaEdit",
+				component: idea_edit
+			},
+			{
+				path: "speech-list",
+				name: "speechList",
+				component: speech_list
+			},
+			{
+				path: "speech-add",
+				name: "speechAdd",
+				component: speech_add
+			},
+			{
+				path: "speech-edit",
+				name: "speechEdit",
+				component: speech_edit
+			},
+			{
+				path: "exercise-list",
+				name: "exerciseList",
+				component: exercise_list
+			},
+			{
+				path: "exercise-add",
+				name: "exerciseAdd",
+				component: exercise_add
+			},
+			{
+				path: "exercise-edit",
+				name: "exerciseEdit",
+				component: exercise_edit
+			},
+			{
+				path: "guide-list",
+				name: "guideList",
+				component: guide_list
+			},
+			{
+				path: "guide-add",
+				name: "guideAdd",
+				component: guide_add
+			},
+			{
+				path: "guide-edit",
+				name: "guideEdit",
+				component: guide_edit
+			},
+			{
+				path: "guarantee-list",
+				name: "guaranteeList",
+				component: guarantee_list
+			},
+			{
+				path: "guarantee-add",
+				name: "guaranteeAdd",
+				component: guarantee_add
+			},
+			{
+				path: "guarantee-edit",
+				name: "guaranteeEdit",
+				component: guarantee_edit
+			},
+			{
+				path: "computer-list",
+				name: "computerList",
+				component: computer_list
+			},
+			{
+				path: "computer-add",
+				name: "computerAdd",
+				component: computer_add
+			},
+			{
+				path: "computer-edit",
+				name: "computerEdit",
+				component: computer_edit
 			}
 		]
 	}

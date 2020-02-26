@@ -1,7 +1,7 @@
 <template>
 	<div class="union-edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '党团工会', '团建工作', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '党团工会', '工会活动', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

@@ -1,7 +1,7 @@
 <template>
 	<div class="party-add">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '党团工会', '党建活动', '新增']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '党团工会', '党建动态', '新增']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

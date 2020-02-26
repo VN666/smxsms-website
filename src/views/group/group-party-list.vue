@@ -37,13 +37,13 @@ export default {
 		};
 	},
 	mounted () {
-		// this.requestData();
+		this.requestData();
 	},
 	methods: {
 		requestData () {
 			this.$http({
 				method: "post",
-				url: this.$api.news_party_queryList,
+				url: this.$api.group_party_queryList,
 				data: {
 					pageNo: this.page.pageNo,
 					pageSize: this.page.pageSize
@@ -63,7 +63,7 @@ export default {
             this.requestData();
         },
         goDetail (id) {
-        	this.$router.push({ path: "/news/party-detail", query: {id: id, index: 1}});
+        	this.$router.push({ path: "/group/party-detail", query: {id: id, index: 0}});
         }
 	}
 }

@@ -1,7 +1,7 @@
 <template>
 	<div class="media-edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '新闻动态', '通知公告', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '新闻动态', '媒体报道', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

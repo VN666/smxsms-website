@@ -2,11 +2,11 @@
 	<div class="panel">
 		<div class="title">
 			<span class="word">{{title}}</span>
-			<span class="icon">>> more</span>
+			<span class="icon" @click="moreClick">>> more</span>
 		</div>
 		<div class="content">
 			<ul class="contentUl">
-				<li v-for="(item,index) in content" v-if="index<max">
+				<li v-for="(item,index) in content" v-if="index<max" @click="itemClick(item)">
 					<span class="itemTitle">{{item.title}}</span>
 					<span class="itemDate">{{item.date}}</span>
 				</li>
@@ -37,6 +37,14 @@ export default {
 		return {};
 	},
 	created () {
+	},
+	methods: {
+		moreClick () {
+			this.$emit("moreClick");
+		},
+		itemClick (item) {
+			this.$emit("itemClick", item)
+		}
 	}
 }
 
@@ -108,6 +116,7 @@ export default {
 				align-items: center;
 				&:hover {
 					opacity: 0.7;
+					text-decoration: underline;
 				}
 				img {
 					margin-right: 0;

@@ -51,7 +51,7 @@ const menu = [
 	{
 		title: "新闻动态",
 		router: "/news",
-		code: "",
+		code: "smxsmx_news",
 		children: [
 			{
 				title: "新闻快讯",
@@ -78,7 +78,7 @@ const menu = [
 	{
 		title: "党团工会",
 		router: "/group",
-		code: "",
+		code: "smxsmx_group",
 		children: [
 			{
 				title: "党建动态",
@@ -103,163 +103,148 @@ const menu = [
 		]
 	},
 	{
-		title: "科学科研",
-		router: "",
-		code: "",
+		title: "教学科研",
+		router: "/education",
+		code: "smxsmx_education",
 		children: [
 			{
 				title: "教研动态",
-				router: "",
+				router: "/education/research-list",
 				code: ""
 			},
 			{
 				title: "教学案例",
-				router: "",
+				router: "/education/case-list",
 				code: ""
 			},
 			{
 				title: "教学反思",
-				router: "",
+				router: "/education/summary-list",
 				code: ""
 			},
 			{
 				title: "教学课件",
-				router: "",
+				router: "/education/ppt-list",
 				code: ""
 			},
 			{
 				title: "试题集锦",
-				router: "",
-				code: ""
-			},
-			{
-				title: "名师风采",
-				router: "",
+				router: "/education/paper-list",
 				code: ""
 			},
 			{
 				title: "特色教育",
-				router: "",
+				router: "/education/feature-list",
 				code: ""
 			}
 		]
 	},
 	{
 		title: "学生天地",
-		router: "",
-		code: "",
+		router: "/student",
+		code: "smxsmx_student",
 		children: [
 			{
 				title: "班级活动",
-				router: "",
+				router: "/student/activity-list",
 				code: ""
 			},
 			{
 				title: "荣誉表彰",
-				router: "",
+				router: "/student/prize-list",
 				code: ""
 			},
 			{
 				title: "纪律卫生",
-				router: "",
+				router: "/student/flag-list",
 				code: ""
 			},
 			{
-				title: "学生座屏",
-				router: "",
+				title: "学生作品",
+				router: "/student/exhibition-list",
 				code: ""
 			},
 			{
 				title: "毕业留念",
-				router: "",
+				router: "/student/graduation-list",
 				code: ""
 			}
 		]
 	},
 	{
 		title: "家长学校",
-		router: "",
-		code: "",
+		router: "/parent",
+		code: "smxsmx_parent",
 		children: [
 			{
 				title: "活动掠影",
-				router: "",
+				router: "/parent/pratice-list",
 				code: ""
 			},
 			{
-				title: "教教专区",
-				router: "",
+				title: "家教知识",
+				router: "/parent/knowledge-list",
 				code: ""
 			},
 			{
 				title: "学校沟通",
-				router: "",
+				router: "/parent/communication-list",
 				code: ""
 			}
 		]
 	},
 	{
 		title: "七彩校园",
-		router: "",
-		code: "",
+		router: "/school",
+		code: "smxsmx_school",
 		children: [
 			{
-				title: "校园活动",
-				router: "",
-				code: ""
-			},
-			{
-				title: "校园活动",
-				router: "",
-				code: ""
-			},
-			{
-				title: "学校活动",
-				router: "",
+				title: "活动报道",
+				router: "/school/display-list",
 				code: ""
 			}
 		]
 	},
 	{
 		title: "幸福教育",
-		router: "",
-		code: "",
+		router: "/happy",
+		code: "smxsmx_happy",
 		children: [
 			{
 				title: "幸福理念",
-				router: "",
+				router: "/happy/idea-list",
 				code: ""
 			},
 			{
 				title: "幸福感言",
-				router: "",
+				router: "/happy/speech-list",
 				code: ""
 			},
 			{
 				title: "幸福教育活动",
-				router: "",
+				router: "/happy/exercise-list",
 				code: ""
 			}
 		]
 	},
 	{
 		title: "为您服务",
-		router: "",
-		code: "",
+		router: "/service",
+		code: "smxsmx_service",
 		children: [
 			{
 				title: "办事指南",
-				router: "",
+				router: "/service/guide-list",
 				code: ""
 			},
 			{
 				title: "后勤保障",
-				router: "",
+				router: "/service/guarantee-list",
 				code: ""
 			},
 			{
 				title: "电教知识",
-				router: "",
+				router: "/service/computer-list",
 				code: ""
 			}
 		]

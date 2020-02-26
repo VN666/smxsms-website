@@ -21,5 +21,5 @@ export const bgFilter = (htmlStr) => {
 export const removeHtmlTag = (htmlStr) => {
 	if (!htmlStr) return "";
 	const reg = /<\/?.+?\/?>/g;
-	return htmlStr.replace(reg, "");
+	return htmlStr.replace(reg, "").replace(/&nbsp;/g, "");
 }

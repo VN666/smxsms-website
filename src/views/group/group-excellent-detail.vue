@@ -11,7 +11,7 @@
 		<div class="detail-download" v-if="content.fileListSrc.length">
 			<div class="download-des">附件</div>
 			<div class="download-file">
-				<div class="download-item" v-for="(item, index) in content.fileListSrc" @click="downLoad(item)"><img src="@/src/assets/icons/download-icon.png" />{{ item.match(/news\/(\S*)-oss-/)[1] + "." + $utils.getFileExt(item) }}</div>
+				<div class="download-item" v-for="(item, index) in content.fileListSrc" @click="downLoad(item)"><img src="@/src/assets/icons/download-icon.png" />{{ item.match(/group\/(\S*)(\s*)-oss-/)[1] + "." + $utils.getFileExt(item) }}</div>
 			</div>
 		</div>
 	</div>
@@ -31,13 +31,13 @@ export default {
 	},
 	created () {
 		this.id = this.$route.query.id;
-		// this.requestData();
+		this.requestData();
 	},
 	methods: {
 		requestData () {
 			this.$http({
 				method: "post",
-				url: this.$api.news_excellent_queryById,
+				url: this.$api.group_excellent_queryById,
 				data: {
 					id: this.id,
 					addViews: true

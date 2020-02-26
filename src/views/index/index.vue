@@ -32,8 +32,8 @@
 
 			<div class="wLine1">
 				<div class="wLineL">
-					<h-panel class="panel" title="教研动态" :content="news"></h-panel>
-					<h-panel class="panel" title="校园活动" :content="news"></h-panel>
+					<h-panel class="panel" title="党建动态" :content="partyData|filterParty" @moreClick="partyMore" @itemClick="partyItem"></h-panel>
+					<h-panel class="panel" title="教研动态" :content="researchData|filterResearch" @moreClick="researchMore" @itemClick="researchItem"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
@@ -49,8 +49,8 @@
 
 			<div class="wLine2">
 				<div class="wLineL">
-					<h-panel class="panel" title="教研动态" :content="news" :max="6"></h-panel>
-					<h-panel class="panel" title="校园活动" :content="news" :max="6"></h-panel>
+					<h-panel class="panel" title="班级活动" :content="activityData|filterActivity" @moreClick="activityMore" @itemClick="activityItem"></h-panel>
+					<h-panel class="panel" title="七彩校园" :content="displayData|filterDisplay" @moreClick="displayMore" @itemClick="displayItem"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
@@ -89,10 +89,25 @@
 						<li @click="goPath('admin')">管理员入口</li>
 					</ul>
 					<div class="line"></div>
-					<img src="../../assets/icons/qq.png" />
-					<img src="../../assets/icons/wechat.png" />
-					<img src="../../assets/icons/weibo.png" />
-					<img src="../../assets/icons/phone.png" />
+
+					<div class="social-btn">
+						<img src="../../assets/icons/qq.png" />
+					</div>
+					<div class="social-btn">
+						<el-tooltip effect="light" placement="top">
+							<div slot="content" class="social-btn-inner__img"><img src="../../assets/icons/wechat-code.png" width="100" height="100" /></div>
+							<img src="../../assets/icons/wechat.png" />
+						</el-tooltip>
+					</div>
+					<div class="social-btn">
+						<el-tooltip effect="light" placement="top">
+							<div slot="content" class="social-btn-inner__img"><img src="../../assets/icons/weibo-code.png" width="100" height="100" /></div>
+							<img src="../../assets/icons/weibo.png" />
+						</el-tooltip>
+					</div>
+					<div class="social-btn">
+						<img src="../../assets/icons/phone.png" />
+					</div>
 					<span>0398-XXXXXXX</span>
 				</div>
 			</div>
@@ -126,7 +141,33 @@ export default {
 			return val;
 		},
 		picText (text) {
-			return text.substring(0, 145) + "...";
+			return text.substring(0, 140) + "...";
+		},
+		filterParty (val) {
+			val.forEach((item) => {
+				item.title = item.headline;
+			});
+			return val;
+		},
+		filterResearch (val) {
+			val.forEach((item) => {
+				item.title = item.headline;
+			});
+			return val;
+		},
+		filterActivity (val) {
+			val.forEach((item) => {
+				item.title = item.headline;
+			});
+			return val;
+		},
+		filterDisplay (val) {
+			val.forEach((item) => {
+				val.forEach((item) => {
+					item.title = item.headline;
+				});
+			});
+			return val;
 		}
 	},
 	data () {
@@ -140,116 +181,46 @@ export default {
 				postCode: ""
 			},
 			proverbData: "",
+			partyData: [],
+			researchData: [],
+			activityData: [],
+			displayData: [],
 
 			linkMenu: null,
-			imgs: [
-				{
-					title: "市二中找平代课教师启事",
-					src: "./static/index/img1.jpg"
-				},
-				{
-					title: "二、2017年市二中七年级新生招生简章",
-					src: "./static/index/img2.jpg"
-				},
-				{
-					title: "e44",
-					src: "./static/index/img3.jpg"
-				},
-				{
-					title: "4",
-					src: "./static/index/img4.jpg"
-				},
-				{
-					title: "5",
-					src: "./static/index/img5.jpg"
-				},
-				{
-					title: "6",
-					src: "./static/index/img6.jpg"
-				},
-				{
-					title: "7",
-					src: "./static/index/img7.jpg"
-				}
-			],
-			notices: [
-				{
-					title: "一、市二中找平代课教师启事",
-					src: "",
-					id: "1"
-				},
-				{
-					title: "二、2017年市二中七年级新生招生简章",
-					src: "",
-					id: "2"
-				},
-				{
-					title: "三、关于在全省教育系统开展\"学习张伟，践行焦裕禄精神\"师德主题教育活动的通知",
-					src: "",
-					id: "3"
-				},
-				{
-					title: "四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛四、全省教育教学信息化大奖赛",
-					src: "",
-					id: "4"
-				}
-			],
+
 			picRollStyle: {
 				border: "5px"
-			},
-			news: [
-				{
-					title: "自组装纳米材料的生物效应",
-					src: "./static/news/news1.jpg",
-					date: "2019-01-01"
-				},
-				{
-					title: "自组装纳米材料的活体超分子组装",
-					src: "./static/news/news2.jpg",
-					date: "2019-01-02"
-				},
-				{
-					title: "自组装纳米材料的高通量合成",
-					src: "./static/news/news3.jpg",
-					date: "2019-01-03"
-				},
-				{
-					title: "文明三门峡 清洁市二中",
-					src: "./static/news/news3.jpg",
-					date: "2019-01-04"
-				},
-				{
-					title: "召开文明城市建设推进会",
-					src: "",
-					date: "2019-01-05"
-				},
-				{
-					title: "匆匆岁月沉淀真情 近日系别师恩难忘",
-					src: "",
-					date: "2019-01-06"
-				},
-				{
-					title: "很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的数据",
-					date: "2019-01-09"
-				},
-				{
-					title: "志愿服务忙 清洁魅力校园",
-					src: "",
-					date: "2019-01-07"
-				},
-				{
-					title: "我校召开以案促改革专题民主生活会",
-					src: "",
-					date: "2019-01-08"
-				}
-			],
-			proverb: "崔新来，男，汉族，1964年8月生，中共党员，中学英语高级教师。1989年毕业于河南师范大学外语系，同年分配到三门峡市第四中学（原水电十一局中学）任教，2005年任业务副校长，2012年任市二中党支部书记，2013年8月任市二中校长。从教二十多年来，曾多次被评为三门峡市先进教育工作者；1995年、1996年连续两年被评为三门峡市优秀班主任；1999年被评为三门峡市“跨世纪园丁工程”骨干教师；2001年被评为十一局优秀党员；2002年被评为“十一局杰出青年”；2003年被评为市级骨干教师，2004年被评为三门峡市优秀教师；2009年被评为“学校管理上台阶先进个人”；2010年被评为“岗位管理标兵”。"
+			}
 		}
 	},
 	mounted () {
 		this.requestData();
 	},
 	methods: {
+		partyMore () {
+			this.goPathQuery("/group/party-list", "", 0);
+		},
+		researchMore () {
+			this.goPathQuery("/education/research-list", "", 0);
+		},
+		activityMore () {
+			this.goPathQuery("/student/activity-list", "", 0);
+		},
+		displayMore () {
+			this.goPathQuery("/school/display-list", "", 0);
+		},
+		partyItem (item) {
+			this.goPathQuery("/group/party-detail", item.id, 0);
+		},
+		researchItem (item) {
+			this.goPathQuery("/education/research-detail", item.id, 0);
+		},
+		activityItem (item) {
+			this.goPathQuery("/student/activity-detail", item.id, 0);
+		},
+		displayItem (item) {
+			this.goPathQuery("/school/display-detail", item.id, 0);
+		},
 		goPath (path) {
 			this.$router.push({ path: path });
 		},
@@ -263,16 +234,24 @@ export default {
 			this.goPathQuery("/news/notice-detail", notice.id, 1);
 		},
 		async requestData () {
-			let [ newsData, noticeData, contactData, proverbData ] = await Promise.all([
+			let [ newsData, noticeData, contactData, proverbData, partyData, researchData, activityData, displayData ] = await Promise.all([
 				this.requestNews(),
 				this.requestNotice(),
 				this.requestContact(),
-				this.requestProverb()
+				this.requestProverb(),
+				this.requestParty(),
+				this.requestResearch(),
+				this.requestActivity(),
+				this.requestDisplay()
 			]);
 			this.newsData = newsData.data.list;
 			this.noticeData = noticeData.data.list;
 			this.contactData = contactData.data;
 			this.proverbData = proverbData.data;
+			this.partyData = partyData.data.list;
+			this.researchData = researchData.data.list;
+			this.activityData = activityData.data.list;
+			this.displayData = displayData.data.list;
 		},
 		requestNews () {
 			return this.$http({
@@ -305,6 +284,46 @@ export default {
 				method: "post",
 				url: this.$api.about_proverb_queryById,
 				data: { addViews: false }
+			});
+		},
+		requestParty () {
+			return this.$http({
+				method: "post",
+				url: this.$api.group_party_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
+			});
+		},
+		requestResearch () {
+			return this.$http({
+				method: "post",
+				url: this.$api.education_research_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
+			});
+		},
+		requestActivity () {
+			return this.$http({
+				method: "post",
+				url: this.$api.student_activity_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
+			});
+		},
+		requestDisplay () {
+			return this.$http({
+				method: "post",
+				url: this.$api.school_display_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
 			});
 		}
 	},
@@ -451,6 +470,7 @@ export default {
 							}
 							img {
 								margin-right: 0;
+								cursor: pointer;
 							}
 							.itemTitle {
 								overflow: hidden;
@@ -752,6 +772,16 @@ export default {
 					justify-content: flex-end;
 					align-items: center;
 					padding-right: 128px;
+					.social-btn {
+						display: flex;
+						justify-content: content;
+						align-items: center;
+						cursor: pointer;
+						img {
+							width: 28px;
+							height: 28px;
+						}
+					}
 					img {
 						margin: 0px 16px;
 					}

@@ -1,7 +1,7 @@
 <template>
 	<div class="union-list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '党团工会', '团建工作', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '党团工会', '工会活动', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">

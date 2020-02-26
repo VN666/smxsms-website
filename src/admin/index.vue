@@ -6,9 +6,11 @@
 			</div>
 			<div class="menu_content">
 				<el-menu
-					default-active="admin_news_campus"
+					:default-active="defaultActive"
 		      		background-color="#424F63"
 		      		text-color="#FFFFFF"
+		      		:unique-opened="true"
+					:router="true"
 		      		active-text-color="#FFD04B">
 		      		<el-submenu v-for="(item, key) in menu" :index="item.code" v-if="item.children" :key="item.code">
 		      			<template slot="title">
@@ -77,27 +79,31 @@ export default {
 				cancelButtonText: "取消",
 				type: "warning"
 			}).then(() => {
-				this.$router.push({ path: "/" });
+				this.$router.push({ path: "/" }).catch(err => {err});
 			}).catch(() => {
 				console.log("取消");
 			});
       	},
       	goPath (path) {
-      		this.$router.push({ path: path });
+      		this.$router.push({ path: path }).catch(err => {err});
       	},
       	goHome (item) {
-      		if (item.code === "admin_home") {
-      			this.$router.push({ path: "/index" });
+      		if (item.code === "home") {
+      			this.$router.push({ path: "/index" }).catch(err => {err});
       		}
-      		if (item.code === "admin_bg") {
-      			this.$router.push({ path: item.path });
+      		if (item.code === "bg") {
+      			this.$router.push({ path: item.path }).catch(err => {err});
       		}
-      		if (item.code === "admin_contact") {
-      			console.log(item.path);
-      			this.$router.push({ path: item.path });
+      		if (item.code === "contact") {
+      			this.$router.push({ path: item.path }).catch(err => {err});
       		}
       	}
-	}
+	},
+	computed: {
+		defaultActive () {
+			return this.$route.path.split("/")[2].split("-")[0];
+		}
+	},
 }
 
 </script>
