@@ -32,7 +32,7 @@
 					<ul>
 						<li>登录</li>
 						<li>注册</li>
-						<li @click="$router.push({ path: '/admin'})">管理员入口</li>
+						<li @click="$router.push({ path: '/login'})">管理员入口</li>
 					</ul>
 					<div class="line"></div>
 					<img src="@/src/assets/icons/qq.png" />

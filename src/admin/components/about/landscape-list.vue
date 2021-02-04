@@ -51,7 +51,7 @@
 		<el-dialog :visible.sync="dialogPicName" :modal="false" width="480px" :close-on-click-modal="false" :close-on-press-escape="false" label-position="top" title="输入">
 			<el-form :model="addForm"  :rules="rules" ref="addForm">
 				<el-form-item label="名称（该名称将用于网站显示）" prop="name">
-				    <el-input v-model="addForm.name"></el-input>
+				    <el-input v-model="addForm.name" @keyup.enter.native="beforeSubmit"></el-input>
 				</el-form-item>
 			</el-form>
 			<span slot="footer" class="dialog-footer">
@@ -118,7 +118,7 @@ export default {
 		window.addEventListener("resize", this.resize, false);
 		this.requestData();
 	},
-	beforeDestory () {
+	beforeDestroy () {
 		window.removeEventListener("resize", this.resize, false);
 	},
 	methods: {

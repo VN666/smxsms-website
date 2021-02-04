@@ -1,3 +1,5 @@
+import CryptoJS from "crypto-js";
+
 const getStrLength = (str) => {
 	let count = str.length;
 	for (let i = 0, size = str.length; i < size; i++) {
@@ -40,13 +42,24 @@ const pickImgSrc = (htmlStr) => {
 	return srcArr;
 };
 
+const encodeBase64 = (words) => {
+	return CryptoJS.SHA256(words + "smxdezx").toString();
+}
+
+const getAbsolutePath = (url) => {
+	const tempUrl = url.split("//")[1];
+	return tempUrl.substring(tempUrl.indexOf("/") + 1, tempUrl.length);
+}
+
 export default {
 	getStrLength,
 	timeFormate,
 	getFileName,
 	getFileExt,
 	downloadFile,
-	pickImgSrc
+	pickImgSrc,
+	encodeBase64,
+	getAbsolutePath
 };
 
 

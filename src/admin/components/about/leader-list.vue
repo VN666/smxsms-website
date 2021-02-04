@@ -378,10 +378,8 @@ export default {
 				url: this.$api.about_leader_queryById,
 				data: { id: row.id }
 			}).then((res) => {
-				console.log(this.addForm);
 				this.addForm = res.data;
 				this.dialogEdit = true;
-				console.log(this.addForm);
 			});
 		}
 	},
@@ -390,7 +388,7 @@ export default {
 		window.addEventListener("resize", this.resize, false);
 		this.requestData();
 	},
-	beforeDestory () {
+	beforeDestroy () {
 		window.removeEventListener("resize", this.resize, false);
 	}
 }

@@ -171,6 +171,7 @@ export default {
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
+		overflow: hidden;
 		.breadcrumb_wrap {
 			position: relative;
 			height: 48px;

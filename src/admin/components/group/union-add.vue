@@ -145,7 +145,6 @@ export default {
 			this.isSaving = true;
 			let upload = await this.fileUpload();
 			this.addForm.fileListSrc = upload.url;
-			console.log(upload.url);
 			if (upload.code === 200) {
 				this.$http({
 					method: "post",
@@ -175,7 +174,6 @@ export default {
 			}
 		},
 		beforeUpload (file, fileList) {
-			console.log(file);
 			if (file.size > 10485760) {
 				this.addForm.fileList.pop();
 				this.$message({	message: "文件大小超过10M", type: "warning", duration: 3000 });
@@ -216,6 +214,7 @@ export default {
 		position: relative;
 		width: 100%;
 		height: 100%;
+		overflow: auto;
 		.breadcrumb_wrap {
 			position: relative;
 			height: 48px;

@@ -228,7 +228,7 @@ export default {
 		window.addEventListener("resize", this.resize, false);
 		this.requestData();
 	},
-	beforeDestory () {
+	beforeDestroy () {
 		window.removeEventListener("resize", this.resize, false);
 	}
 }

@@ -15,6 +15,8 @@ import "tinymce/plugins/autoresize";
 import "@/src/components/zh_CN.js";
 import axios from "axios";
 
+
+
 export default {
 	name: "hTinymce",
 	data () {
@@ -104,9 +106,16 @@ export default {
 					const headerConfig = { headers: { 'Content-Type': 'multipart/form-data' }};
 					formData.append("file", blobInfo.blob());
 					formData.append("category", this.category);
-					axios.post(this.$api.imgs_upload, formData, headerConfig).then((res) => {
-						this.$emit("getPicSrc", res.data.url);
-						success(res.data.url);
+					this.$http({
+						method: "post",
+						url: this.$api.imgs_upload,
+						reqType: "formData",
+						data: formData
+					}).then((res) => {
+						this.$emit("getPicSrc", res.url);
+						success(res.url);
+					}).catch((e) => {
+						console.log(e);
 					});
 				},
 				images_upload_credentias: true

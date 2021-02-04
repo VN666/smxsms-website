@@ -124,6 +124,7 @@ export default {
 	position: relative;
 	width: 100%;
 	height: 100%;
+	overflow: auto;
 	box-sizing: border-box;
 	.breadcrumb_wrap {
 		position: relative;

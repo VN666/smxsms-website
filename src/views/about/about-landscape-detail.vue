@@ -60,6 +60,7 @@ export default {
 		img {
 			width: auto;
 			height: 100%;
+			max-width: 1008px;
 		}
 	}
 	.content-name {

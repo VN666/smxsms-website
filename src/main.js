@@ -14,6 +14,12 @@ import api from "./config/api.js";
 import hComponents from "@/src/components/index.js";
 import "@/src/filters/index.js";
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(VueRouter);
@@ -23,11 +29,11 @@ Vue.use(hComponents);
 let routes = new Set([...fe_router, ...admin_router]);
 let router = new VueRouter({
 	routes,
-	mode: "history"
+	mode: "hash"
 })
 
 /* eslint-disable no-new */
-new Vue({
+window.vm = new Vue({
   el: '#app',
   router,
   components: { App },

@@ -9,6 +9,7 @@ import hTinymce from "./h-tinymce"
 import hBreadcrumb from "./h-breadcrumb"
 import hNavigator from "./h-navigator"
 import hPicRoll from "./h-picRoll"
+import hSlide from "./h-slide";
 
 const components = [
     hBgImgs,
@@ -21,7 +22,8 @@ const components = [
     hPanel,
     hTinymce,
     hBreadcrumb,
-    hNavigator
+    hNavigator,
+    hSlide
 ];
 
 const install = (Vue) => {

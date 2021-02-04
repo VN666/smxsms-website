@@ -32,8 +32,8 @@
 
 			<div class="wLine1">
 				<div class="wLineL">
-					<h-panel class="panel" title="党建动态" :content="partyData|filterParty" @moreClick="partyMore" @itemClick="partyItem"></h-panel>
-					<h-panel class="panel" title="教研动态" :content="researchData|filterResearch" @moreClick="researchMore" @itemClick="researchItem"></h-panel>
+					<h-panel class="panel" title="党建动态" :content="partyData|filterParty" @moreClick="partyMore" @itemClick="partyItem" :max="5"></h-panel>
+					<h-panel class="panel" title="教研动态" :content="researchData|filterResearch" @moreClick="researchMore" @itemClick="researchItem" :max="5"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
@@ -49,8 +49,8 @@
 
 			<div class="wLine2">
 				<div class="wLineL">
-					<h-panel class="panel" title="班级活动" :content="activityData|filterActivity" @moreClick="activityMore" @itemClick="activityItem"></h-panel>
-					<h-panel class="panel" title="七彩校园" :content="displayData|filterDisplay" @moreClick="displayMore" @itemClick="displayItem"></h-panel>
+					<h-panel class="panel" title="班级活动" :content="activityData|filterActivity" @moreClick="activityMore" @itemClick="activityItem" :max="6"></h-panel>
+					<h-panel class="panel" title="七彩校园" :content="displayData|filterDisplay" @moreClick="displayMore" @itemClick="displayItem" :max="6"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
@@ -86,7 +86,7 @@
 					<ul>
 						<li>登录</li>
 						<li>注册</li>
-						<li @click="goPath('admin')">管理员入口</li>
+						<li @click="goPath('login')">管理员入口</li>
 					</ul>
 					<div class="line"></div>
 

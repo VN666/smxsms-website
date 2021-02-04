@@ -65,7 +65,7 @@ export default {
 		this.menu = menu;
 		window.addEventListener("resize", this.resize, false);
 	},
-	beforeDestory () {
+	beforeDestroy () {
 		window.removeEventListener("resize", this.resize, false);
 	},
 	methods: {
@@ -79,23 +79,24 @@ export default {
 				cancelButtonText: "取消",
 				type: "warning"
 			}).then(() => {
-				this.$router.push({ path: "/" }).catch(err => {err});
+				localStorage.clear();
+				this.$router.push({ path: "/" });
 			}).catch(() => {
 				console.log("取消");
 			});
       	},
       	goPath (path) {
-      		this.$router.push({ path: path }).catch(err => {err});
+      		this.$router.push({ path: path });
       	},
       	goHome (item) {
       		if (item.code === "home") {
-      			this.$router.push({ path: "/index" }).catch(err => {err});
+      			this.$router.push({ path: "/index" });
       		}
       		if (item.code === "bg") {
-      			this.$router.push({ path: item.path }).catch(err => {err});
+      			this.$router.push({ path: item.path });
       		}
       		if (item.code === "contact") {
-      			this.$router.push({ path: item.path }).catch(err => {err});
+      			this.$router.push({ path: item.path });
       		}
       	}
 	},

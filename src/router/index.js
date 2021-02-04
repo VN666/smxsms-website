@@ -2,6 +2,7 @@
 import index from "@/src/views/index/index";
 
 import admin from "@/src/admin/index";
+import login from "@/src/views/login/index";
 
 /** 新闻动态 */
 import news from "@/src/views/news/index";
@@ -101,6 +102,10 @@ export default  [
 	{
 		path: "/index",
 		component: index
+	},
+	{
+		path: "/login",
+		component: login
 	},
 	{
 		path: "/about",

@@ -57,10 +57,10 @@
 
 				<el-row>
 					<el-form-item label="正文" prop="content">
-						<div class="content_inner" :style="{minHeight:`${hTinymceHeight}px`,width: `${hTinymceWidth}px`}">
+						<div class="content_inner" :style="{minHeight:`${hTinymceMinHeight}px`,width: `${hTinymceWidth}px`}">
 							<h-tinymce
 								:width="hTinymceWidth"
-								:height="hTinymceHeight"
+								:height="hTinymceMinHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
 								category="news"
@@ -118,6 +118,11 @@ export default {
 			isSaving: false
 		};
 	},
+	computed: {
+		hTinymceMinHeight () {
+			return Math.max(this.hTinymceHeight, 800);
+		}
+	},
 	mounted () {
 		this.resize();
 		window.addEventListener("resize", this.resize, false);
@@ -131,13 +136,18 @@ export default {
 		},
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row3.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
+
+			this.hTinymceHeight = Math.max(this.hTinymceHeight, 100);
 			this.hTinymceWidth = this.$el.clientWidth * 0.9;
 		},
 		beforeSubmit () {
+			console.log(123);
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
 					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
+					console.log(this.$utils.pickImgSrc(this.addForm.content))
 					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
+						console.log(src);
 						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
 					});
 					this.submit();
@@ -186,6 +196,7 @@ export default {
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
+		overflow-y: auto;
 		.breadcrumb_wrap {
 			position: relative;
 			height: 48px;
