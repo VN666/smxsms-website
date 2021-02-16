@@ -3,6 +3,7 @@ import index from "@/src/views/index/index";
 
 import admin from "@/src/admin/index";
 import login from "@/src/views/login/index";
+import loginTool from "@/src/views/login/loginTool";
 
 /** 新闻动态 */
 import news from "@/src/views/news/index";
@@ -106,6 +107,10 @@ export default  [
 	{
 		path: "/login",
 		component: login
+	},
+	{
+		path: "/loginTool",
+		component: loginTool
 	},
 	{
 		path: "/about",

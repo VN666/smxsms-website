@@ -86,7 +86,7 @@
 					<ul>
 						<li>登录</li>
 						<li>注册</li>
-						<li @click="goPath('login')">管理员入口</li>
+						<li @click="goPath('admin/campus-list')">管理员入口</li>
 					</ul>
 					<div class="line"></div>
 
@@ -113,7 +113,7 @@
 			</div>
 
 			<div class="copyRight">
-				<p>Copyright © 2013-1019 三门峡市第二中学 网站备案：豫ICP备11020767</p>
+				<p>Copyright © 2013-2021 三门峡市第二中学 网站备案：豫ICP备2020035332号</p>
 				<p>Powered by: VN666 地址：三门峡市黄河路中段 邮编：472000</p>
 			</div>
 		</div>

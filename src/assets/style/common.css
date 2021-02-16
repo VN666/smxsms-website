@@ -1,0 +1,15 @@
+.page-wrap input {
+	background: #FFFFFF !important;
+}
+.page-wrap .el-input__inner {
+	border-color: #666666 !important;
+}
+.page-wrap .el-select .el-input .el-select__caret {
+	color: #666666 !important;
+}
+.page-wrap .el-pagination button {
+	background: #FFFFFF !important;
+}
+.page-wrap .el-pager li {
+	background: #FFFFFF !important;
+}

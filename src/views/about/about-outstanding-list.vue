@@ -28,7 +28,7 @@ export default {
 		return {
 			page: {
 				pageNo: 1,
-				pageSize: 20,
+				pageSize: 15,
 				total: 0
 			},
 			listData: []

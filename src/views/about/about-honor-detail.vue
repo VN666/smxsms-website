@@ -54,7 +54,7 @@ export default {
 	    color: #333333;
 	    letter-spacing: 0pt;
 	    font-size: 34pt;
-	    background: #f2f2f2;
+	    background: #FFFFFF;
 
 	}
 	.detail-source {

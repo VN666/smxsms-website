@@ -15,6 +15,9 @@
 			<div class="row row4">
 				<el-button @click="beforeSubmit" type="primary" style="padding: 12px 186px;" :loading="loading">登录</el-button>
 			</div>
+			<div class="row row5">
+				<el-button type="text" @click="goHome">返回首页</el-button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -71,7 +74,6 @@ export default {
 			}
 		},
 		beforeSubmit () {
-			console.log(this.$api.login_get_token);
 			if (this.loginForm.username === "") {
 				this.error = "请输入用户名";
 			} else if (this.loginForm.password === "") {
@@ -95,7 +97,7 @@ export default {
 				this.loginForm.slideCode = ""
 				if (res.code === 200) {
 					this.$message({ message: res.msg, type: "success", duration: 3000 });
-					this.getToken();
+					this.$router.push({ path: "/admin" });
 				} else {
 					if (this.$refs.slideCheck) this.$refs.slideCheck.reload();
 					if (res.code === 405) {
@@ -109,23 +111,8 @@ export default {
 				}
 			});
 		},
-		getToken () {
-			this.$http({
-				method: "post",
-				url: this.$api.login_get_token,
-				data: {
-					username: this.loginForm.username
-				}
-			}).then((res) => {
-				const { token, refresh_token, expiresIn } = res.result;
-				localStorage.setItem("token", token);
-				localStorage.setItem("refresh_token", refresh_token);
-				localStorage.setItem("token_expiresIn", expiresIn);
-				localStorage.setItem("username", this.loginForm.username);
-				this.$router.push({ path: "/admin" });
-			}).catch((err) => {
-				this.$message({ message: "获取Token失败，请重新登录", type: "error", duration: 3000 });
-			});
+		goHome () {
+			this.$router.push({ path: "/index" });
 		}
 	}
 }
@@ -140,6 +127,8 @@ export default {
 	height: 100%;
 	overflow: hidden;
 	min-height: 600px;
+	background: url("../../assets/login_bg.png") no-repeat;
+	background-size: cover;
 	.login-form {
 		position: relative;
 		width: 480px;
@@ -172,6 +161,11 @@ export default {
 			}
 			&.row4 {
 				margin-top: 36px;
+			}
+			&.row5 {
+				margin: 0px 0px 0px !important;
+				height: 24px;
+				text-align: right;
 			}
 		}
 	}

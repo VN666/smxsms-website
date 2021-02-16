@@ -8,7 +8,6 @@
 			  	action=""
 			  	:show-file-list="false"
 			  	:on-change="beforeUpload"
-			  	accept="png"
 			  	:auto-upload="false">
 			  	<el-button slot="trigger" type="success" size="mini"><i class="el-icon-plus el-icon--left"></i>上传</el-button>
 			</el-upload>

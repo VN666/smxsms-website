@@ -16,9 +16,9 @@
 					</template>
 				</el-table-column>
 				<el-table-column label="姓名" prop="name" width="120" show-overflow-tooltip></el-table-column>
-				<el-table-column label="支撑" prop="job" width="220" show-overflow-tooltip></el-table-column>
 				<el-table-column label="简介" prop="introduction" min-width="250" show-overflow-tooltip></el-table-column>
 				<el-table-column label="阅读数" prop="views" width="150"></el-table-column>
+				<el-table-column label="发布人" prop="publisher" width="220" show-overflow-tooltip></el-table-column>
 				<el-table-column label="发布日期" prop="timecreate" width="200"></el-table-column>
 				<el-table-column label="操作" width="210">
 					<template slot-scope="scope">
@@ -72,11 +72,11 @@
 							<el-input v-model="addForm.name" placeholder="姓名" size="mini" clearable></el-input>
 						</el-form-item>
 					</el-row>
-					<el-row>
+					<!-- <el-row>
 						<el-form-item label="职务" prop="job">
 							<el-input v-model="addForm.job" placeholder="职务" size="mini" clearable></el-input>
 						</el-form-item>
-					</el-row>
+					</el-row> -->
 					<el-row>
 						<el-form-item label="简介" prop="introduction">
 							<el-input type="textarea" v-model="addForm.introduction" placeholder="简介" size="mini" clearable rows="10"></el-input>
@@ -119,11 +119,11 @@
 							<el-input v-model="addForm.name" placeholder="姓名" size="mini" clearable></el-input>
 						</el-form-item>
 					</el-row>
-					<el-row>
+					<!-- <el-row>
 						<el-form-item label="职务" prop="job">
 							<el-input v-model="addForm.job" placeholder="职务" size="mini" clearable></el-input>
 						</el-form-item>
-					</el-row>
+					</el-row> -->
 					<el-row>
 						<el-form-item label="简介" prop="introduction">
 							<el-input type="textarea" v-model="addForm.introduction" placeholder="简介" size="mini" clearable rows="10"></el-input>
@@ -145,6 +145,7 @@ export default {
 	name: "outstanding_list",
 	data () {
 		return {
+			category: "about",
 			page: {
 				pageNo: 1,
 				pageSize: 20,
@@ -266,7 +267,7 @@ export default {
         	const ext = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length);
 			const accept = ["png", "jpeg", "jpg", "gif", "svg", "webp", "JPEG"];
 			if (accept.includes(ext)) {
-				this.dialogEdit ? this.delImgs(file) : this.upload(file);
+				this.upload(file);
 			} else {
 				this.$message({	message: `只接受${accept.join("、")}格式文件`, type: "error", duration: 3000 });
 			}
@@ -285,26 +286,11 @@ export default {
 				this.$message({ message: "上传成功", type: "success", duration: 3000 });
 			});
         },
-        delImgs (file) {
-        	this.$http({
-        		method: "post",
-        		url: this.$api.imgs_delete,
-        		data: {
-        			src: this.addForm.headSrc
-        		}
-        	}).then((res) => {
-        		if (res.code === 200) {
-        			this.upload(file);
-        		} else {
-        			this.$message({	message: "上传失败，请重新上传", type: "error", duration: 2000	});
-        			this.addForm.headSrc = "";
-        		}
-        	})
-        },
         beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc[0] = this.addForm.headSrc;
+					this.addForm.category = this.category;
+					this.addForm.publisher = localStorage.getItem("username");
 					this.submit();
 				} else {
 					return false;
@@ -379,6 +365,7 @@ export default {
 				data: { id: row.id }
 			}).then((res) => {
 				this.addForm = res.data;
+				this.addForm.tempSrc = res.data.headSrc;
 				this.dialogEdit = true;
 			});
 		}

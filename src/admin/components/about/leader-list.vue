@@ -58,7 +58,6 @@
 							  	action=""
 							  	:show-file-list="false"
 							  	:on-change="beforeUpload"
-							  	accept="png"
 							  	:auto-upload="false">
 							  	<el-button slot="trigger" type="success" size="mini"><i class="el-icon-plus el-icon--left"></i>上传</el-button>
 							</el-upload>
@@ -145,6 +144,7 @@ export default {
 	name: "leader_list",
 	data () {
 		return {
+			category: "about",
 			page: {
 				pageNo: 1,
 				pageSize: 20,
@@ -266,7 +266,7 @@ export default {
         	const ext = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length);
 			const accept = ["png", "jpeg", "jpg", "gif", "svg", "webp", "JPEG"];
 			if (accept.includes(ext)) {
-				this.dialogEdit ? this.delImgs(file) : this.upload(file);
+				this.upload(file);
 			} else {
 				this.$message({	message: `只接受${accept.join("、")}格式文件`, type: "error", duration: 3000 });
 			}
@@ -285,26 +285,11 @@ export default {
 				this.$message({ message: "上传成功", type: "success", duration: 3000 });
 			});
         },
-        delImgs (file) {
-        	this.$http({
-        		method: "post",
-        		url: this.$api.imgs_delete,
-        		data: {
-        			src: this.addForm.headSrc
-        		}
-        	}).then((res) => {
-        		if (res.code === 200) {
-        			this.upload(file);
-        		} else {
-        			this.$message({	message: "上传失败，请重新上传", type: "error", duration: 2000	});
-        			this.addForm.headSrc = "";
-        		}
-        	})
-        },
         beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
 					this.addForm.picSrc[0] = this.addForm.headSrc;
+					this.addForm.category = this.category;
 					this.submit();
 				} else {
 					return false;
@@ -379,6 +364,7 @@ export default {
 				data: { id: row.id }
 			}).then((res) => {
 				this.addForm = res.data;
+				this.addForm.tempSrc = res.data.headSrc;
 				this.dialogEdit = true;
 			});
 		}

@@ -63,6 +63,7 @@
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
+								v-if="addForm.content"
 								category="news"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
@@ -90,6 +91,7 @@ export default {
 	name: "campus_edit",
 	data () {
 		return {
+			category: "news",
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
@@ -98,7 +100,7 @@ export default {
 				subTitle: "",
 				author: "",
 				timecreate: "",
-				publisher: "",
+				publisher: localStorage.getItem("username"),
 				origin: "",
 				originDes: "",
 				isTop: "",
@@ -144,6 +146,7 @@ export default {
 				}
 			}).then((res) => {
 				this.addForm = res.data;
+				this.addForm.tempSrc = res.data.picSrc.slice(0);
 			}).catch((err) => {
 				this.$message({	message: err, type: "error", duration: 2000	});
 			});
@@ -155,10 +158,8 @@ export default {
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
-					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
-						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
-					});
+					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
+					this.addForm.category = this.category;
 					this.submit();
 				} else {
 					return false;

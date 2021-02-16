@@ -14,7 +14,7 @@
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
-								category="about"
+								v-if="addForm.content"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
 						</div>
@@ -36,6 +36,7 @@ export default {
 	name: "profile_content",
 	data () {
 		return {
+			category: "about",
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
@@ -43,6 +44,7 @@ export default {
 				timecreate: "",
 				content: "",
 				picSrc: "",
+				tempSrc: "",
 				id: ""
 			},
 			rules: {
@@ -67,10 +69,7 @@ export default {
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
-					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
-						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
-					});
+					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
 					this.submit();
 				} else {
 					return false;
@@ -87,6 +86,7 @@ export default {
 				this.isSaving = false;
 				if (res.code === 200) {
 					this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
+					this.requestData();
 				} else {
 					this.$message({	message: res.msg, type: "error", duration: 2000	});
 				}
@@ -103,6 +103,9 @@ export default {
 				}
 			}).then((res) => {
 				this.addForm = res.data;
+				this.addForm.tempHeadSrc = res.data.headSrc;
+				this.addForm.tempSrc = res.data.picSrc.slice(0);
+				this.addForm.category = this.category;
 			})
 		}
  	},

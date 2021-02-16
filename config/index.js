@@ -12,8 +12,8 @@ module.exports = {
 	assetsSubDirectory: 'static',
 	assetsPublicPath: '/',
 	proxyTable: {
-		'/my/**': {
-			target: "https://localhost:7778",
+		'/api/**': {
+			target: "https://www.smxsdezx.cn",
 			secure: false,
 			changeOrigin: true
 		}
@@ -57,7 +57,7 @@ module.exports = {
 	// Paths
 	assetsRoot: path.resolve(__dirname, '../dist'),
 	assetsSubDirectory: 'static',
-	assetsPublicPath: '',
+	assetsPublicPath: '/',
 
 	/**
 	 * Source Maps

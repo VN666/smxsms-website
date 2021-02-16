@@ -65,6 +65,7 @@
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
+								v-if="addForm.content"
 								category="education"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
@@ -87,6 +88,7 @@ export default {
 	name: "summary-edit",
 	data () {
 		return {
+			category: "education",
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
@@ -95,7 +97,7 @@ export default {
 				headline: "",
 				department: "三门峡市第二中学",
 				author: "",
-				publisher: "",
+				publisher: localStorage.getItem("username"),
 				timecreate: "",
 				isTop: "",
 				content: "",
@@ -157,10 +159,8 @@ export default {
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
-					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
-						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
-					});
+					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
+					this.addForm.category = this.category;
 					this.submit();
 				} else {
 					return false;
@@ -209,6 +209,8 @@ export default {
 				}
 			}).then((res) => {
 				this.addForm = res.data;
+				this.addForm.tempSrc = res.data.picSrc.slice(0);
+				this.addForm.tempFileSrc = res.data.fileListSrc.slice(0);
 			}).catch((err) => {
 				this.$message({	message: err, type: "error", duration: 2000	});
 			});

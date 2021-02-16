@@ -88,6 +88,7 @@ export default {
 	name: "campus_add",
 	data () {
 		return {
+			category: "news",
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
@@ -96,12 +97,13 @@ export default {
 				subTitle: "",
 				author: "",
 				timecreate: this.$utils.timeFormate(new Date()),
-				publisher: "admin",
+				publisher: localStorage.getItem("username"),
 				origin: "",
 				originDes: "",
 				isTop: false,
 				content: "",
 				picSrc: [],
+				tempSrc: [],
 				checked: true
 			},
 			rules: {
@@ -141,15 +143,10 @@ export default {
 			this.hTinymceWidth = this.$el.clientWidth * 0.9;
 		},
 		beforeSubmit () {
-			console.log(123);
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
-					console.log(this.$utils.pickImgSrc(this.addForm.content))
-					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
-						console.log(src);
-						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
-					});
+					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
+					this.addForm.category = this.category;
 					this.submit();
 				} else {
 					return false;

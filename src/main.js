@@ -13,6 +13,7 @@ import http from "./config/http.js";
 import api from "./config/api.js";
 import hComponents from "@/src/components/index.js";
 import "@/src/filters/index.js";
+import "@/src/assets/style/common.css";
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {

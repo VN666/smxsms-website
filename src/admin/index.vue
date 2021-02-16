@@ -32,7 +32,7 @@
 			<div class="title">第二中学后台管理系统</div>
 			<div class="option">
 				<svg t="1568484501657" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4595" width="32" height="32"><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m0-938.666667C276.352 85.333333 85.333333 276.352 85.333333 512s191.018667 426.666667 426.666667 426.666667 426.666667-191.018667 426.666667-426.666667S747.648 85.333333 512 85.333333z m0 768a340.650667 340.650667 0 0 1-266.24-128A340.650667 340.650667 0 0 1 512 597.333333a340.48 340.48 0 0 1 266.197333 128A340.48 340.48 0 0 1 512 853.333333z m0-298.666666a170.666667 170.666667 0 1 1 0-341.333334 170.666667 170.666667 0 0 1 0 341.333334z" p-id="4596" fill="#000000"></path></svg>
-				<span class="user">{{ userName }}</span>
+				<span class="user">{{ username }}</span>
 				<span class="btn" @click="exit">
 					<svg class="icon" t="1568483593213" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3337" width="16" height="16"><path d="M512 921.8c-55.1 0-108.5-10.8-158.8-32.1-48.6-20.6-92.2-50-129.7-87.4-37.5-37.5-66.9-81.1-87.4-129.7-21.3-50.3-32.1-103.7-32.1-158.8 0-64.6 14.7-126.3 43.6-183.6 27.5-54.6 67.8-103.1 116.5-140.4 17.6-13.5 36.4-25.6 55.9-36 17-9.1 38.3-2.7 47.4 14.4 9.1 17 2.7 38.3-14.4 47.4-16.2 8.6-31.7 18.7-46.3 29.9-40.3 30.9-73.7 71.2-96.6 116.4-23.9 47.4-36 98.6-36 152.1 0 90.3 35.2 175.2 99 239 63.8 63.8 148.7 99 239 99s175.2-35.2 239-99c63.8-63.8 99-148.7 99-239 0-53.6-12.2-104.9-36.2-152.4C791 316.3 757.5 276 717 245.1c-14.1-10.8-29.1-20.5-44.7-28.9-17-9.2-23.4-30.4-14.2-47.4s30.4-23.4 47.4-14.2c18.8 10.1 36.9 21.9 53.9 34.8 48.8 37.3 89.3 85.9 116.9 140.5 29 57.4 43.7 119.2 43.7 183.9 0 55.1-10.8 108.5-32.1 158.8-20.6 48.6-50 92.2-87.4 129.7-37.5 37.5-81.1 66.9-129.7 87.4-50.3 21.3-103.7 32.1-158.8 32.1z" p-id="3338" fill="#000000"></path><path d="M512 547c-19.3 0-35-15.7-35-35V108.3c0-19.3 15.7-35 35-35s35 15.7 35 35V512c0 19.3-15.7 35-35 35z" p-id="3339" fill="#000000"></path></svg>
 				</span>
@@ -57,13 +57,14 @@ export default {
 			h: 0,
 			w: 0,
 			menu: [],
-			userName: "administrator"
+			username: ""
 		};
 	},
 	created () {
 		this.resize();
 		this.menu = menu;
 		window.addEventListener("resize", this.resize, false);
+		this.requestUserInfo();
 	},
 	beforeDestroy () {
 		window.removeEventListener("resize", this.resize, false);
@@ -79,7 +80,7 @@ export default {
 				cancelButtonText: "取消",
 				type: "warning"
 			}).then(() => {
-				localStorage.clear();
+				this.$utils.delCookie("Authorization");
 				this.$router.push({ path: "/" });
 			}).catch(() => {
 				console.log("取消");
@@ -98,6 +99,16 @@ export default {
       		if (item.code === "contact") {
       			this.$router.push({ path: item.path });
       		}
+      	},
+      	requestUserInfo () {
+      		this.$http({
+      			url: "api/user/getUserInfo",
+      			method: "post",
+      			data: {}
+      		}).then((res) => {
+      			this.username = res.result.username;
+      			localStorage.setItem("username", this.username);
+      		});
       	}
 	},
 	computed: {

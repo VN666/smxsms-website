@@ -47,11 +47,12 @@ export default {
 	.content-headline {
 		position: relative;
 		text-align: center;
-		font-family: 宋体;
+		font-family: "微软雅黑";
 	    color: #333333;
 	    letter-spacing: 0pt;
-	    font-size: 34pt;
+	    font-size: 24px;
 	    background: #F2F2F2;
+	    margin: 16px 0px;
 	}
 	.content-source {
 		position: relative;

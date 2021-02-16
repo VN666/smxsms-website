@@ -173,6 +173,8 @@ export default {
 				position: relative;
 				width: 1008px;
 				padding-right: 0px;
+				overflow-x: hidden;
+				min-height: 700px;
 				.location {
 					position: relative;
 					width: 100%;

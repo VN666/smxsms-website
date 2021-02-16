@@ -296,13 +296,17 @@ const api = {
 	service_computer_queryById: "api/service/computer/queryById",
 	service_computer_edit: "api/service/computer/edit",
 	service_computer_queryList: "api/service/computer/queryList",
+	/** 登录相关 */
+	login_ip_check: "api/login/ipCheck",
+	login_get_slideCode: "api/login/getSlideCode",
+	login_get_token: "api/login/getToken",
+	login: "api/login/login",
+	login_tool: "api/login/loginTest",
+	/** 用户信息 */
+	user_get_userinfo: "api/user/getUserInfo",
 
-};
+	download: "api/download"
 
-const url = Object.keys(api);
-
-for (let key of url) {
-	api[key] = baseUrl + api[key];
 };
 
 Vue.prototype.$api = api;

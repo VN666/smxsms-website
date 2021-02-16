@@ -65,17 +65,19 @@ export default {
 	name: "honor_add",
 	data () {
 		return {
+			category: "about",
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
 			addForm: {
 				headline: "",
 				timecreate: this.$utils.timeFormate(new Date()),
-				publisher: "admin",
+				publisher: localStorage.getItem("username"),
 				isTop: false,
 				content: "",
 				picSrc: [],
-				checked: true
+				checked: true,
+				tempSrc: []
 			},
 			rules: {
 				headline: [
@@ -106,10 +108,8 @@ export default {
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
-					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
-						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
-					});
+					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
+					this.addForm.category = this.category;
 					this.submit();
 				} else {
 					return false;

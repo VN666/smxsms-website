@@ -87,20 +87,22 @@ export default {
 	name: "case-add",
 	data () {
 		return {
+			category: "education",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
 			addForm: {
 				headline: "",
 				department: "",
 				author: "",
-				publisher: "admin",
+				publisher: localStorage.getItem("username"),
 				timecreate: this.$utils.timeFormate(new Date()),
 				isTop: false,
 				content: "",
 				picSrc: [],
 				fileList: [],
 				fileListSrc: [],
-				checked: true
+				checked: true,
+				tempSrc: []
 			},
 			rules: {
 				headline: [
@@ -187,10 +189,8 @@ export default {
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.addForm.picSrc.filter((item) => RegExp(item).test(this.addForm.content));
-					this.$utils.pickImgSrc(this.addForm.content).forEach((src) => {
-						if (!this.addForm.picSrc.includes(src)) this.addForm.picSrc.push(src);
-					});
+					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
+					this.addForm.category = this.category;
 					this.submit();
 				} else {
 					return false;
