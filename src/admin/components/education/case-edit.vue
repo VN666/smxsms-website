@@ -65,7 +65,7 @@
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
-								v-if="addForm.content"
+								v-if="showTinymce"
 								category="education"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
@@ -92,10 +92,11 @@ export default {
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
+			showTinymce: false,
 			addForm: {
 				id: "",
 				headline: "",
-				department: "",
+				department: "三门峡市二中",
 				author: "",
 				publisher: localStorage.getItem("username"),
 				timecreate: "",
@@ -151,7 +152,7 @@ export default {
 		},
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row3.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
-			this.hTinymceWidth = this.$el.clientWidth * 0.9;
+			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
 		},
 		goBack () {
 			this.$router.push({ path: "case-list" });
@@ -211,6 +212,7 @@ export default {
 				this.addForm = res.data;
 				this.addForm.tempSrc = res.data.picSrc.slice(0);
 				this.addForm.tempFileSrc = res.data.fileListSrc.slice(0);
+				this.showTinymce = true;
 			}).catch((err) => {
 				this.$message({	message: err, type: "error", duration: 2000	});
 			});

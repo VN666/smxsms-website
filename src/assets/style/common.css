@@ -13,3 +13,9 @@
 .page-wrap .el-pager li {
 	background: #FFFFFF !important;
 }
+video:focus {
+	outline: none !important;
+}
+.tox .tox-spinner>div {
+	background-color: #2080F7 !important;
+}

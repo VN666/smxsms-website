@@ -1,7 +1,7 @@
 <template>
 	<div class="block">
-		<h-header></h-header>
-		<h-navigator></h-navigator>
+		<div class="header-wrap"><h-header></h-header></div>
+		<div class="navigator-wrap"><h-navigator></h-navigator></div>
 		<div class="main">
 			<div class="wPicRoll">
 				<h-bgImgs></h-bgImgs>
@@ -95,17 +95,26 @@ export default {
 		position: relative;
 		width: 100%;
 		height: 100%;
+		.header-wrap {
+			position: relative;
+			width: 100%;
+		}
+		.navigator-wrap {
+			position: relative;
+			width: 100%;
+		}
 		.main {
 			position: relative;
 			width: 100%;
 			height: 100%;
-			background: #F2F2F2
+			background: #F2F2F2;
 		}
 		.wPicRoll {
 			position: relative;
 			width: 1280px;
 			height: 360px;
 			margin: 0px auto;
+			background: #FFFFFF;
 		}
 		.content {
 			position: relative;
@@ -115,9 +124,10 @@ export default {
 			margin: 16px auto;
 			display: flex;
 			justify-content: space-between;
+			background: #F2F2F2;
 			.nav {
 				position: relative;
-				width: 248px;
+				width: 224px;
 				height: auto;
 				background: #F2F2F2;
 				.title {
@@ -171,10 +181,15 @@ export default {
 			}
 			.list {
 				position: relative;
-				width: 1008px;
-				padding-right: 0px;
+				width: 1040px;
+				padding-right: 16px;
+				padding-left: 16px;
+				padding-top: 8px;
+				padding-bottom: 48px;
 				overflow-x: hidden;
 				min-height: 700px;
+				background: #FFFFFF;
+				border: 1px solid #E0E0E0;
 				.location {
 					position: relative;
 					width: 100%;

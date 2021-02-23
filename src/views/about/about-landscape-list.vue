@@ -135,21 +135,3 @@ export default {
 }
 
 </style>
-
-<style>
-	.page-wrap input {
-		background: #F2F2F2;
-	}
-	.page-wrap .el-input__inner {
-		border-color: #666666;
-	}
-	.page-wrap .el-select .el-input .el-select__caret {
-		color: #666666;
-	}
-	.page-wrap .el-pagination button {
-		background: #F2F2F2;
-	}
-	.page-wrap .el-pager li {
-		background: #F2F2F2;
-	}
-</style>

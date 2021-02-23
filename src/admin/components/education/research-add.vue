@@ -124,7 +124,7 @@ export default {
 	methods: {
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row3.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
-			this.hTinymceWidth = this.$el.clientWidth * 0.9;
+			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
 		},
 		getPicSrc (src) {
 			this.addForm.picSrc.push(src);

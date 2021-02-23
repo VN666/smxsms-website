@@ -6,7 +6,7 @@ import router from "../router/index.js";
 // 创建请求实例
 const req = axios.create({
 	baseURL: process.env.NODE_ENV === "development" ? "/" : process.env.HOST,
-	timeout: 20000,
+	timeout: 60000 * 5000,
 	headers: {"X-Requested-With": "XMLHttpRequest"}
 });
 

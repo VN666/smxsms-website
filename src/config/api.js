@@ -22,6 +22,7 @@ const api = {
 	imgs_upload: "api/upload/imgs",
 	files_upload: "api/upload/files",
 	imgs_delete: "api/upload/deleteImg",
+	media_upload: "api/upload/media",
 	/** 新闻动态-通知公告 */
 	news_notice_add: "api/news/notice/add",
 	news_notice_query: "api/news/notice/query",

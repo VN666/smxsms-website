@@ -14,7 +14,7 @@
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
-								v-if="addForm.content"
+								v-if="showTinymce"
 								category="about"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
@@ -41,11 +41,13 @@ export default {
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
+			showTinymce: false,
 			addForm: {
 				timecreate: "",
 				content: "",
 				picSrc: "",
-				id: ""
+				id: "",
+				publisher: localStorage.getItem("username")
 			},
 			rules: {
 				content: [
@@ -61,12 +63,13 @@ export default {
 		},
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row4.$el.clientHeight - 56;
-			this.hTinymceWidth = this.$el.clientWidth * 0.9;
+			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
 		},
 		cancel () {
 			this.requestData();
 		},
 		beforeSubmit () {
+			console.log(this.addForm);
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
 					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
@@ -105,6 +108,7 @@ export default {
 				this.addForm = res.data;
 				this.addForm.category = this.category;
 				this.addForm.tempSrc = res.data.picSrc.slice(0);
+				this.showTinymce = true;
 			})
 		}
  	},

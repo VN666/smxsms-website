@@ -5,7 +5,7 @@
 			<div class="item views"><span>阅读数 </span><span>{{content.views}}</span></div>
 		</div>
 		<div class="content-headline">二中校史</div>
-		<div class="content-content" v-html="$options.filters.bgFilter(content.content)"></div>
+		<div class="content-content" v-html="content.content"></div>
 	</div>
 </template>
 

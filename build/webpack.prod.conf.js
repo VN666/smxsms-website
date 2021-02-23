@@ -38,7 +38,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       uglifyOptions: {
         compress: {
           warnings: false
-        }
+        },
+        extractComments: false,
+        output: { comments: false }
       },
       sourceMap: config.build.productionSourceMap,
       parallel: true

@@ -4,7 +4,7 @@
 			<div class="item timecreate"><span>发布日期 </span><span>{{content.timecreate}}</span></div>
 			<div class="item views"><span>阅读数 </span><span>{{content.views}}</span></div>
 		</div>
-		<div class="content-content" v-html="$options.filters.bgFilter(content.content)"></div>
+		<div class="content-content" v-html="content.content"></div>
 	</div>
 </template>
 

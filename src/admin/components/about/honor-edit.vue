@@ -75,7 +75,7 @@ export default {
 			addForm: {
 				headline: "",
 				timecreate: "",
-				publisher: "",
+				publisher: localStorage.getItem("username"),
 				isTop: "",
 				content: "",
 				picSrc: "",
@@ -126,7 +126,7 @@ export default {
 		},
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
-			this.hTinymceWidth = this.$el.clientWidth * 0.9;
+			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
 		},
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {

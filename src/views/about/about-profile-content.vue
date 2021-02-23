@@ -5,7 +5,7 @@
 			<div class="item views"><span>阅读数 </span><span>{{content.views}}</span></div>
 		</div>
 		<div class="content-headline">三门峡市第二中学</div>
-		<div class="content-content" v-html="$options.filters.bgFilter(content.content)"></div>
+		<div class="content-content" v-html="content.content"></div>
 	</div>
 </template>
 
@@ -51,7 +51,7 @@ export default {
 	    color: #333333;
 	    letter-spacing: 0pt;
 	    font-size: 24px;
-	    background: #F2F2F2;
+	    background: #FFFFFF;
 	    margin: 16px 0px;
 	}
 	.content-source {

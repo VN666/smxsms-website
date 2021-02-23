@@ -1,13 +1,13 @@
 <template>
 	<div class="flagDetail">
-		<div class="detail-headline">{{content.headline}}</div>
 		<div class="detail-source">
 			<div class="item timecreate"><span>发布日期 </span><span>{{content.timecreate}}</span></div>
 			<div class="item department" v-if="content.department"><span>部门 </span><span>{{content.department}}</span></div>
 			<div class="item author"><span>作者 </span><span>{{content.author}}</span></div>
 			<div class="item views"><span>阅读数 </span><span>{{content.views}}</span></div>
 		</div>
-		<div class="detail-content" v-html="$options.filters.bgFilter(content.content)"></div>
+		<div class="detail-headline">{{content.headline}}</div>
+		<div class="detail-content" v-html="content.content"></div>
 		<div class="detail-download" v-if="content.fileListSrc.length">
 			<div class="download-des">附件</div>
 			<div class="download-file">
@@ -63,11 +63,12 @@ export default {
 	.detail-headline {
 		position: relative;
 		text-align: center;
-		font-family: 宋体;
+		font-family: "微软雅黑";
 	    color: #333333;
 	    letter-spacing: 0pt;
-	    font-size: 34pt;
-	    background: #f2f2f2;
+	    font-size: 24px;
+	    background: #FFFFFF;
+	    margin: 16px 0px;
 	}
 	.detail-source {
 		position: relative;

@@ -88,6 +88,10 @@ const pickImgSrc = (htmlStr) => {
 	imgArr.forEach((item) => {
 		srcArr.push(item.match(srcReg)[1]);
 	});
+	const videoReg = /<source.*?(?:>|\/>)/gi;
+	const srcReg2 = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+	let videoArr = htmlStr.match(videoReg) || [];
+	videoArr.forEach((item) => srcArr.push(item.match(srcReg2)[1]));
 	return srcArr;
 };
 
@@ -96,12 +100,13 @@ const filterPicSrc = (htmlStr, picSrc) => {
 	pickImgSrc(htmlStr).forEach((src) => {
 		if (!picSrc.includes(src)) picSrc.push(src);
 	});
+	console.log(picSrc);
 	picSrc = picSrc.filter((item) => item.includes("www.smxsdezx.cn"));
 	return picSrc;
 }
 
 const encodeBase64 = (words) => {
-	return CryptoJS.SHA256(words + "smxdezx").toString();
+	return CryptoJS.SHA256(words + "smxsdezx").toString();
 }
 
 const getAbsolutePath = (url) => {
@@ -121,11 +126,9 @@ const getCookie = (name) => {
     else return "";
 }
 
-const delCookie = (name) => {
-    let exp = new Date();
-    exp.setTime(exp.getTime() - 1);
-    let value = getCookie(name);
-    if (!!value) document.cookie = `${name}=${value};expires=${exp.toUTCString()}`;
+const delCookie = (name, value = "", path = "/") => {
+	const domain = window.location.href.includes("smxsdezx.cn") ? "smxsdezx.cn" : "";
+	document.cookie = `${name}=${value};expires=-1;path=${path};domain=${domain}`;
 }
 
 export default {

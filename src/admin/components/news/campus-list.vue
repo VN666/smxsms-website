@@ -104,7 +104,6 @@ export default {
 			timeValue: "",
 			filters: {
 				headline: "",
-				publisher: "",
 				author: "",
 				startTime: "",
 				endTime: ""
