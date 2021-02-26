@@ -4,9 +4,9 @@ import 'babel-polyfill';
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router';
+import store from "@/src/store/index.js";
 
-import admin_router from "./admin/route.js";
-import fe_router from "./router/index";
+import routes from "@/src/router/index";
 import utils from "@/utils/index";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -16,6 +16,7 @@ import CST from "./config/constant.js";
 import hComponents from "@/src/components/index.js";
 import "@/src/filters/index.js";
 import "@/src/assets/style/common.css";
+import "@/src/assets/style/text.css";
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -29,16 +30,16 @@ Vue.use(VueRouter);
 Vue.use(utils);
 Vue.use(hComponents);
 
-let routes = new Set([...fe_router, ...admin_router]);
 let router = new VueRouter({
 	routes,
-	mode: "hash"
+	mode: "history"
 })
 
 /* eslint-disable no-new */
 window.vm = new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

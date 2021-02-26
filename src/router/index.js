@@ -1,3 +1,4 @@
+import admin_router from "@/src/admin/route.js";
 
 import index from "@/src/views/index/index";
 
@@ -95,7 +96,7 @@ import service_guarantee_detail from "@/src/views/service/service-guarantee-deta
 import service_guide_list from "@/src/views/service/service-guide-list";
 import service_guide_detail from "@/src/views/service/service-guide-detail";
 
-export default  [
+const fe_router = [
 	{
   		path: "/",
   		redirect: "/index"
@@ -558,3 +559,7 @@ export default  [
 		]
 	}
 ];
+
+const routes = new Set([...fe_router, ...admin_router]);
+
+export default routes;

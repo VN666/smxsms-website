@@ -30,21 +30,36 @@
 			<div class="social">
 				<div class="socialInner">
 					<ul>
-						<li>登录</li>
-						<li>注册</li>
+						<!-- <li @click="goWebsite()">公众号</li> -->
+						<li @click="goWebsite(weibo)">微博</li>
 						<li @click="$router.push({ path: '/login'})">管理员入口</li>
 					</ul>
 					<div class="line"></div>
-					<img src="@/src/assets/icons/qq.png" />
-					<img src="@/src/assets/icons/wechat.png" />
-					<img src="@/src/assets/icons/weibo.png" />
-					<img src="@/src/assets/icons/phone.png" />
-					<span>0398-XXXXXXX</span>
+					<!-- <img src="@/src/assets/icons/qq.png" /> -->
+					<div class="social-btn">
+						<el-tooltip effect="light" placement="top">
+							<div slot="content" class="social-btn-inner__img"><img src="@/src/assets/icons/wechat-code.png" width="100" height="100" /></div>
+							<img src="@/src/assets/icons/wechat.png" />
+						</el-tooltip>
+					</div>
+					<div class="social-btn">
+						<el-tooltip effect="light" placement="top">
+							<div slot="content" class="social-btn-inner__img"><img src="@/src/assets/icons/weibo-code.png" width="100" height="100" /></div>
+							<img src="@/src/assets/icons/weibo.png" />
+						</el-tooltip>
+					</div>
+					<div class="social-btn">
+						<img src="@/src/assets/icons/phone.png" />
+					</div>
+					<span>{{ phone }}</span>
 				</div>
 			</div>
 			<div class="copyRight">
-				<p>Copyright © 2013-1019 三门峡市第二中学 网站备案：豫ICP备11020767</p>
-				<p>Powered by: VN666 地址：三门峡市黄河路中段 邮编：472000</p>
+				<p>
+					Copyright © 1958-2021 三门峡市第二中学 网站备案:
+					<span class="golink" @click="goWebsite(website)">豫ICP备2020035332号</span>
+				</p>
+				<p>地址：三门峡市黄河路中段 邮编：{{ postCode }} 电话：{{ phone }}</p>
 			</div>
 		</div>
 	</div>
@@ -62,7 +77,9 @@ export default {
 	},
 	data () {
 		return {
-			currentIndex: 0
+			currentIndex: 0,
+			website: "https://beian.miit.gov.cn/#/Integrated/index",
+			weibo: "https://weibo.com/u/5058623654?is_all=1",
 		};
 	},
 	mounted () {
@@ -79,11 +96,28 @@ export default {
 		goPath () {
 			if (this.$route.path !== this.menuData.children[this.currentIndex].router)
 				this.$router.push({ path: this.menuData.children[this.currentIndex].router, query: { index: this.currentIndex }});
+		},
+		goWebsite (path) {
+			window.open(path, "_blank");
 		}
 	},
 	watch: {
 		"$route" (to, from) {
 			this.currentIndex = parseInt(this.$route.query.index);
+		}
+	},
+	computed: {
+		phone () {
+			return this.$store.state.phone;
+		},
+		email () {
+			return this.$store.state.email;
+		},
+		address () {
+			return this.$store.state.address;
+		},
+		postCode () {
+			return this.$store.state.postCode;
 		}
 	}
 }
@@ -296,6 +330,15 @@ export default {
 				color: #666666;
 				font-size: 14px;
 				line-height: 14px;
+				span.golink {
+					color: #666666;
+				    font-size: 14px;
+				    line-height: 14px;
+					&:hover {
+						color: #0265FF;
+						cursor: pointer;
+					}
+				}
 			}
 		}
 	}

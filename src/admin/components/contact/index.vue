@@ -13,13 +13,13 @@
 							</el-form-item>
 						</el-col>
 					</el-row>
-					<el-row ref="row2">
+					<!-- <el-row ref="row2">
 						<el-col :span="24">
 							<el-form-item label="邮箱" prop="email">
 								<el-input v-model="addForm.email"></el-input>
 							</el-form-item>
 						</el-col>
-					</el-row>
+					</el-row> -->
 					<el-row ref="row3">
 						<el-col :span="24">
 							<el-form-item label="地址" prop="address">
@@ -52,7 +52,7 @@ export default {
 		return {
 			addForm: {
 				phone: "",
-				email: "",
+				// email: "",
 				address: "",
 				postCode: "",
 				id: ""
@@ -73,7 +73,7 @@ export default {
 			},
 			isSaving: false,
 			phone: "",
-			email: "",
+			// email: "",
 			address: "",
 			postCode: "",
 			id: ""
@@ -90,7 +90,7 @@ export default {
 				url: this.$api.news_contact_query
 			}).then((res) => {
 				this.phone = res.data.phone;
-				this.email = res.data.email;
+				// this.email = res.data.email;
 				this.address = res.data.address;
 				this.postCode = res.data.postCode;
 				this.addForm = res.data;
@@ -98,7 +98,7 @@ export default {
 		},
 		cancel () {
 			this.addForm.phone = this.phone;
-			this.addForm.email = this.email;
+			// this.addForm.email = this.email;
 			this.addForm.address = this.address;
 			this.addForm.postCode = this.postCode;
 		},

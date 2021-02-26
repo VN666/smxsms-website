@@ -42,7 +42,8 @@
 					</div>
 					<p class="proverb">
 						<img :src="proverbData.headSrc" />
-						{{proverbData.content | removeHtmlTag | picText}}
+						<span v-html="$options.filters.picText($options.filters.removeHtmlTag(proverbData.content))"></span>
+						<!-- {{proverbData.content | removeHtmlTag | picText}} -->
 					</p>
 				</div>
 			</div>
@@ -58,7 +59,7 @@
 					</div>
 					<div class="contact">
 						<p>电话：{{ contactData.phone }}</p>
-						<p>邮箱：{{ contactData.email }}</p>
+						<!-- <p>邮箱：{{ contactData.email }}</p> -->
 						<p>地址：{{ contactData.address }}</p>
 						<p>邮编：{{ contactData.postCode }}</p>
 					</div>
@@ -84,15 +85,15 @@
 			<div class="social">
 				<div class="socialInner">
 					<ul>
-						<li>登录</li>
-						<li>注册</li>
+						<!-- <li @click="goWebsite()">公众号</li> -->
+						<li @click="goWebsite(weibo)">微博</li>
 						<li @click="goPath('admin/campus-list')">管理员入口</li>
 					</ul>
 					<div class="line"></div>
 
-					<div class="social-btn">
+					<!-- <div class="social-btn">
 						<img src="../../assets/icons/qq.png" />
-					</div>
+					</div> -->
 					<div class="social-btn">
 						<el-tooltip effect="light" placement="top">
 							<div slot="content" class="social-btn-inner__img"><img src="../../assets/icons/wechat-code.png" width="100" height="100" /></div>
@@ -108,13 +109,16 @@
 					<div class="social-btn">
 						<img src="../../assets/icons/phone.png" />
 					</div>
-					<span>0398-XXXXXXX</span>
+					<span>{{ contactData.phone }}</span>
 				</div>
 			</div>
 
 			<div class="copyRight">
-				<p>Copyright © 2013-2021 三门峡市第二中学 网站备案：豫ICP备2020035332号</p>
-				<p>Powered by: VN666 地址：三门峡市黄河路中段 邮编：472000</p>
+				<p>
+					Copyright © 1958-2021 三门峡市第二中学 网站备案:
+					<span class="golink" @click="goWebsite(website)">豫ICP备2020035332号</span>
+				</p>
+				<p>地址：三门峡市黄河路中段 邮编：{{ contactData.postCode }} 电话：{{ contactData.phone }}</p>
 			</div>
 		</div>
 	</div>
@@ -141,7 +145,7 @@ export default {
 			return val;
 		},
 		picText (text) {
-			return text.substring(0, 140) + "...";
+			return text.substring(0, 155) + "...";
 		},
 		filterParty (val) {
 			val.forEach((item) => {
@@ -190,7 +194,10 @@ export default {
 
 			picRollStyle: {
 				border: "5px"
-			}
+			},
+			website: "https://beian.miit.gov.cn/#/Integrated/index",
+			weibo: "https://weibo.com/u/5058623654?is_all=1",
+			wechat: ""
 		}
 	},
 	mounted () {
@@ -252,6 +259,10 @@ export default {
 			this.researchData = researchData.data.list;
 			this.activityData = activityData.data.list;
 			this.displayData = displayData.data.list;
+			this.$store.commit("SET_PHONE", this.contactData.phone);
+			this.$store.commit("SET_EMAIL", this.contactData.email);
+			this.$store.commit("SET_ADDRESS", this.contactData.address);
+			this.$store.commit("SET_POSTCODE", this.contactData.postCode);
 		},
 		requestNews () {
 			return this.$http({
@@ -325,6 +336,9 @@ export default {
 					pageSize: 20
 				}
 			});
+		},
+		goWebsite (path) {
+			window.open(path, "_blank");
 		}
 	},
 	created () {
@@ -341,6 +355,7 @@ export default {
 		height: 100%;
 		overflow-y: auto;
 		overflow-x: hidden;
+		background-color: #FFFFFF;
 		.main {
 			position: relative;
 			width: 100%;
@@ -831,6 +846,15 @@ export default {
 					color: #666666;
 					font-size: 14px;
 					line-height: 14px;
+					span.golink {
+						color: #666666;
+					    font-size: 14px;
+					    line-height: 14px;
+						&:hover {
+							color: #0265FF;
+							cursor: pointer;
+						}
+					}
 				}
 			}
 		}

@@ -1,51 +1,51 @@
 const linkArr = [
 	{
-		name: "三门峡教育信息港",
-		href: "http://www.smxjy.cn/"
+		name: "中华人民共和国教育部",
+		href: "http://www.moe.gov.cn/"
 	},
 	{
-		name: "三门峡市教学研究室",
-		href: "http://www.smxjys.com/oa/Login.aspx"
+		name: "教育部全国青少年普法网",
+		href: "http://qspfw.moe.gov.cn/index.html"
 	},
 	{
-		name: "三门峡市育才中学微博",
-		href: "https://weibo.com/p/1002065086273975/home?is_hot=1"
+		name: "河南省教育厅",
+		href: "http://jyt.henan.gov.cn/"
 	},
 	{
-		name: "三门峡市外国语高中",
-		href: "http://www.smxwg.com/"
+		name: "第二教育网",
+		href: "http://www.dearedu.com/"
 	},
 	{
-		name: "三门峡市第一高中",
+		name: "三门峡市教育局",
+		href: "http://jyj.smx.gov.cn/"
+	},
+	{
+		name: "三门峡市第一高级中学",
 		href: "http://www.smxyg.net.cn/"
 	},
 	{
-		name: "三门峡市实验高中",
-		href: "http://www.smxsygz.com/"
+		name: "三门峡市阳光中学",
+		href: "http://www.smxygzx.cn/"
 	},
 	{
-		name: "三门峡市第二中学",
-		href: "http://www.smxdezx.com/"
-	},
-	{
-		name: "三门峡市第三中学",
-		href: "http://www.smxsz.cn/"
-	},
-	{
-		name: "三门峡市实验中学",
-		href: "http://www.smxsyzx.cn/"
-	},
-	{
-		name: "门峡市外国语中学",
+		name: "三门峡市外国语中学",
 		href: "http://www.smxflms.cn/"
 	},
 	{
-		name: "三门峡市阳光中学",
-		href: "http://www.smxqz.com/"
+		name: "三门峡市第二实验小学",
+		href: "http://www.smxesx.cn/"
 	},
 	{
-		name: "三门峡市育才小学",
-		href: "http://www.smxycxx.cn/"
+		name: "三门峡市阳光小学",
+		href: "http://www.smxygxx.com/"
 	},
+	{
+		name: "三门峡市外国语小学",
+		href: "http://www.smxwyxx.com/"
+	},
+	{
+		name: "三门峡市崤函小学",
+		href: "http://www.smxxhxx.cn/"
+	}
 ];
 export default linkArr;

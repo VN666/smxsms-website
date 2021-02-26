@@ -3,10 +3,13 @@ import Vue from "vue";
 import whiteList from "./whiteList.js";
 import router from "../router/index.js";
 
+const _this = Vue.prototype;
+
 // 创建请求实例
 const req = axios.create({
 	baseURL: process.env.NODE_ENV === "development" ? "/" : process.env.HOST,
-	timeout: 60000 * 5000,
+	// timeout: 60000 * 5000,
+	timeout: 30000,
 	headers: {"X-Requested-With": "XMLHttpRequest"}
 });
 
@@ -29,8 +32,7 @@ req.interceptors.response.use((res) => {
 
 }, (err) => {
 	if (err.response.status === 401 || err.response === 403) {
-		Vue.prototype.$message.error(err.response.data.msg);
-		window.location.href = window.location.origin + "/#/login";
+		window.location.href = window.location.origin + "/login";
 	}
 	return Promise.reject(err);
 });
