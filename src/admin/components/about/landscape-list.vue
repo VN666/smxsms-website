@@ -8,7 +8,6 @@
 			  	action=""
 			  	:show-file-list="false"
 			  	:on-change="beforeUpload"
-			  	accept="png"
 			  	:auto-upload="false">
 			  	<el-button slot="trigger" type="success" size="mini"><i class="el-icon-plus el-icon--left"></i>上传</el-button>
 			</el-upload>
@@ -91,7 +90,7 @@ export default {
 			dialogPicNameEdit: false,
 			addForm: {
 				name: "",
-				file: null
+				picSrc: []
 			},
 			editForm: {
 				name: "",
@@ -111,7 +110,8 @@ export default {
 				total: 0
 			},
 			listHeight: 0,
-			loading: true
+			loading: true,
+			file: null
 		};
 	},
 	mounted () {
@@ -196,10 +196,7 @@ export default {
 			this.$http({
 				method: "post",
 				url: this.$api.about_landscape_del,
-				data: {
-					id: id,
-					picSrc: src
-				}
+				data: { id: id, picSrc: src }
 			}).then((res) => {
 				if (res.code === 200) {
 					this.$message({	message: "删除成功", type: "success", duration: 3000 });
@@ -215,39 +212,42 @@ export default {
 			this.dialogVisible = true;
 		},
 		beforeUpload (file) {
-			this.addForm.name = "";
-			this.addForm.file = null;
 			const ext = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length);
 			const accept = ["png", "jpeg", "jpg", "gif", "svg", "webp", "JPEG"];
-			if (accept.includes(ext)) {
-				this.addForm.file = file;
-				this.dialogPicName = true;
+			if (file.size > 10485760) {
+				this.$message({	message: "文件大小超过10M", type: "warning", duration: 3000 });
+			} else if (!accept.includes(ext)) {
+				this.$message({ message: `只接受${accept.join("、")}格式文件`, type: "warning", duration: 3000 });
 			} else {
-				this.$message({	message: `只接受${accept.join("、")}格式文件`, type: "error", duration: 3000 });
+				this.file = file;
+				this.dialogPicName = true;
 			}
 		},
 		beforeSubmit () {
-			this.$refs["addForm"].validate((valid) => {
-				if (valid) {
-					this.submit(this.addForm.file);
-					this.dialogPicName = false;
-				} else {
-					return false;
-				}
-			});
-		},
-		submit (file) {
 			let formData = new FormData();
-			let order = this.bgImgsData.length ? parseInt(this.bgImgsData[0].order) + 1 : 0;
-			formData.append("file", file.raw);
-			formData.append("category", "about");
-			formData.append("order", order);
-			formData.append("name", this.addForm.name);
+			formData.append("file", this.file.raw);
 			this.$http({
 				method: "post",
-				url: this.$api.about_landscape_upload,
+				url: this.$api.imgs_upload,
 				reqType: "formData",
 				data: formData
+			}).then((res) => {
+				if (!!res.url) {
+					this.dialogPicName = false;
+					this.addForm.picSrc[0] = res.url;
+					this.submit();
+				} else this.$message.warning("上传失败");
+			}).catch((err) => {
+				this.$message.warning(err.message)
+				this.dialogPicName = false;
+			});
+		},
+		submit () {
+			this.addForm.order = this.bgImgsData.length ? parseInt(this.bgImgsData[0].order) + 1 : 0;
+			this.$http({
+				method: "post",
+				url: this.$api.about_landscape_add,
+				data: this.addForm
 			}).then((res) => {
 				this.$message({ message: "上传成功", type: "success", duration: 3000 });
 				this.requestData();
@@ -281,10 +281,7 @@ export default {
 			this.$http({
 				method: "post",
 				url: this.$api.about_landscape_edit,
-				data: {
-					id: this.editForm.id,
-					name: this.editForm.name
-				}
+				data: { id: this.editForm.id, name: this.editForm.name }
 			}).then((res) => {
 				if (res.code === 200) {
 					this.$message({ message: "修改成功", type: "success", duration: 3000 });

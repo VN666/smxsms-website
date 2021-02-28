@@ -13,7 +13,7 @@ const api = {
 	news_campus_queryById: "/api/news/campus/queryById",
 	news_campus_queryList: "/api/news/campus/queryList",
 	/** 背景封面 */
-	bg_imgs_upload: "/api/bg/upload",
+	bg_imgs_add: "/api/bg/add",
 	bg_imgs_query: "/api/bg/query",
 	bg_imgs_getTotal: "/api/bg/getTotal",
 	bg_imgs_del: "/api/bg/del",
@@ -91,7 +91,7 @@ const api = {
 	about_honor_queryById: "/api/about/honor/queryById",
 	about_honor_queryList: "/api/about/honor/queryList",
 	/** 关于二中-校园风貌 */
-	about_landscape_upload: "/api/about/landscape/upload",
+	about_landscape_add: "/api/about/landscape/add",
 	about_landscape_query: "/api/about/landscape/query",
 	about_landscape_getTotal: "/api/about/landscape/getTotal",
 	about_landscape_del: "/api/about/landscape/del",

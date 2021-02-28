@@ -28,9 +28,7 @@
 			</div>
 		</div>
 		<el-dialog :visible.sync="dialogVisible" :modal="false" width="1280px">
-			<div class="dialog-content">
-				<img :src="currentPicSrc" />
-			</div>
+			<div class="dialog-content"><img :src="currentPicSrc" /></div>
 		</el-dialog>
 	</div>
 </template>
@@ -44,7 +42,11 @@ export default {
 			bgImgsData: [],
 			dialogVisible: false,
 			currentPicSrc: "",
-			loading: true
+			loading: true,
+			addForm: {
+				picSrc: [],
+				order: ""
+			}
 		};
 	},
 	mounted () {
@@ -115,10 +117,7 @@ export default {
 			this.$http({
 				method: "post",
 				url: this.$api.bg_imgs_del,
-				data: {
-					id: id,
-					picSrc: src
-				}
+				data: { id: id, picSrc: src }
 			}).then((res) => {
 				if (res.code === 200) {
 					this.$message({	message: "删除成功", type: "success", duration: 3000 });
@@ -135,48 +134,36 @@ export default {
 		beforeUpload (file) {
 			const ext = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length);
 			const accept = ["png", "jpeg", "jpg", "gif", "svg", "webp", "JPEG"];
-			this.$http({
-				method: "post",
-				url: this.$api.bg_imgs_getTotal
-			}).then((res) => {
-				if (res.total < 12) {
-					if (accept.includes(ext)) {
-						this.upload(file);
-					} else {
-						this.$message({	message: `只接受${accept.join("、")}格式文件`, type: "error", duration: 3000 });
+			if (file.size > 10485760) {
+				this.$message({	message: "文件大小超过10M", type: "warning", duration: 3000 });
+			} else if (!accept.includes(ext)) {
+				this.$message({ message: `只接受${accept.join("、")}格式文件`, type: "warning", duration: 3000 });
+			} else {
+				this.$http({ method: "post", url: this.$api.bg_imgs_getTotal }).then((res) => {
+					if (res.total < 12) {
+						let formData = new FormData();
+						formData.append("file", file.raw);
+						this.$http({ method: "post", url: this.$api.imgs_upload, reqType: "formData", data: formData }).then((res) => {
+							if (!!res.url) {
+								this.addForm.picSrc[0] = res.url;
+								this.upload();
+							} else this.$message.warning("上传失败");
+						}).catch((err) => this.$message.warning(err.message));
 					}
-				} else {
-					this.$message({	message: `最多只能上传12张封面图片`, type: "error", duration: 3000 });
-				}
-			});
-
+					else this.$message({	message: `最多只能上传12张封面图片`, type: "error", duration: 3000 });
+				});
+			}
 		},
 		upload (file) {
-			let formData = new FormData();
-			let order = this.bgImgsData.length ? parseInt(this.bgImgsData[0].order) + 1 : 0;
-			formData.append("file", file.raw);
-			formData.append("category", "bg");
-			formData.append("order", order);
-			this.$http({
-				method: "post",
-				url: this.$api.bg_imgs_upload,
-				reqType: "formData",
-				data: formData
-			}).then((res) => {
-				this.$message({ message: "上传成功", type: "success", duration: 3000 });
+			this.addForm.order = this.bgImgsData.length ? parseInt(this.bgImgsData[0].order) + 1 : 0;;
+			this.$http({ method: "post", url: this.$api.bg_imgs_add, data: this.addForm }).then((res) => {
+				this.$message({ message: "添加成功", type: "success", duration: 3000 });
 				this.requestData();
 			});
 		},
 		requestData () {
 			this.loading = true;
-			this.$http({
-				method: "post",
-				url: this.$api.bg_imgs_query,
-				data: {
-					pageNo: 1,
-					pageSize: 50
-				}
-			}).then((res) => {
+			this.$http({ method: "post", url: this.$api.bg_imgs_query, data: { pageNo: 1, pageSize: 50 }}).then((res) => {
 				this.loading = false;
 				this.bgImgsData = res.data.list;
 			});
