@@ -48,7 +48,6 @@
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
-								category="news"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
 						</div>
@@ -85,7 +84,7 @@ export default {
 				isTop: false,
 				content: "",
 				picSrc: [],
-				tempSrc: [],
+				removeSrc: [],
 				checked: true
 			},
 			rules: {
@@ -102,7 +101,8 @@ export default {
 					{ required: true, message: "正文不能为空", trigger: "blur" }
 				]
 			},
-			isSaving: false
+			isSaving: false,
+			tempSrc: []
 		};
 	},
 	mounted () {
@@ -113,52 +113,36 @@ export default {
 		window.removeEventListener("resize", this.resize, false);
 	},
 	methods: {
-		getPicSrc (src) {
-			this.addForm.picSrc.push(src);
-		},
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
 			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
 		},
-		beforeSubmit () {
-			this.$refs["addForm"].validate((valid) => {
-				if (valid) {
-					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
-					this.addForm.category = this.category;
-					this.submit();
-				} else {
-					return false;
-				}
-			});
-		},
-		submit () {
-			this.isSaving = true;
-			this.$http({
-				method: "post",
-				data: this.addForm,
-				url: this.$api.news_media_add
-			}).then((res) => {
-				this.isSaving = false;
-				if (res.code === 200) {
-					this.$message({
-			          	message: res.msg,
-			          	type: "success",
-			          	duration: 2000,
-			          	onClose: this.goBack
-			        });
-				} else {
-					this.$message({
-						message: res.msg,
-						type: "error",
-						duration: 2000
-					});
-				}
-			}).catch((err) => {
-				this.isSaving = false;
-			});
+		getPicSrc (src) {
+			this.tempSrc.push(src);
 		},
 		goBack () {
 			this.$router.push({ path: "media-list" });
+		},
+		async submit () {
+			this.isSaving = true;
+			this.$http({
+				method: "post",
+				url: this.$api.news_media_add,
+				data: this.addForm
+			}).then((res) => {
+				this.isSaving = false;
+				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
+				else this.$message({ message: res.msg, type: "error", duration: 2000 });
+			}).catch((err) => this.isSaving = false);
+		},
+		beforeSubmit () {
+			this.$refs["addForm"].validate((valid) => {
+				if (valid) {
+					this.addForm.picSrc = this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).picSrc;
+					this.addForm.removeSrc = [...this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).removeSrc, ...this.addForm.removeSrc];
+					this.submit();
+				} else return false;
+			});
 		}
 	}
 }

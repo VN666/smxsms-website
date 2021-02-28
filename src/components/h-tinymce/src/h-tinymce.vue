@@ -8,7 +8,7 @@
 			:append-to-body="true"
 			:show-close="false">
 			<div class="progress-wrap">
-				<div class="text"><h3>视频上传中，请耐心等待...</h3></div>
+				<div class="text"><h3>{{ progressText }}</h3></div>
 				<el-progress :text-inside="true" :stroke-width="26" :percentage="progress"></el-progress>
 			</div>
 		</el-dialog>
@@ -35,7 +35,6 @@ import "tinymce/plugins/autolink";
 import "tinymce/plugins/directionality";
 import "tinymce/plugins/visualblocks";
 import "tinymce/plugins/visualchars";
-import "tinymce/plugins/fullscreen";
 import "tinymce/plugins/template";
 import "tinymce/plugins/codesample";
 import "tinymce/plugins/charmap";
@@ -45,7 +44,6 @@ import "tinymce/plugins/anchor";
 import "tinymce/plugins/insertdatetime";
 import "tinymce/plugins/advlist";
 import "tinymce/plugins/textpattern";
-import "tinymce/plugins/autosave";
 import "tinymce/plugins/link";
 import "tinymce/plugins/code";
 import "tinymce/plugins/lists";
@@ -80,17 +78,10 @@ export default {
 		value: {
 			type: String,
 			default: ""
-		},
-		category: {
-			type: String,
-			default: ""
 		}
 	},
 	mounted () {
-		this.$nextTick(() => {
-			this.init();
-			// Tinymce.get(this.id).setContent(this.value)
-		});
+		this.$nextTick(() => this.init());
 	},
 
 	watch: {
@@ -103,7 +94,7 @@ export default {
 			Tinymce.init({
                 language: 'zh_CN',
 				selector: "#" + this.id,
-				plugins: "print preview lineheight searchreplace autolink fullscreen image media link code codesample table charmap hr nonbreaking anchor advlist lists textpattern autosave imagetools",
+				plugins: "print preview lineheight searchreplace autolink fullscreen image media link code codesample table charmap hr nonbreaking anchor advlist lists textpattern imagetools",
 				toolbar: "formatselect fontselect fontsizeselect lineheight code undo redo restoredraft cut copy forecolor backcolor bold italic underline strikethrough link alignleft aligncenter alignright alignjustify bullist numlist blockquote subscript superscript removeformat table image media charmap hr print paste outdent indent preview fullscreen",
 				fontsize_formats: "8px 10px 12px 14px 16px 18px 20px 22px 24px 36px 48px 56px 72px",
                 font_formats: "微软雅黑='微软雅黑';宋体='宋体';黑体='黑体';仿宋='仿宋';楷体='楷体';隶书='隶书';幼圆='幼圆';Andale Mono=andale mono,times;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;Comic Sans MS=comic sans ms,sans-serif;Courier New=courier new,courier;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Symbol=symbol;Tahoma=tahoma,arial,helvetica,sans-serif;Terminal=terminal,monaco;Times New Roman=times new roman,times;Trebuchet MS=trebuchet ms,geneva;Verdana=verdana,geneva;Webdings=webdings;Wingdings=wingdings",
@@ -138,9 +129,7 @@ export default {
 				images_upload_handler: (blobInfo, success, failure) => {
 					this.$message({message: "建议图片最大宽度不要超过1008", type: "warning", duration: 3000});
 					let formData = new FormData();
-					const headerConfig = { headers: { 'Content-Type': 'multipart/form-data' }};
 					formData.append("file", blobInfo.blob());
-					formData.append("category", this.category);
 					this.$http({
 						method: "post",
 						url: this.$api.imgs_upload,
@@ -149,9 +138,7 @@ export default {
 					}).then((res) => {
 						this.$emit("getPicSrc", res.url);
 						success(res.url);
-					}).catch((e) => {
-						console.log(e);
-					});
+					}).catch((e) => console.log(e.message));
 				},
 				file_picker_callback: (callback, value, meta) => {
 					if (meta.filetype === "media") {
@@ -165,6 +152,7 @@ export default {
 								_this.loaded = 0;
 								_this.total = 1;
 								_this.progressVisible = false;
+								_this.$emit("getPicSrc", res.url);
 								callback(res.url);
 							}).catch((err) => {
 								_this.loaded = 0;
@@ -179,12 +167,11 @@ export default {
 				media_live_embeds: true,
 				file_picker_types: "media",
 				images_upload_credentias: true
-			}).then(() => Tinymce.get(this.id).setContent(this.value)).catch
+			}).then(() => Tinymce.get(this.id).setContent(this.value))
 		},
 		uploadMedia (file) {
 			this.progressVisible = true;
 			const formDate = new FormData();
-			const headerConfig = { headers: { "Content-Type": "multipart/form-data"} };
 			formDate.append("file", file);
 			return new Promise((resolve, reject) => {
 				this.$http({
@@ -202,7 +189,12 @@ export default {
 	},
 	computed: {
 		progress () {
-			return Math.round(this.loaded * 100 / this.total);
+			const percentage =  Math.round(this.loaded * 100 / this.total);
+
+			return percentage < 99 ? Math.round(this.loaded * 100 / this.total) : 99;
+		},
+		progressText () {
+			return this.progress < 99 ? "视频上传中，请耐心等待..." : "上传完成，正在写入服务器...";
 		}
 	}
 };

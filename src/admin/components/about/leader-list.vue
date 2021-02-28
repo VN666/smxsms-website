@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="table_wrap" :style="{height:tableMaxHeight+'px'}" stripe>
-			<el-table :data="tableData" height="100%" stripe :header-cell-style="{background:'#F5F5F5',color:'#606266'}">
+			<el-table :data="tableData" height="100%" stripe :header-cell-style="{background:'#F5F5F5',color:'#606266'}" v-loading="loading">
 				<el-table-column type="index" label="序号" width="50">
 					<template slot-scope="scope">
 						{{ (scope.$index + 1) + (page.pageNo - 1) * page.pageSize }}
@@ -105,7 +105,6 @@
 							  	action=""
 							  	:show-file-list="false"
 							  	:on-change="beforeUpload"
-							  	accept="png"
 							  	:auto-upload="false">
 							  	<el-button slot="trigger" type="success" size="mini"><i class="el-icon-plus el-icon--left"></i>上传</el-button>
 							</el-upload>
@@ -160,6 +159,7 @@ export default {
 				job: "",
 				introduction: "",
 				picSrc: [],
+				removeSrc: [],
 				headSrc: "",
 				order: "",
 				publisher: localStorage.getItem("username")
@@ -178,7 +178,8 @@ export default {
 					{ required: true, message: "简介不能为空", trigger: "blur" }
 				]
 			},
-			isSaving: false
+			isSaving: false,
+			loading: true
 		}
 	},
 	methods: {
@@ -232,6 +233,7 @@ export default {
 			this.addForm.job = "";
 			this.addForm.introduction = "";
 			this.addForm.picSrc = [];
+			this.addForm.removeSrc = [];
 			this.addForm.headSrc = "";
 			this.addForm.order = "";
 		},
@@ -240,6 +242,7 @@ export default {
 			this.dialogAdd = true;
 		},
 		requestData () {
+			this.loading = true;
 			this.$http({
 				method: "post",
 				url: this.$api.about_leader_query,
@@ -248,6 +251,7 @@ export default {
 					pageSize: this.page.pageSize
 				}
 			}).then((res) => {
+				this.loading = false;
 				this.tableData = res.data.list;
 				this.page.total = res.data.total;
 			})
@@ -264,38 +268,36 @@ export default {
             this.page.pageNo = page;
             this.requestData();
         },
-        beforeUpload (file) {
+        beforeUpload (file, fileList) {
         	const ext = file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length);
 			const accept = ["png", "jpeg", "jpg", "gif", "svg", "webp", "JPEG"];
-			if (accept.includes(ext)) {
-				this.upload(file);
-			} else {
+			if (!accept.includes(ext)) {
 				this.$message({	message: `只接受${accept.join("、")}格式文件`, type: "error", duration: 3000 });
+			} else if (file.size > 10485760) {
+				this.$message({	message: `文件大小超过10M`, type: "error", duration: 3000 });
+			} else {
+				let formData = new FormData();
+				formData.append("file", file.raw);
+				this.$http({
+					method: "post",
+					url: this.$api.imgs_upload,
+					reqType: "formData",
+					data: formData
+				}).then((res) => {
+					if (!!res.url) {
+						if (this.addForm.headSrc) this.addForm.removeSrc.push(this.addForm.headSrc);
+						this.addForm.headSrc = res.url;
+						this.$message({ message: "上传成功", type: "success", duration: 3000 });
+					} else this.$message.warning("上传失败");
+				}).catch((err) => this.$message.warning(err.message));
 			}
-        },
-        upload (file) {
-			let formData = new FormData();
-			formData.append("file", file.raw);
-			formData.append("category", "about");
-			this.$http({
-				method: "post",
-				url: this.$api.imgs_upload,
-				reqType: "formData",
-				data: formData
-			}).then((res) => {
-				this.addForm.headSrc = res.url;
-				this.$message({ message: "上传成功", type: "success", duration: 3000 });
-			});
         },
         beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
 					this.addForm.picSrc[0] = this.addForm.headSrc;
-					this.addForm.category = this.category;
 					this.submit();
-				} else {
-					return false;
-				}
+				} else return false;
 			});
 		},
 		submit () {
@@ -312,16 +314,9 @@ export default {
 					this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
 					this.dialogAdd = false;
 					this.dialogEdit = false;
-				} else {
-					this.$message({	message: res.msg, type: "error", duration: 2000	});
-				}
-			}).catch((err) => {
-				this.isSaving = false;
-			});
+				} else this.$message({	message: res.msg, type: "error", duration: 2000	});
+			}).catch((err) => this.isSaving = false);
 		},
-		beforeUpload2 () {},
-		beforeSubmit2 () {},
-		submit2 () {},
  		beforeDel (row, index) {
         	this.$confirm("是否删除该条信息，删除后将无法恢复", "提示", {
         		confirmButtonText: "确定",
@@ -334,39 +329,20 @@ export default {
 			this.$http({
 				method: "post",
 				url: this.$api.about_leader_del,
-				data: {
-					id: row.id,
-					picSrc: row.picSrc
-				}
+				data: { id: row.id, picSrc: row.picSrc}
 			}).then((res) => {
 				if (res.code === 200) {
-        			this.$message({
-			          	message: res.msg,
-			          	type: "success",
-			          	duration: 2000
-			        });
-			        if (order === this.page.total && index === 0) {
-			        	this.page.pageNo = this.page.pageNo > 1 ? this.page.pageNo - 1 : this.page.pageNo;
-			        }
+        			this.$message({ message: res.msg, type: "success", duration: 2000 });
+			        if (order === this.page.total && index === 0) this.page.pageNo = this.page.pageNo > 1 ? this.page.pageNo - 1 : this.page.pageNo;
 			        this.requestData();
-        		} else {
-        			this.$message({
-						message: res.msg,
-						type: "error",
-						duration: 2000
-					});
-        		}
+        		} else this.$message({ message: res.msg, type: "error", duration: 2000 });
 			});
 		},
 		goEdit (row, index) {
 			this.clearForm();
-			this.$http({
-				method: "post",
-				url: this.$api.about_leader_queryById,
-				data: { id: row.id }
-			}).then((res) => {
+			this.$http({ method: "post", url: this.$api.about_leader_queryById, data: { id: row.id }}).then((res) => {
 				this.addForm = res.data;
-				this.addForm.tempSrc = res.data.headSrc;
+				this.addForm.removeSrc = [];
 				this.dialogEdit = true;
 			});
 		}

@@ -66,7 +66,6 @@
 								ref="hTinymce"
 								v-model="addForm.content"
 								v-if="showTinymce"
-								category="parent"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
 						</div>
@@ -88,7 +87,6 @@ export default {
 	name: "knowledge-edit",
 	data () {
 		return {
-			category: "parent",
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
@@ -105,6 +103,7 @@ export default {
 				picSrc: [],
 				fileList: [],
 				fileListSrc: [],
+				removeSrc: [],
 				checked: ""
 			},
 			rules: {
@@ -122,13 +121,15 @@ export default {
 				]
 			},
 			isSaving: false,
-			id: ""
+			id: "",
+			tempSrc: []
 		};
 	},
 	mounted () {
 		this.resize();
 		window.addEventListener("resize", this.resize, false);
-		this.id = this.$route.params.id;
+		this.id = this.$route.params.id || localStorage.getItem("detailId");
+		localStorage.setItem("detailId", this.id);
 		this.requestData(this.id);
 	},
 	beforeDestroy () {
@@ -137,18 +138,41 @@ export default {
 	methods: {
 		beforeUpload (file, fileList) {
 			if (file.size > 10485760) {
-				this.addForm.fileList.pop();
+				fileList.pop();
 				this.$message({	message: "文件大小超过10M", type: "warning", duration: 3000 });
+			} else if (fileList.map((file) => file.name).reduce((acc, cur) => cur === file.name ? acc + 1 : acc , 0) > 1) {
+				fileList.pop();
+				this.$message({ message: "已包含该文件", type: "warning", duration: 3000 });
 			} else {
-				this.addForm.fileList = fileList;
+				let formData = new FormData();
+				formData.append("file", file.raw);
+				this.$http({
+					method: "post",
+					url: this.$api.files_upload,
+					reqType: "formData",
+					data: formData
+				}).then((res) => {
+					if (res.code === 200) {
+						this.addForm.fileListSrc.push(res.url);
+						this.addForm.fileList = fileList;
+					} else {
+						this.$message.warning(res.msg);
+						this.addForm.fileList.pop();
+					};
+				}).catch((err) => this.$message.warning(res.msg));
 			}
 		},
 		handleFileRemove (file, fileList) {
 			this.addForm.fileList = fileList;
-			this.addForm.fileListSrc = this.addForm.fileListSrc.filter((item) => !(RegExp(this.$utils.getFileName(file.name) + "-oss-").test(item) && this.$utils.getFileExt(file.name) === this.$utils.getFileExt(item)));
+			this.addForm.fileListSrc = this.addForm.fileListSrc.filter((src) => {
+				let temp = this.$utils.getFileOriginalname(src);
+				temp = temp.match(/(\S*)-oss-/gi)[0].replace(/-oss-/g, ".") + this.$utils.getFileExt(src);
+				if (temp === file.name) this.addForm.removeSrc.push(src);
+				return temp !== file.name;
+			});
 		},
 		getPicSrc (src) {
-			this.addForm.picSrc.push(src);
+			this.tempSrc.push(src);
 		},
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row3.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
@@ -160,73 +184,37 @@ export default {
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
-					this.addForm.category = this.category;
+					this.addForm.picSrc = this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).picSrc;
+					this.addForm.removeSrc = [...this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).removeSrc, ...this.addForm.removeSrc];
 					this.submit();
-				} else {
-					return false;
-				}
+				} else return false;
 			});
 		},
 		async submit () {
 			this.isSaving = true;
-			let upload = await this.fileUpload();
-			this.addForm.fileListSrc = [...this.addForm.fileListSrc, ...upload.url];
-			if (upload.code === 200) {
-				this.$http({
-					method: "post",
-					url: this.$api.parent_knowledge_edit,
-					data: this.addForm
-				}).then((res) => {
-					this.isSaving = false;
-					if (res.code === 200) {
-						this.$message({
-				          	message: res.msg,
-				          	type: "success",
-				          	duration: 2000,
-				          	onClose: this.goBack
-				        });
-					} else {
-						this.$message({
-							message: res.msg,
-							type: "error",
-							duration: 2000
-						});
-					}
-				}).catch((err) => {
-					this.isSaving = false;
-				});
-			} else {
-				this.$message({ message: "保存失败", type: "error", duration: 3000});
-			}
+			this.$http({
+				method: "post",
+				url: this.$api.parent_knowledge_edit,
+				data: this.addForm
+			}).then((res) => {
+				this.isSaving = false;
+				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
+				else this.$message({ message: res.msg, type: "error", duration: 2000 });
+			}).catch((err) => this.isSaving = false);
 		},
 		requestData (id) {
 			this.$http({
 				method: "post",
 				url: this.$api.parent_knowledge_queryById,
-				data: {
-					id: id,
-					addViews: false
-				}
+				data: { id: id, addViews: false }
 			}).then((res) => {
 				this.addForm = res.data;
-				this.addForm.tempSrc = res.data.picSrc.slice(0);
-				this.addForm.tempFileSrc = res.data.fileListSrc.slice(0);
+				this.addForm.removeSrc = [];
+				this.tempSrc = res.data.picSrc.slice(0);
 				this.showTinymce = true;
 			}).catch((err) => {
 				this.$message({	message: err, type: "error", duration: 2000	});
 			});
-		},
-		fileUpload () {
-			let formData = new FormData();
-			this.addForm.fileList.forEach((item) => formData.append("file", item.raw));
-			formData.append("category", "parent");
-			return this.$http({
-				method: "post",
-				url: this.$api.files_upload,
-				reqType: "formData",
-				data: formData
-			})
 		}
 	}
 }

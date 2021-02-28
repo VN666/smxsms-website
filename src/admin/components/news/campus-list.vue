@@ -58,7 +58,7 @@
 		</div>
 
 		<div class="table_wrap" :style="{height:tableMaxHeight+'px'}" stripe>
-			<el-table :data="tableData" height="100%" stripe :header-cell-style="{background:'#F5F5F5',color:'#606266'}">
+			<el-table :data="tableData" height="100%" stripe :header-cell-style="{background:'#F5F5F5',color:'#606266'}" v-loading="loading">
 				<el-table-column type="index" label="序号" width="50">
 					<template slot-scope="scope">
 						{{ (scope.$index + 1) + (page.pageNo - 1) * page.pageSize }}
@@ -115,7 +115,8 @@ export default {
 			},
 			tableData: [],
 			tableMaxHeight: 0,
-			showFilter: false
+			showFilter: false,
+			loading: true
 		};
 	},
 	methods: {
@@ -207,6 +208,7 @@ export default {
         	});
         },
         requestData () {
+        	this.loading = true;
         	this.$http({
         		method: "post",
         		url: this.$api.news_campus_query,
@@ -220,6 +222,7 @@ export default {
         			endTime: this.filters.endTime
         		}
         	}).then((res) => {
+        		this.loading = false;
         		this.tableData = res.data.list;
         		this.page.total = res.data.total;
         	});

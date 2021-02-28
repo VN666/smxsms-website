@@ -41,7 +41,6 @@
 								ref="hTinymce"
 								v-model="addForm.content"
 								v-if="addForm.content"
-								category="about"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
 						</div>
@@ -68,7 +67,6 @@ export default {
 	name: "honor_edit",
 	data () {
 		return {
-			category: "about",
 			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
@@ -78,7 +76,8 @@ export default {
 				publisher: localStorage.getItem("username"),
 				isTop: "",
 				content: "",
-				picSrc: "",
+				picSrc: [],
+				removeSrc: [],
 				id: ""
 			},
 			rules: {
@@ -93,13 +92,15 @@ export default {
 				]
 			},
 			isSaving: false,
-			id: ""
+			id: "",
+			tempSrc: []
 		};
 	},
 	mounted () {
 		this.resize();
 		window.addEventListener("resize", this.resize, false);
-		this.id = this.$route.params.id;
+		this.id = this.$route.params.id || localStorage.getItem("detailId");
+		localStorage.setItem("detailId", this.id);
 		this.requestData(this.id);
 	},
 	beforeDestroy () {
@@ -107,57 +108,49 @@ export default {
 	},
 	methods: {
 		getPicSrc (src) {
-			this.addForm.picSrc.push(src);
-		},
-		requestData (id) {
-			this.$http({
-				method: "post",
-				url: this.$api.about_honor_queryById,
-				data: {
-					id: id,
-					addViews: false
-				}
-			}).then((res) => {
-				this.addForm = res.data;
-				this.addForm.tempSrc = res.data.picSrc.slice(0);
-			}).catch((err) => {
-				this.$message({	message: err, type: "error", duration: 2000	});
-			});
+			this.tempSrc.push(src);
 		},
 		resize () {
 			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
 			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
 		},
+		goBack () {
+			this.$router.push({ path: "honor-list" });
+		},
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
-					this.addForm.picSrc = this.$utils.filterPicSrc(this.addForm.content, this.addForm.picSrc);
-					this.addForm.category = this.category;
+					this.addForm.picSrc = this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).picSrc;
+					this.addForm.removeSrc = [...this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).removeSrc, ...this.addForm.removeSrc];
 					this.submit();
-				} else {
-					return false;
-				}
+				} else return false;
 			});
 		},
-		submit () {
+		async submit () {
 			this.isSaving = true;
 			this.$http({
 				method: "post",
-				data: this.addForm,
-				url: this.$api.about_honor_edit
+				url: this.$api.about_honor_edit,
+				data: this.addForm
 			}).then((res) => {
 				this.isSaving = false;
-				if (res.code === 200) {
-					this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
-				} else {
-					this.$message({	message: res.msg, type: "error", duration: 2000	});
-				}
-			}).catch((err) => {
-				this.isSaving = false;
-			});
+				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
+				else this.$message({ message: res.msg, type: "error", duration: 2000 });
+			}).catch((err) => this.isSaving = false);
 		},
-		goBack () {
-			this.$router.push({ path: "honor-list" });
+		requestData (id) {
+			this.$http({
+				method: "post",
+				url: this.$api.about_honor_queryById,
+				data: { id: id, addViews: false }
+			}).then((res) => {
+				this.addForm = res.data;
+				this.addForm.removeSrc = [];
+				this.tempSrc = res.data.picSrc.slice(0);
+				this.showTinymce = true;
+			}).catch((err) => {
+				this.$message({	message: err, type: "error", duration: 2000	});
+			});
 		}
 	}
 }

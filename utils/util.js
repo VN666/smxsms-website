@@ -3,6 +3,8 @@ import Vue from "vue";
 
 const _this = Vue.prototype;
 
+const DOMAIN = "www.smxsdezx.cn";
+
 const getStrLength = (str) => {
 	let count = str.length;
 	for (let i = 0, size = str.length; i < size; i++) {
@@ -23,6 +25,8 @@ const timeFormate = (date) => {
 }
 
 const getFileName = (file) => file.substr(0, file.lastIndexOf("."));
+
+const getFileOriginalname = (file) => file.substring(file.lastIndexOf("/") + 1);
 
 const getFileExt = (file) => file.substring(file.lastIndexOf(".") + 1, file.length);
 
@@ -100,10 +104,14 @@ const filterPicSrc = (htmlStr, picSrc) => {
 	pickImgSrc(htmlStr).forEach((src) => {
 		if (!picSrc.includes(src)) picSrc.push(src);
 	});
-	console.log(picSrc);
 	picSrc = picSrc.filter((item) => item.includes("www.smxsdezx.cn"));
 	return picSrc;
 }
+
+const sweepPicsrc = (content, picsrc) => ({
+	picSrc: picsrc.filter((src) => RegExp(src).test(content)),
+	removeSrc: picsrc.filter((src) => !RegExp(src).test(content)).filter((src) => src.includes(DOMAIN))
+});
 
 const encodeBase64 = (words) => {
 	return CryptoJS.SHA256(words + "smxsdezx").toString();
@@ -143,7 +151,9 @@ export default {
 	getAbsolutePath,
 	setCookie,
 	getCookie,
-	delCookie
+	delCookie,
+	sweepPicsrc,
+	getFileOriginalname
 };
 
 

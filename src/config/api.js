@@ -21,8 +21,9 @@ const api = {
 	/** 上传/删除 */
 	imgs_upload: "/api/upload/imgs",
 	files_upload: "/api/upload/files",
-	imgs_delete: "/api/upload/deleteImg",
+	imgs_delete: "/api/upload/delete_img",
 	media_upload: "/api/upload/media",
+	files_delete: "/api/upload/delete_file",
 	/** 新闻动态-通知公告 */
 	news_notice_add: "/api/news/notice/add",
 	news_notice_query: "/api/news/notice/query",

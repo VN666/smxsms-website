@@ -12,7 +12,7 @@
 			  	<el-button slot="trigger" type="success" size="mini"><i class="el-icon-plus el-icon--left"></i>上传</el-button>
 			</el-upload>
 		</div>
-		<div class="bg-list">
+		<div class="bg-list" v-loading="loading">
 			<div class="bg-list-item" v-for="(item, index) in bgImgsData" :key="item.id">
 				<div class="bg-list-item-inner">
 					<div class="item-img">
@@ -43,7 +43,8 @@ export default {
 		return {
 			bgImgsData: [],
 			dialogVisible: false,
-			currentPicSrc: ""
+			currentPicSrc: "",
+			loading: true
 		};
 	},
 	mounted () {
@@ -167,6 +168,7 @@ export default {
 			});
 		},
 		requestData () {
+			this.loading = true;
 			this.$http({
 				method: "post",
 				url: this.$api.bg_imgs_query,
@@ -175,6 +177,7 @@ export default {
 					pageSize: 50
 				}
 			}).then((res) => {
+				this.loading = false;
 				this.bgImgsData = res.data.list;
 			});
 		}

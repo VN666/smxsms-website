@@ -13,7 +13,7 @@
 			  	<el-button slot="trigger" type="success" size="mini"><i class="el-icon-plus el-icon--left"></i>上传</el-button>
 			</el-upload>
 		</div>
-		<div class="landscape_list" :style="`height: ${listHeight}px`">
+		<div class="landscape_list" :style="`height: ${listHeight}px`" v-loading="loading">
 			<div class="landscape_list-item" v-for="(item, index) in bgImgsData" :key="item.id">
 				<div class="landscape_list-item-inner">
 					<div class="item-img">
@@ -110,7 +110,8 @@ export default {
 				pageSize: 20,
 				total: 0
 			},
-			listHeight: 0
+			listHeight: 0,
+			loading: true
 		};
 	},
 	mounted () {
@@ -253,6 +254,7 @@ export default {
 			});
 		},
 		requestData () {
+			this.loading = true;
 			this.$http({
 				method: "post",
 				url: this.$api.about_landscape_query,
@@ -261,6 +263,7 @@ export default {
 					pageSize: this.page.pageSize
 				}
 			}).then((res) => {
+				this.loading = false;
 				this.bgImgsData = res.data.list;
 				this.page.total = res.data.total;
 			});
