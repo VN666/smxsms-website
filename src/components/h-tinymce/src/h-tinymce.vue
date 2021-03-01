@@ -126,7 +126,7 @@ export default {
 			    		});
 			    	});
 			    },
-				images_upload_handler: (blobInfo, success, failure) => {
+				images_upload_handler: function (blobInfo, success, failure) {
 					this.$message({message: "建议图片最大宽度不要超过1008", type: "warning", duration: 3000});
 					let formData = new FormData();
 					formData.append("file", blobInfo.blob());
@@ -138,7 +138,7 @@ export default {
 					}).then((res) => {
 						this.$emit("getPicSrc", res.url);
 						success(res.url);
-					}).catch((e) => console.log(e.message));
+					}).catch((e) => failure(e));
 				},
 				file_picker_callback: (callback, value, meta) => {
 					if (meta.filetype === "media") {
@@ -148,6 +148,7 @@ export default {
 						input.onchange = function () {
 							let file = this.files[0];
 							if (file.type !== "video/mp4") _this.$message.warning(`请选择MP4文件进行上传`);
+							else if (file.name.includes("-oss-")) _this.$message.warning(`文件名中不能包含-oss-,请修改文件名`);
 							else _this.uploadMedia(file).then((res) => {
 								_this.loaded = 0;
 								_this.total = 1;
@@ -166,7 +167,9 @@ export default {
 				},
 				media_live_embeds: true,
 				file_picker_types: "media",
-				images_upload_credentias: true
+				images_upload_credentias: true,
+				relative_urls: false,
+    			remove_script_host: false,
 			}).then(() => Tinymce.get(this.id).setContent(this.value))
 		},
 		uploadMedia (file) {

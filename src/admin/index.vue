@@ -102,7 +102,7 @@ export default {
       	},
       	requestUserInfo () {
       		this.$http({
-      			url: "api/user/getUserInfo",
+      			url: this.$api.user_get_userinfo,
       			method: "post",
       			data: {}
       		}).then((res) => {

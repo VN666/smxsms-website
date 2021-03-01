@@ -69,6 +69,7 @@ export default {
 			this.requestData();
 		},
 		beforeSubmit () {
+			console.log(this.addForm.content);
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
 					this.addForm.picSrc = this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).picSrc;
@@ -85,7 +86,7 @@ export default {
 				data: this.addForm
 			}).then((res) => {
 				this.isSaving = false;
-				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
+				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.requestData });
 				else this.$message({ message: res.msg, type: "error", duration: 2000 });
 			}).catch((err) => this.isSaving = false);
 		},
@@ -93,7 +94,7 @@ export default {
 			this.$http({
 				method: "post",
 				url: this.$api.about_profile_queryById,
-				data: { id: id, addViews: false }
+				data: { addViews: false }
 			}).then((res) => {
 				this.addForm = res.data;
 				this.addForm.removeSrc = [];
