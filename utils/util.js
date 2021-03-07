@@ -139,6 +139,11 @@ const delCookie = (name, value = "", path = "/") => {
 	document.cookie = `${name}=${value};expires=-1;path=${path};domain=${domain}`;
 }
 
+const validUsername = (username) => {
+	const reg = /^[a-zA-Z0-9_]{1,}$/g;
+	return reg.test(username);
+}
+
 export default {
 	getStrLength,
 	timeFormate,
@@ -153,7 +158,8 @@ export default {
 	getCookie,
 	delCookie,
 	sweepPicsrc,
-	getFileOriginalname
+	getFileOriginalname,
+	validUsername
 };
 
 

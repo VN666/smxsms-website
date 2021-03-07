@@ -8,7 +8,10 @@ const state = {
 	phone: "",
 	email: "",
 	address: "",
-	postCode: ""
+	postCode: "",
+	username: "",
+	auths: "",
+	departmentId: ""
 };
 
 const mutations = {
@@ -23,6 +26,15 @@ const mutations = {
     },
     SET_POSTCODE (state, postCode) {
     	state.postCode = postCode
+    },
+    SET_USERNAME (state, username) {
+    	state.username = username;
+    },
+    SET_AUTHS (state, auths) {
+    	state.auths = auths;
+    },
+    SET_DEPARTMENTID (state, id) {
+    	state.departmentId = id;
     }
 };
 

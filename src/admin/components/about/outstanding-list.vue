@@ -144,7 +144,6 @@ export default {
 	name: "outstanding_list",
 	data () {
 		return {
-			category: "about",
 			page: {
 				pageNo: 1,
 				pageSize: 20,

@@ -126,7 +126,12 @@ export default {
 			    		});
 			    	});
 			    },
-				images_upload_handler: function (blobInfo, success, failure) {
+				images_upload_handler: (blobInfo, success, failure) => {
+					if (blobInfo.filename().includes("-oss-")) {
+						this.$message.warning(`文件名中不能包含-oss-,请修改文件名`);
+						failure();
+						return;
+					}
 					this.$message({message: "建议图片最大宽度不要超过1008", type: "warning", duration: 3000});
 					let formData = new FormData();
 					formData.append("file", blobInfo.blob());

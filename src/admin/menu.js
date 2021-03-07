@@ -1,66 +1,71 @@
+import Vue from "Vue";
+
+const _this = Vue.prototype;
+
+
 export const menu = [
 	{
 		title: "返回门户",
 		code: "home",
 		icon: "el-icon-s-home",
-		path: "index"
+		path: "/index"
 	},
 	{
 		title: "背景封面",
-		code: "bg",
+		code: "admin_bg",
 		path: "admin-bg",
 		icon: "el-icon-picture-outline"
 	},
 	{
 		title: "关于二中",
-		code: "about",
+		code: "admin_about",
 		path: "admin-about",
 		icon: "el-icon-school",
 		children: [
 			{
 				title: "学校简介",
 				path: "profile-content",
-				code: "profile"
+				code: "admin_about_profile"
 			},
 			{
 				title: "学校领导",
 				path: "leader-list",
-				code: "leader"
+				code: "admin_about_leader"
 			},
 			{
 				title: "校长寄语",
 				path: "proverb-content",
-				code: "proverb"
+				code: "admin_about_proverb"
 			},
 			{
 				title: "内部机构",
 				path: "organization-content",
-				code: "organization"
+				code: "admin_about_organization"
 			},
 			{
 				title: "师资概况",
 				path: "team-content",
-				code: "team"
+				code: "admin_about_team"
 			},
 			{
 				title: "名师风采",
 				path: "outstanding-list",
-				code: "about_outstanding"
+				code: "admin_about__outstanding"
 			},
 			{
 				title: "学校荣誉",
 				path: "honor-list",
-				code: "honor"
+				code: "admin_about_honor"
 			},
 			{
 				title: "二中校史",
 				path: "history-content",
-				code: "history"
+				code: "admin_about_history"
 			},
 			{
 				title: "校园风貌",
 				path: "landscape-list",
-				code: "landscape"
+				code: "admin_about_landscape"
 			}
 		]
 	},
@@ -72,22 +77,22 @@ export const menu = [
 			{
 				title: "新闻快讯",
 				path: "campus-list",
-				code: "campus"
+				code: "admin_news_campus"
 			},
 			{
 				title: "通知公告",
 				path: "notice-list",
-				code: "notice"
+				code: "admin_news_notice"
 			},
 			{
 				title: "媒体报道",
 				path: "media-list",
-				code: "media"
+				code: "admin_news_media"
 			},
 			{
 				title: "招生信息",
 				path: "enroll-list",
-				code: "enroll"
+				code: "admin_news_enroll"
 			}
 		]
 	},
@@ -100,186 +105,201 @@ export const menu = [
 			{
 				title: "党建动态",
 				path: "party-list",
-				code: "party"
+				code: "admin_group_party"
 			},
 			{
 				title: "团建工作",
 				path: "ccyl-list",
-				code: "ccyl"
+				code: "admin_group_ccyl"
 			},
 			{
 				title: "工会活动",
 				path: "union-list",
-				code: "union"
+				code: "admin_group_union"
 			},
 			{
 				title: "创先争优",
 				path: "excellent-list",
-				code: "excellent"
+				code: "admin_group_excellent"
 			}
 		]
 	},
 	{
 		title: "教学科研",
-		code: "education",
+		code: "admin_education",
 		path: "admin-education",
 		icon: "el-icon-data-analysis",
 		children: [
 			{
 				title: "教研动态",
 				path: "research-list",
-				code: "research"
+				code: "admin_education_research"
 			},
 			{
 				title: "教学案例",
 				path: "case-list",
-				code: "case"
+				code: "admin_education_case"
 			},
 			{
 				title: "教学反思",
 				path: "summary-list",
-				code: "summary"
+				code: "admin_education_summary"
 			},
 			{
 				title: "教学课件",
 				path: "ppt-list",
-				code: "ppt"
+				code: "admin_education_ppt"
 			},
 			{
 				title: "试题集锦",
 				path: "paper-list",
-				code: "paper"
+				code: "admin_education_paper"
 			},
 			{
 				title: "特色教育",
 				path: "feature-list",
-				code: "feature"
+				code: "admin_education_feature"
 			}
 		]
 	},
 	{
 		title: "学生天地",
-		code: "student",
+		code: "admin_student",
 		path: "admin-student",
 		icon: "el-icon-basketball",
 		children: [
 			{
 				title: "班级活动",
 				path: "activity-list",
-				code: "activity"
+				code: "admin_student_activity"
 			},
 			{
 				title: "荣誉表彰",
 				path: "prize-list",
-				code: "prize"
+				code: "admin_student_prize"
 			},
 			{
 				title: "纪律卫生",
 				path: "flag-list",
-				code: "flag"
+				code: "admin_student_flag"
 			},
 			{
 				title: "学生作品",
 				path: "exhibition-list",
-				code: "exhibition"
+				code: "admin_student_exhibition"
 			},
 			{
 				title: "毕业留念",
 				path: "graduation-list",
-				code: "graduation"
+				code: "admin_student_graduation"
 			}
 		]
 	},
 	{
 		title: "家长学校",
-		code: "parent",
+		code: "admin_parent",
 		path: "admin-parent",
 		icon: "el-icon-user",
 		children: [
 			{
 				title: "活动掠影",
 				path: "pratice-list",
-				code: "pratice"
+				code: "admin_parent_pratice"
 			},
 			{
 				title: "家教知识",
 				path: "knowledge-list",
-				code: "knowledge"
+				code: "admin_parent_knowledge"
 			},
 			{
 				title: "学校沟通",
 				path: "communication-list",
-				code: "communication"
+				code: "admin_parent_communication"
 			}
 		]
 	},
 	{
 		title: "七彩校园",
-		code: "school",
+		code: "admin_school",
 		path: "admin-school",
 		icon: "el-icon-orange",
 		children: [
 			{
 				title: "活动报道",
 				path: "display-list",
-				code: "display"
+				code: "admin_school_display"
 			}
 		]
 	},
 	{
 		title: "幸福教育",
-		code: "admin_happy",
+		code: "",
 		path: "admin-happy",
 		icon: "el-icon-ship",
 		children: [
 			{
 				title: "幸福理念",
 				path: "idea-list",
-				code: "idea"
+				code: "admin_happy_idea"
 			},
 			{
 				title: "幸福感言",
 				path: "speech-list",
-				code: "speech"
+				code: "admin_happy_speech"
 			},
 			{
 				title: "幸福教育活动",
 				path: "exercise-list",
-				code: "exercise"
+				code: "admin_happy_exercise"
 			}
 		]
 	},
 	{
 		title: "为您服务",
-		code: "service",
+		code: "admin_service",
 		path: "admin-service",
 		icon: "el-icon-help",
 		children: [
 			{
 				title: "办事指南",
 				path: "guide-list",
-				code: "guide"
+				code: "admin_service_guide"
 			},
 			{
 				title: "后勤保障",
 				path: "guarantee-list",
-				code: "guarantee"
+				code: "admin_service_guarantee"
 			},
 			{
 				title: "电教知识",
 				path: "computer-list",
-				code: "computer"
+				code: "admin_service_computer"
 			}
 		]
 	},
-
-
-
 	{
 		title: "联系我们",
 		path: "admin_contact",
 		icon: "el-icon-phone",
 		path: "admin-contact",
-		code: "contact"
+		code: "admin_service_contact"
+	},
+	{
+		title: "网站管理",
+		code: "admin_system",
+		path: "admin-system",
+		icon: "el-icon-monitor",
+		children: [
+			{
+				title: "科室管理",
+				path: "department-list",
+				code: "admin_system_department"
+			},
+			{
+				title: "账号管理",
+				path: "account-list",
+				code: "admin_system_accoumnt"
+			}
+		]
 	}
 ];

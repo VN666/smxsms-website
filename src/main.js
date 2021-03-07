@@ -33,6 +33,18 @@ Vue.use(hComponents);
 let router = new VueRouter({
 	routes,
 	mode: "history"
+});
+
+router.beforeEach((to, from, next) => {
+    console.log(from);
+    console.log(to);
+    next();
+    // if (!to.meta.auth) next();
+   	// else {
+   	// 	console.log(store.state.auths.includes(to.meta.code));
+   	// 	if (store.state.auths.includes(to.meta.code)) next();
+   	// 	else next (to);
+   	// }
 })
 
 /* eslint-disable no-new */

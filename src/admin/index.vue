@@ -62,7 +62,6 @@ export default {
 	},
 	created () {
 		this.resize();
-		this.menu = menu;
 		window.addEventListener("resize", this.resize, false);
 		this.requestUserInfo();
 	},
@@ -70,6 +69,21 @@ export default {
 		window.removeEventListener("resize", this.resize, false);
 	},
 	methods: {
+		generateMenu (menuData, codes, id = "code", children = "children") {
+			return menuData.filter((node) => {
+				if (node[children] && codes.includes(node[id])) node[children] = this.generateMenu(node[children], codes, id, children);
+				return codes.includes(node[id]);
+			});
+		},
+		requestUserInfo () {
+			this.$http({ url: this.$api.user_get_userinfo, method: "post", data: {} })	.then((res) => {
+				localStorage.setItem("username", res.result.username);
+				this.$store.commit("SET_USERNAME", res.result.username);
+				this.$store.commit("SET_AUTHS", res.result.auths);
+				this.$store.commit("SET_DEPARTMENTID", res.result.departmentId);
+				this.menu = [menu[0], ...this.generateMenu(menu, this.$store.state.auths)];
+			})
+		},
 		resize () {
 			this.h = document.documentElement.clientHeight + "px";
 			this.w = document.documentElement.clientWidth + "px";
@@ -90,25 +104,7 @@ export default {
       		this.$router.push({ path: path });
       	},
       	goHome (item) {
-      		if (item.code === "home") {
-      			this.$router.push({ path: "/index" });
-      		}
-      		if (item.code === "bg") {
-      			this.$router.push({ path: item.path });
-      		}
-      		if (item.code === "contact") {
-      			this.$router.push({ path: item.path });
-      		}
-      	},
-      	requestUserInfo () {
-      		this.$http({
-      			url: this.$api.user_get_userinfo,
-      			method: "post",
-      			data: {}
-      		}).then((res) => {
-      			this.username = res.result.username;
-      			localStorage.setItem("username", this.username);
-      		});
+      		this.$router.push({ path: item.path });
       	}
 	},
 	computed: {

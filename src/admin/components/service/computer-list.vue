@@ -289,18 +289,6 @@ export default {
 				}
 			}
 		}
-		.option_wrap {
-			position: relative;
-			padding: 0px 16px;
-			height: 28px;
-			margin: 8px 0px;
-			svg {
-				float: right;
-				width: 28px;
-				height: 28px;
-				cursor: pointer;
-			}
-		}
 		.table_wrap {
 			padding: 0px 16px;
 			.isTop {

@@ -307,7 +307,24 @@ const api = {
 	/** 用户信息 */
 	user_get_userinfo: "/api/user/getUserInfo",
 
-	download: "/api/download"
+	download: "/api/download",
+
+	/** 网站管理-部门管理 */
+	system_department_query: "/api/system/department/query",
+	system_department_queryById: "/api/system/department/queryById",
+	system_department_add: "/api/system/department/add",
+	system_department_edit: "/api/system/department/edit",
+	system_department_del: "/api/system/department/del",
+	system_department_isOne: "/api/system/department/isOne",
+
+	/** 网站管理-账号管理 */
+	system_account_query: "/api/system/account/query",
+	system_account_queryById: "/api/system/account/queryById",
+	system_account_add: "/api/system/account/add",
+	system_account_edit: "/api/system/account/edit",
+	system_account_del: "/api/system/account/del",
+	system_account_isOne: "/api/system/account/isOne",
+	system_account_userData: "/api/system/account/getAccountData"
 
 };
 

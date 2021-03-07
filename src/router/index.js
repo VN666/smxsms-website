@@ -103,19 +103,23 @@ const fe_router = [
 	},
 	{
 		path: "/index",
-		component: index
+		component: index,
+		meta: { auth: false, code: "" }
 	},
 	{
 		path: "/login",
-		component: login
+		component: login,
+		meta: { auth: false, code: "" }
 	},
 	{
 		path: "/loginTool",
-		component: loginTool
+		component: loginTool,
+		meta: { auth: false, code: "" }
 	},
 	{
 		path: "/about",
 		component: about,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -124,73 +128,87 @@ const fe_router = [
 			{
 				path: "profile-content",
 				name: "aboutProfileContent",
-				component: about_profile_content
+				component: about_profile_content,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "leader-list",
 				name: "aboutLeaderList",
-				component: about_leader_list
+				component: about_leader_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "leader-detail",
 				name: "aboutDetail",
-				component: about_leader_detail
+				component: about_leader_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "proverb-content",
 				name: "aboutProverbContent",
-				component: about_proverb_content
+				component: about_proverb_content,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "organization-content",
 				name: "aboutOrganizationContent",
-				component: about_organization_content
+				component: about_organization_content,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "team-content",
 				name: "aboutTeamContent",
-				component: about_team_content
+				component: about_team_content,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "outstanding-list",
 				name: "aboutOutstandingList",
-				component: about_outstanding_list
+				component: about_outstanding_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "outstanding-detail",
 				name: "aboutOutstandingDetail",
-				component: about_outstanding_detail
+				component: about_outstanding_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "honor-list",
 				name: "aboutHonorList",
-				component: about_honor_list
+				component: about_honor_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "honor-detail",
 				name: "honorDetail",
-				component: about_honor_detail
+				component: about_honor_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "history-content",
 				name: "aboutHistoryContent",
-				component: about_history_content
+				component: about_history_content,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "landscape-list",
 				name: "aboutLandscapeList",
-				component: about_landscape_list
+				component: about_landscape_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "landscape-detail",
 				name: "aboutLandscapeDetail",
-				component: about_landscape_detail
+				component: about_landscape_detail,
+				meta: { auth: false, code: "" }
 			}
 		]
 	},
 	{
 		path: "/news",
 		component: news,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -199,48 +217,57 @@ const fe_router = [
 			{
 				path: "campus-list",
 				name: "newsCampusList",
-				component: news_campus_list
+				component: news_campus_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "campus-detail",
 				name: "newsCampusDetail",
-				component: news_campus_detail
+				component: news_campus_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "notice-list",
 				name: "newsNoticeList",
-				component: news_notice_list
+				component: news_notice_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "notice-detail",
 				name: "newsNoticeDetail",
-				component: news_notice_detail
+				component: news_notice_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "media-list",
 				name: "newsMediaList",
-				component: news_media_list
+				component: news_media_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "media-detail",
 				name: "newsMediaDetail",
-				component: news_media_detail
+				component: news_media_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "enroll-list",
 				name: "newsEnrollList",
-				component: news_enroll_list
+				component: news_enroll_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "enroll-detail",
 				name: "newsEnrollDetail",
-				component: news_enroll_detail
+				component: news_enroll_detail,
+				meta: { auth: false, code: "" }
 			}
 		]
 	},
 	{
 		path: "/group",
 		component: group,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -249,48 +276,57 @@ const fe_router = [
 			{
 				path: "party-list",
 				name: "groupPartyList",
-				component: group_party_list
+				component: group_party_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "party-detail",
 				name: "groupPartyDetail",
-				component: group_party_detail
+				component: group_party_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "ccyl-list",
 				name: "groupCcylList",
-				component: group_ccyl_list
+				component: group_ccyl_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "ccyl-detail",
 				name: "groupCcylDetail",
-				component: group_ccyl_detail
+				component: group_ccyl_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "union-list",
 				name: "groupUnionList",
-				component: group_union_list
+				component: group_union_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "union-detail",
 				name: "groupUnionDetail",
-				component: group_union_detail
+				component: group_union_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "excellent-list",
 				name: "groupExcellentList",
-				component: group_excellent_list
+				component: group_excellent_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "excellent-detail",
 				name: "groupExcellentDetail",
-				component: group_excellent_detail
+				component: group_excellent_detail,
+				meta: { auth: false, code: "" }
 			}
 		]
 	},
 	{
 		path: "/education",
 		component: education,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -299,68 +335,81 @@ const fe_router = [
 			{
 				path: "research-list",
 				name: "educationResearchList",
-				component: education_research_list
+				component: education_research_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "research-detail",
 				name: "educationResearchDetail",
-				component: education_research_detail
+				component: education_research_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "summary-list",
 				name: "educationSummaryList",
-				component: education_summary_list
+				component: education_summary_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "summary-detail",
 				name: "educationSummaryDetail",
-				component:education_summary_detail
+				component:education_summary_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "case-list",
 				name: "educationCaseList",
-				component: education_case_list
+				component: education_case_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "case-detail",
 				name: "educationCaseDetail",
-				component: education_case_detail
+				component: education_case_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "feature-list",
 				name: "educationFeatureList",
-				component: education_feature_list
+				component: education_feature_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "feature-detail",
 				name: "educationFeatureDetail",
-				component: education_feature_detail
+				component: education_feature_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "paper-list",
 				name: "educationPaperList",
-				component: education_paper_list
+				component: education_paper_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "paper-detail",
 				name: "educationPaperDetail",
-				component: education_paper_detail
+				component: education_paper_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "ppt-list",
 				name: "educationPptList",
-				component: education_ppt_list
+				component: education_ppt_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "ppt-detail",
 				name: "educationPptDetail",
-				component: education_ppt_detail
+				component: education_ppt_detail,
+				meta: { auth: false, code: "" }
 			}
 		]
 	},
 	{
 		path: "/student",
 		component: student,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -369,58 +418,69 @@ const fe_router = [
 			{
 				path: "activity-list",
 				name: "studentActivityList",
-				component: student_activity_list
+				component: student_activity_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "activity-detail",
 				name: "studentActivityDetail",
-				component: student_activity_detail
+				component: student_activity_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "exhibition-list",
 				name: "studentExhibitionList",
-				component: student_exhibition_list
+				component: student_exhibition_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "exhibition-detail",
 				name: "studentExhibitionDetail",
-				component: student_exhibition_detail
+				component: student_exhibition_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "flag-list",
 				name: "studentFlagList",
-				component: student_flag_list
+				component: student_flag_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "flag-detail",
 				name: "studentFlagDetail",
-				component: student_flag_detail
+				component: student_flag_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "graduation-list",
 				name: "studentGraduationList",
-				component: student_graduation_list
+				component: student_graduation_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "graduation-detail",
 				name: "studentGraduationDetail",
-				component: student_graduation_detail
+				component: student_graduation_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "prize-list",
 				name: "studentPrizeList",
-				component: student_prize_list
+				component: student_prize_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "prize-detail",
 				name: "studentPrizeDetail",
-				component: student_prize_detail
+				component: student_prize_detail,
+				meta: { auth: false, code: "" }
 			}
 		]
 	},
 	{
 		path: "/parent",
 		component: parent,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -429,38 +489,45 @@ const fe_router = [
 			{
 				path: "pratice-list",
 				name: "parentPraticeList",
-				component: parent_pratice_list
+				component: parent_pratice_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "pratice-detail",
 				name: "parentPraticeDetail",
-				component: parent_pratice_detail
+				component: parent_pratice_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "communication-list",
 				name: "parentCommunicationList",
-				component: parent_communication_list
+				component: parent_communication_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "communication-detail",
 				name: "parentCommunicationDetail",
-				component: parent_communication_detail
+				component: parent_communication_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "knowledge-list",
 				name: "parentKnowledgeList",
-				component: parent_knowledge_list
+				component: parent_knowledge_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "knowledge-detail",
 				name: "parentKnowledgeDetail",
-				component: parent_knowledge_detail
+				component: parent_knowledge_detail,
+				meta: { auth: false, code: "" }
 			},
 		]
 	},
 	{
 		path: "/school",
 		component: school,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -469,18 +536,21 @@ const fe_router = [
 			{
 				path: "display-list",
 				name: "schoolDisplayList",
-				component: school_display_list
+				component: school_display_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "display-detail",
 				name: "schoolDisplayDetail",
-				component: school_display_detail
+				component: school_display_detail,
+				meta: { auth: false, code: "" }
 			}
 		]
 	},
 	{
 		path: "/happy",
 		component: happy,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -489,38 +559,45 @@ const fe_router = [
 			{
 				path: "idea-list",
 				name: "happyIdeaList",
-				component: happy_idea_list
+				component: happy_idea_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "idea-detail",
 				name: "happyIdeaDetail",
-				component: happy_idea_detail
+				component: happy_idea_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "speech-list",
 				name: "happySpeechList",
-				component: happy_speech_list
+				component: happy_speech_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "speech-detail",
 				name: "happySpeechDetail",
-				component: happy_speech_detail
+				component: happy_speech_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "exercise-list",
 				name: "happyExerciseList",
-				component: happy_exercise_list
+				component: happy_exercise_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "exercise-detail",
 				name: "happyExerciseDetail",
-				component: happy_exercise_detail
+				component: happy_exercise_detail,
+				meta: { auth: false, code: "" }
 			},
 		]
 	},
 	{
 		path: "/service",
 		component: service,
+		meta: { auth: false, code: "" },
 		children: [
 			{
 				path: "",
@@ -529,32 +606,38 @@ const fe_router = [
 			{
 				path: "guide-list",
 				name: "serviceGuideList",
-				component: service_guide_list
+				component: service_guide_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "guide-detail",
 				name: "serviceGuideDetail",
-				component: service_guide_detail
+				component: service_guide_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "guarantee-list",
 				name: "serviceGuaranteeList",
-				component: service_guarantee_list
+				component: service_guarantee_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "guarantee-detail",
 				name: "serviceGuaranteeDetail",
-				component: service_guarantee_detail
+				component: service_guarantee_detail,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "computer-list",
 				name: "serviceComputerList",
-				component: service_computer_list
+				component: service_computer_list,
+				meta: { auth: false, code: "" }
 			},
 			{
 				path: "computer-detail",
 				name: "serviceComputerDetail",
-				component: service_computer_detail
+				component: service_computer_detail,
+				meta: { auth: false, code: "" }
 			}
 		]
 	}
