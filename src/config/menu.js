@@ -6,48 +6,99 @@ const menu = [
 		children: []
 	},
 	{
-		title: "关于二中",
+		title: "二中概况",
 		router: "/about",
 		code: "smxsmx_about",
 		children: [
+			{
+				title: "领导风采",
+				router: "/about/leader-list"
+			},
 			{
 				title: "学校简介",
 				router: "/about/profile-content"
 			},
 			{
-				title: "学校领导",
-				router: "/about/leader-list"
+				title: "办学理念",
+				router: "/about/school-concept"
 			},
 			{
 				title: "校长寄语",
 				router: "/about/proverb-content"
 			},
 			{
-				title: "内部机构",
-				router: "/about/organization-content"
-			},
-			{
-				title: "师资概况",
-				router: "/about/team-content"
-			},
-			{
-				title: "名师风采",
-				router: "/about/outstanding-list"
-			},
-			{
 				title: "学校荣誉",
 				router: "/about/honor-list"
-			},
-			{
-				title: "二中校史",
-				router: "/about/history-content"
-			},
-			{
-				title: "校园风貌",
-				router: "/about/landscape-list"
 			}
 		]
 	},
+	{
+		title: "教学动态",
+		router: "/education",
+		code: "smxsmx_education",
+		children: []
+	},
+	{
+		title: "德育活动",
+		router: "/activity",
+		code: "smxsmx_activity",
+		children: [
+			{
+				title: "德育规划",
+				router: "/activity/planning-list",
+				code: ""
+			},
+			{
+				title: "德育标兵",
+				router: "/activity/pacesetter-list",
+				code: ""
+			},
+			{
+				title: "健康教育",
+				router: "/activity/health-list",
+				code: ""
+			},
+			{
+				title: "班级文化",
+				router: "/activity/culture-list",
+				code: ""
+			},
+			{
+				title: "班主任专栏",
+				router: "/activity/teacher-list",
+				code: ""
+			},
+			{
+				title: "体艺活动",
+				router: "/activity/gym-list",
+				code: ""
+			}
+		]
+	},
+	{
+		title: "校本研修",
+		router: "/training",
+		code: "smxsmx_training",
+		children: []
+	},
+	{
+		title: "为您服务",
+		router: "/service",
+		code: "smxsmx_service",
+		children: [
+			{
+				title: "后勤保障",
+				router: "/service/guarantee-list",
+				code: ""
+			},
+			{
+				title: "电教知识",
+				router: "/service/computer-list",
+				code: ""
+			}
+		]
+	},
+
 	{
 		title: "新闻动态",
 		router: "/news",
@@ -103,75 +154,6 @@ const menu = [
 		]
 	},
 	{
-		title: "教学科研",
-		router: "/education",
-		code: "smxsmx_education",
-		children: [
-			{
-				title: "教研动态",
-				router: "/education/research-list",
-				code: ""
-			},
-			{
-				title: "教学案例",
-				router: "/education/case-list",
-				code: ""
-			},
-			{
-				title: "教学反思",
-				router: "/education/summary-list",
-				code: ""
-			},
-			{
-				title: "教学课件",
-				router: "/education/ppt-list",
-				code: ""
-			},
-			{
-				title: "试题集锦",
-				router: "/education/paper-list",
-				code: ""
-			},
-			{
-				title: "特色教育",
-				router: "/education/feature-list",
-				code: ""
-			}
-		]
-	},
-	{
-		title: "学生天地",
-		router: "/student",
-		code: "smxsmx_student",
-		children: [
-			{
-				title: "班级活动",
-				router: "/student/activity-list",
-				code: ""
-			},
-			{
-				title: "荣誉表彰",
-				router: "/student/prize-list",
-				code: ""
-			},
-			{
-				title: "纪律卫生",
-				router: "/student/flag-list",
-				code: ""
-			},
-			{
-				title: "学生作品",
-				router: "/student/exhibition-list",
-				code: ""
-			},
-			{
-				title: "毕业留念",
-				router: "/student/graduation-list",
-				code: ""
-			}
-		]
-	},
-	{
 		title: "家长学校",
 		router: "/parent",
 		code: "smxsmx_parent",
@@ -189,18 +171,6 @@ const menu = [
 			{
 				title: "学校沟通",
 				router: "/parent/communication-list",
-				code: ""
-			}
-		]
-	},
-	{
-		title: "七彩校园",
-		router: "/school",
-		code: "smxsmx_school",
-		children: [
-			{
-				title: "活动报道",
-				router: "/school/display-list",
 				code: ""
 			}
 		]
@@ -228,28 +198,27 @@ const menu = [
 		]
 	},
 	{
-		title: "为您服务",
-		router: "/service",
-		code: "smxsmx_service",
+		title: "幸福教育",
+		router: "/happy",
+		code: "smxsmx_happy",
 		children: [
 			{
-				title: "办事指南",
-				router: "/service/guide-list",
+				title: "幸福理念",
+				router: "/happy/idea-list",
 				code: ""
 			},
 			{
-				title: "后勤保障",
-				router: "/service/guarantee-list",
+				title: "幸福感言",
+				router: "/happy/speech-list",
 				code: ""
 			},
 			{
-				title: "电教知识",
-				router: "/service/computer-list",
+				title: "幸福教育活动",
+				router: "/happy/exercise-list",
 				code: ""
 			}
 		]
 	}
-
 ];
 
 export default menu;

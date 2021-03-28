@@ -1,6 +1,6 @@
 <template>
 	<div class="hNavigator">
-		<h-drop-down-list v-for="(item, index) in menu" :menuData="item" :key="index"></h-drop-down-list>
+		<h-drop-down-list v-for="(item, index) in menu" :menuData="item" :key="index" @click="doClick(item)"></h-drop-down-list>
 	</div>
 </template>
 
@@ -15,6 +15,13 @@ export default {
 			menu: menu
 		};
 	},
+	methods: {
+		doClick (item) {
+			if (item.children.length === 0) {
+				this.$router.push({ path: item.path, query:{index: 0 }});
+			}
+		}
+	}
 };
 
 </script>

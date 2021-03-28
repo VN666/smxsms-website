@@ -63,7 +63,8 @@ export default {
             this.requestData();
         },
         goDetail (id) {
-        	this.$router.push({ path: "/about/honor-detail", query: {id: id, index: 6}});
+        	this.$router.push({ path: "/about/honor-detail", query: {id: id, index: 4}});
+
         }
 	}
 }

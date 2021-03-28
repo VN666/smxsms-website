@@ -17,11 +17,11 @@
 				</div>
 				<div class="newsContent">
 					<div class="title">
-						<span class="word">新闻快讯</span>
-						<span class="icon" @click="goPathQuery('/news/campus-list', '', 0)">>> more</span>
+						<span class="word">教学动态</span>
+						<span class="icon" @click="goPathQuery('/education', '', 0)">>> more</span>
 					</div>
 					<ul class="newsUl">
-						<li v-for="(item,index) in newsData" v-if="index<8" @click="goPathQuery('/news/campus-detail', item.id, 0)">
+						<li v-for="(item,index) in newsData" v-if="index<8" @click="goPathQuery('/education/research-detail', item.id, 0)">
 							<img src="../../assets/icons/angle-right.png" />
 							<span class="itemTitle">{{item.headline}}</span>
 							<span class="itemDate">{{item.timecreate | timeCut}}</span>
@@ -267,7 +267,7 @@ export default {
 		requestNews () {
 			return this.$http({
 				method: "post",
-				url: this.$api.news_campus_queryList,
+				url: this.$api.education_research_queryList,
 				data: {
 					pageNo: 1,
 					pageSize: 8

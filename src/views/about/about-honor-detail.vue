@@ -19,7 +19,7 @@ export default {
 			content: () => {}
 		};
 	},
-	mounted () {
+	created () {
 		this.id = this.$route.query.id;
 		this.requestData();
 	},

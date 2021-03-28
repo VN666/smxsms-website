@@ -63,7 +63,7 @@ export default {
             this.requestData();
         },
         goDetail (id) {
-        	this.$router.push({ path: "/service/computer-detail", query: {id: id, index: 2}});
+        	this.$router.push({ path: "/service/computer-detail", query: {id: id, index: 1}});
         }
 	}
 }

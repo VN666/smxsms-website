@@ -66,7 +66,7 @@ export default {
             this.requestData();
         },
         goDetail (id) {
-        	this.$router.push({ path: "/about/leader-detail", query: {id: id, index: 1}});
+        	this.$router.push({ path: "/about/leader-detail", query: {id: id, index: 0}});
         }
 	}
 }

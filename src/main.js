@@ -36,8 +36,8 @@ let router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(from);
-    console.log(to);
+    // console.log(from);
+    // console.log(to);
     next();
     // if (!to.meta.auth) next();
    	// else {

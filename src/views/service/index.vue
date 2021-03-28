@@ -1,5 +1,5 @@
 <template>
-	<div class="news">
+	<div class="service">
 		<h-block :menuData="menuData">
 			<div slot="area">
 				<router-view></router-view>
@@ -13,7 +13,7 @@
 import menu from "../../config/menu";
 
 export default {
-	name: "news",
+	name: "service",
 	data () {
 		return {
 			menuData: [],
@@ -21,7 +21,7 @@ export default {
 		};
 	},
 	created () {
-		this.menuData = menu[9];
+		this.menuData = menu[5];
 	},
 	methods: {}
 }
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.news {
+	.service {
 		position: relative;
 		width: 100%;
 		height: 100%;

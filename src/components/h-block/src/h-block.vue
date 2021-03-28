@@ -20,7 +20,8 @@
 						<img src="@/src/assets/icons/school.png" />
 						<span>您现在的位置：</span>
 						<span @click="goHome">网站首页</span>
-						<span @click="goPath">{{menuData.children[currentIndex].title}}</span>
+						<span @click="goPath" v-if="menuData.children.length!==0">{{menuData.children[currentIndex].title}}</span>
+						<span @click="goPath" v-else>{{menuData.title}}</span>
 						<span>{{/list/.exec($route.path) ? "列表" : "正文"}}</span>
 					</div>
 					<div class="line"></div>
@@ -94,8 +95,13 @@ export default {
 			this.$router.push({ path: "/index" });
 		},
 		goPath () {
-			if (this.$route.path !== this.menuData.children[this.currentIndex].router)
+			if (this.menuData.children.length === 0) {
+				this.$router.push({ path: this.menuData.router });
+				return;
+			}
+			if (this.$route.path !== this.menuData.children[this.currentIndex].router) {
 				this.$router.push({ path: this.menuData.children[this.currentIndex].router, query: { index: this.currentIndex }});
+			}
 		},
 		goWebsite (path) {
 			window.open(path, "_blank");

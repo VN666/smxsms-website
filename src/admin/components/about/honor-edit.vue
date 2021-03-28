@@ -1,7 +1,7 @@
 <template>
 	<div class="honor_edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '关于二中', '学校荣誉', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '二中概况', '学校荣誉', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

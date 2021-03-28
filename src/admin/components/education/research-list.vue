@@ -1,7 +1,7 @@
 <template>
 	<div class="research-list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '教学科研', '教研动态', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '教学科研', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">

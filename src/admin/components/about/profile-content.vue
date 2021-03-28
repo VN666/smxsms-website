@@ -1,7 +1,7 @@
 <template>
 	<div class="profile_content">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '关于二中', '学校简介', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '二中概况', '学校简介', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

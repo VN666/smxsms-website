@@ -11,7 +11,7 @@
 		<div class="detail-download" v-if="content.fileListSrc.length">
 			<div class="download-des">附件</div>
 			<div class="download-file">
-				<div class="download-item" v-for="(item, index) in content.fileListSrc" @click="downLoad(item)"><img src="@/src/assets/icons/download-icon.png" />{{ item.match(/service\/(\S*)(\s*)-oss-/)[1] + "." + $utils.getFileExt(item) }}</div>
+				<div class="download-item" v-for="(item, index) in content.fileListSrc" @click="downLoad(item)"><img src="@/src/assets/icons/download-icon.png" />{{ item.match(/\-\d{2}\/(\S*)-oss-/)[1] + "." + $utils.getFileExt(item) }}</div>
 			</div>
 		</div>
 	</div>

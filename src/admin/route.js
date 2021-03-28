@@ -16,18 +16,47 @@ import enroll_add from "./components/news/enroll-add";
 import admin_bg from "./components/bg/index";
 /** 联系我们 */
 import admin_contact from "./components/contact/index";
-/** 关于二中 */
+/** 二中概况 */
 import profile_content from "./components/about/profile-content";
-import organization_content from "./components/about/organization-content";
-import team_content from "./components/about/team-content";
-import history_content from "./components/about/history-content";
+import concept_content from "./components/about/concept-content";
 import proverb_content from "./components/about/proverb-content";
 import leader_list from "./components/about/leader-list";
-import outstanding_list from "./components/about/outstanding-list";
 import honor_list from "./components/about/honor-list";
 import honor_add from "./components/about/honor-add";
 import honor_edit from "./components/about/honor-edit";
-import landscape_list from "./components/about/landscape-list";
+/** 教学动态 */
+import research_list from "./components/education/research-list";
+import research_add from "./components/education/research-add";
+import research_edit from "./components/education/research-edit";
+/** 德育活动 */
+import planning_list from "./components/activity/planning-list";
+import planning_add from "./components/activity/planning-add";
+import planning_edit from "./components/activity/planning-edit";
+import pacesetter_list from "./components/activity/pacesetter-list";
+import health_list from "./components/activity/health-list";
+import health_add from "./components/activity/health-add";
+import health_edit from "./components/activity/health-edit";
+import culture_list from "./components/activity/culture-list";
+import culture_add from "./components/activity/culture-add";
+import culture_edit from "./components/activity/culture-edit";
+import teacher_list from "./components/activity/teacher-list";
+import teacher_add from "./components/activity/teacher-add";
+import teacher_edit from "./components/activity/teacher-edit";
+import gym_list from "./components/activity/gym-list";
+import gym_add from "./components/activity/gym-add";
+import gym_edit from "./components/activity/gym-edit";
+/** 校本研修 */
+import study_list from "./components/training/study-list";
+import study_add from "./components/training/study-add";
+import study_edit from "./components/training/study-edit";
+/** 为您服务 */
+import guarantee_list from "./components/service/guarantee-list";
+import guarantee_add from "./components/service/guarantee-add";
+import guarantee_edit from "./components/service/guarantee-edit";
+import computer_list from "./components/service/computer-list";
+import computer_add from "./components/service/computer-add";
+import computer_edit from "./components/service/computer-edit";
+
 /** 党团工会 */
 import party_list from "./components/group/party-list";
 import party_add from "./components/group/party-add";
@@ -41,25 +70,6 @@ import union_edit from "./components/group/union-edit";
 import excellent_list from "./components/group/excellent-list";
 import excellent_add from "./components/group/excellent-add";
 import excellent_edit from "./components/group/excellent-edit";
-/** 教学科研 */
-import research_list from "./components/education/research-list";
-import research_add from "./components/education/research-add";
-import research_edit from "./components/education/research-edit";
-import case_list from "./components/education/case-list";
-import case_add from "./components/education/case-add";
-import case_edit from "./components/education/case-edit";
-import summary_list from "./components/education/summary-list";
-import summary_add from "./components/education/summary-add";
-import summary_edit from "./components/education/summary-edit";
-import ppt_list from "./components/education/ppt-list";
-import ppt_add from "./components/education/ppt-add";
-import ppt_edit from "./components/education/ppt-edit";
-import paper_list from "./components/education/paper-list";
-import paper_add from "./components/education/paper-add";
-import paper_edit from "./components/education/paper-edit";
-import feature_list from "./components/education/feature-list";
-import feature_add from "./components/education/feature-add";
-import feature_edit from "./components/education/feature-edit";
 /** 学生天地 */
 import activity_list from "./components/student/activity-list";
 import activity_add from "./components/student/activity-add";
@@ -86,10 +96,7 @@ import knowledge_edit from "./components/parent/knowledge-edit";
 import communication_list from "./components/parent/communication-list";
 import communication_add from "./components/parent/communication-add";
 import communication_edit from "./components/parent/communication-edit";
-/** 七彩校园 */
-import display_list from "./components/school/display-list";
-import display_add from "./components/school/display-add";
-import display_edit from "./components/school/display-edit";
+
 /** 幸福教育 */
 import idea_list from "./components/happy/idea-list";
 import idea_add from "./components/happy/idea-add";
@@ -100,16 +107,7 @@ import speech_edit from "./components/happy/speech-edit";
 import exercise_list from "./components/happy/exercise-list";
 import exercise_add from "./components/happy/exercise-add";
 import exercise_edit from "./components/happy/exercise-edit";
-/** 为您服务 */
-import guide_list from "./components/service/guide-list";
-import guide_add from "./components/service/guide-add";
-import guide_edit from "./components/service/guide-edit";
-import guarantee_list from "./components/service/guarantee-list";
-import guarantee_add from "./components/service/guarantee-add";
-import guarantee_edit from "./components/service/guarantee-edit";
-import computer_list from "./components/service/computer-list";
-import computer_add from "./components/service/computer-add";
-import computer_edit from "./components/service/computer-edit";
+
 /** 网站管理 */
 import department_list from "./components/system/department-list";
 import account_list from "./components/system/account-list";
@@ -217,23 +215,12 @@ export default [
 				meta: { auth: true, code: "admin_about_profile" },
 				component: profile_content
 			},
+
 			{
-				path: "organization-content",
-				name: "organizationContent",
-				meta: { auth: true, code: "admin_about_organization" },
-				component: organization_content
-			},
-			{
-				path: "team-content",
-				name: "teamContent",
-				meta: { auth: true, code: "admin_about_team" },
-				component: team_content
-			},
-			{
-				path: "history-content",
-				name: "historyContent",
-				meta: { auth: true, code: "admin_about_history" },
-				component: history_content
+				path: "concept-content",
+				name: "conceptContent",
+				meta: { auth: true, code: "admin_about_concept" },
+				component: concept_content
 			},
 			{
 				path: "proverb-content",
@@ -246,12 +233,6 @@ export default [
 				name: "leaderList",
 				meta: { auth: true, code: "admin_about_leader" },
 				component: leader_list
-			},
-			{
-				path: "outstanding-list",
-				name: "outstandingList",
-				meta: { auth: true, code: "admin_about_outstanding" },
-				component: outstanding_list
 			},
 			{
 				path: "honor-list",
@@ -270,12 +251,6 @@ export default [
 				name: "honorEdit",
 				meta: { auth: true, code: "admin_about_honor" },
 				component: honor_edit
-			},
-			{
-				path: "landscape-list",
-				name: "landscapeList",
-				meta: { auth: true, code: "admin_about_landscape" },
-				component: landscape_list
 			},
 			{
 				path: "party-list",
@@ -350,114 +325,186 @@ export default [
 				component: excellent_edit
 			},
 			{
+				path: "admin-education",
+				redirect: "research-list"
+			},
+			{
 				path: "research-list",
 				name: "researchList",
-				meta: { auth: true, code: "admin_education_research" },
+				meta: { auth: true, code: "admin_education" },
 				component: research_list
 			},
 			{
 				path: "research-add",
 				name: "researchAdd",
-				meta: { auth: true, code: "admin_education_research" },
+				meta: { auth: true, code: "admin_education" },
 				component: research_add
 			},
 			{
 				path: "research-edit",
 				name: "researchEdit",
-				meta: { auth: true, code: "admin_education_research" },
+				meta: { auth: true, code: "admin_education" },
 				code: "",
 				component: research_edit
 			},
 			{
-				path: "case-list",
-				name: "caseList",
-				meta: { auth: true, code: "admin_education_case" },
-				component: case_list
+				path: "planning-list",
+				name: "planningList",
+				meta: { auth: true, code: "admin_activity_planning" },
+				component: planning_list
 			},
 			{
-				path: "case-add",
-				name: "caseAdd",
-				meta: { auth: true, code: "admin_education_case" },
-				component: case_add
+				path: "planning-add",
+				name: "planningAdd",
+				meta: { auth: true, code: "admin_activity_planning" },
+				component: planning_add
 			},
 			{
-				path: "case-eidt",
-				name: "caseEdit",
-				meta: { auth: true, code: "admin_education_case" },
-				component: case_edit
+				path: "planning-edit",
+				name: "planningEdit",
+				meta: { auth: true, code: "admin_activity_planning" },
+				component: planning_edit
 			},
 			{
-				path: "summary-list",
-				name: "summaryList",
-				meta: { auth: true, code: "admin_education_summary" },
-				component: summary_list
+				path: "pacesetter-list",
+				name: "pacesetterList",
+				meta: { auth: true, code: "admin_activity_pacesetter" },
+				component: pacesetter_list
 			},
 			{
-				path: "summary-add",
-				name: "summaryAdd",
-				meta: { auth: true, code: "admin_education_summary" },
-				component: summary_add
+				path: "health-list",
+				name: "healthList",
+				meta: { auth: true, code: "admin_activity_health" },
+				component: health_list
 			},
 			{
-				path: "summary-edit",
-				name: "summaryEdit",
-				meta: { auth: true, code: "admin_education_summary" },
-				component: summary_edit
+				path: "health-add",
+				name: "healthAdd",
+				meta: { auth: true, code: "admin_activity_health" },
+				component: health_add
 			},
 			{
-				path: "ppt-list",
-				name: "pptList",
-				meta: { auth: true, code: "admin_education_ppt" },
-				component: ppt_list
+				path: "health-edit",
+				name: "healthEdit",
+				meta: { auth: true, code: "admin_activity_health" },
+				component: health_edit
 			},
 			{
-				path: "ppt-add",
-				name: "pptAdd",
-				meta: { auth: true, code: "admin_education_ppt" },
-				component: ppt_add
+				path: "culture-list",
+				name: "cultureList",
+				meta: { auth: true, code: "admin_activity_culture" },
+				component: culture_list
 			},
 			{
-				path: "ppt-edit",
-				name: "pptEdit",
-				meta: { auth: true, code: "admin_education_ppt" },
-				component: ppt_edit
+				path: "culture-add",
+				name: "cultureAdd",
+				meta: { auth: true, code: "admin_activity_culture" },
+				component: culture_add
 			},
 			{
-				path: "paper-list",
-				name: "paperList",
-				meta: { auth: true, code: "admin_education_paper" },
-				component: paper_list
+				path: "culture-edit",
+				name: "cultureEdit",
+				meta: { auth: true, code: "admin_activity_culture" },
+				component: culture_edit
 			},
 			{
-				path: "paper-add",
-				name: "paperAdd",
-				meta: { auth: true, code: "admin_education_paper" },
-				component: paper_add
+				path: "teacher-list",
+				name: "teacherList",
+				meta: { auth: true, code: "admin_activity_teacher" },
+				component: teacher_list
 			},
 			{
-				path: "paper-edit",
-				name: "paperEdit",
-				meta: { auth: true, code: "admin_education_paper" },
-				component: paper_edit
+				path: "teacher-add",
+				name: "teacherAdd",
+				meta: { auth: true, code: "admin_activity_teacher" },
+				component: teacher_add
 			},
 			{
-				path: "feature-list",
-				name: "featureList",
-				meta: { auth: true, code: "admin_education_feature" },
-				component: feature_list
+				path: "teacher-edit",
+				name: "teacherEdit",
+				meta: { auth: true, code: "admin_activity_teacher" },
+				component: teacher_edit
 			},
 			{
-				path: "feature-add",
-				name: "featureAdd",
-				meta: { auth: true, code: "admin_education_feature" },
-				component: feature_add
+				path: "gym-list",
+				name: "gymList",
+				meta: { auth: true, code: "admin_activity_gym" },
+				component: gym_list
 			},
 			{
-				path: "feature-edit",
-				name: "featureEdit",
-				meta: { auth: true, code: "admin_education_feature" },
-				component: feature_edit
+				path: "gym-add",
+				name: "gymAdd",
+				meta: { auth: true, code: "admin_activity_gym" },
+				component: gym_add
 			},
+			{
+				path: "gym-edit",
+				name: "gymEdit",
+				meta: { auth: true, code: "admin_activity_gym" },
+				component: gym_edit
+			},
+			{
+				path: "admin-training",
+				redirect: "study-list"
+			},
+			{
+				path: "study-list",
+				name: "studyList",
+				meta: { auth: true, code: "admin_training" },
+				component: study_list
+			},
+			{
+				path: "study-add",
+				name: "studyAdd",
+				meta: { auth: true, code: "admin_training" },
+				component: study_add
+			},
+			{
+				path: "study-edit",
+				name: "studyEdit",
+				meta: { auth: true, code: "admin_training" },
+				code: "",
+				component: study_edit
+			},
+			{
+				path: "guarantee-list",
+				name: "guaranteeList",
+				meta: { auth: true, code: "admin_service_guarantee" },
+				component: guarantee_list
+			},
+			{
+				path: "guarantee-add",
+				name: "guaranteeAdd",
+				meta: { auth: true, code: "admin_service_guarantee" },
+				component: guarantee_add
+			},
+			{
+				path: "guarantee-edit",
+				name: "guaranteeEdit",
+				meta: { auth: true, code: "admin_service_guarantee" },
+				component: guarantee_edit
+			},
+			{
+				path: "computer-list",
+				name: "computerList",
+				meta: { auth: true, code: "admin_service_computer" },
+				component: computer_list
+			},
+			{
+				path: "computer-add",
+				name: "computerAdd",
+				meta: { auth: true, code: "admin_service_computer" },
+				component: computer_add
+			},
+			{
+				path: "computer-edit",
+				name: "computerEdit",
+				meta: { auth: true, code: "admin_service_computer" },
+				component: computer_edit
+			},
+
+
+
 			{
 				path: "activity-list",
 				name: "activityList",
@@ -603,24 +650,6 @@ export default [
 				component: communication_edit
 			},
 			{
-				path: "display-list",
-				name: "displayList",
-				meta: { auth: true, code: "admin_school_display" },
-				component: display_list
-			},
-			{
-				path: "display-add",
-				name: "displayAdd",
-				meta: { auth: true, code: "admin_school_display" },
-				component: display_add
-			},
-			{
-				path: "display-edit",
-				name: "displayEdit",
-				meta: { auth: true, code: "admin_school_display" },
-				component: display_edit
-			},
-			{
 				path: "idea-list",
 				name: "ideaList",
 				meta: { auth: true, code: "admin_happy_idea" },
@@ -674,60 +703,7 @@ export default [
 				meta: { auth: true, code: "admin_happy_exercise" },
 				component: exercise_edit
 			},
-			{
-				path: "guide-list",
-				name: "guideList",
-				meta: { auth: true, code: "admin_service_guide" },
-				component: guide_list
-			},
-			{
-				path: "guide-add",
-				name: "guideAdd",
-				meta: { auth: true, code: "admin_service_guide" },
-				component: guide_add
-			},
-			{
-				path: "guide-edit",
-				name: "guideEdit",
-				meta: { auth: true, code: "admin_service_guide" },
-				component: guide_edit
-			},
-			{
-				path: "guarantee-list",
-				name: "guaranteeList",
-				meta: { auth: true, code: "admin_service_guarantee" },
-				component: guarantee_list
-			},
-			{
-				path: "guarantee-add",
-				name: "guaranteeAdd",
-				meta: { auth: true, code: "admin_service_guarantee" },
-				component: guarantee_add
-			},
-			{
-				path: "guarantee-edit",
-				name: "guaranteeEdit",
-				meta: { auth: true, code: "admin_service_guarantee" },
-				component: guarantee_edit
-			},
-			{
-				path: "computer-list",
-				name: "computerList",
-				meta: { auth: true, code: "admin_service_computer" },
-				component: computer_list
-			},
-			{
-				path: "computer-add",
-				name: "computerAdd",
-				meta: { auth: true, code: "admin_service_computer" },
-				component: computer_add
-			},
-			{
-				path: "computer-edit",
-				name: "computerEdit",
-				meta: { auth: true, code: "admin_service_computer" },
-				component: computer_edit
-			},
+
 			{
 				path: "department-list",
 				name: "departmentList",

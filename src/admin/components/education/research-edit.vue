@@ -1,7 +1,7 @@
 <template>
 	<div class="research-edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '教学科研', '教研动态', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '教学科研', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">
