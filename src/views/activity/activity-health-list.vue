@@ -1,5 +1,5 @@
 <template>
-	<div class="displayList">
+	<div class="healthList">
 		<div class="list">
 			<div class="list-item" v-for="(item, index) in listData" :key="index" @click="goDetail(item.id)">
 				<img src="@/src/assets/icons/list-icon.png" />
@@ -25,7 +25,7 @@
 <script>
 
 export default {
-	name: "displayList",
+	name: "healthList",
 	data () {
 		return {
 			page: {
@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.displayList {
+.healthList {
 	position: relative;
 	width: 100%;
 	height: auto;

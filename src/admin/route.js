@@ -56,20 +56,19 @@ import guarantee_edit from "./components/service/guarantee-edit";
 import computer_list from "./components/service/computer-list";
 import computer_add from "./components/service/computer-add";
 import computer_edit from "./components/service/computer-edit";
-
-/** 党团工会 */
-import party_list from "./components/group/party-list";
-import party_add from "./components/group/party-add";
-import party_edit from "./components/group/party-edit";
+/** 二中团建 */
 import ccyl_list from "./components/group/ccyl-list";
 import ccyl_add from "./components/group/ccyl-add";
 import ccyl_edit from "./components/group/ccyl-edit";
-import union_list from "./components/group/union-list";
-import union_add from "./components/group/union-add";
-import union_edit from "./components/group/union-edit";
-import excellent_list from "./components/group/excellent-list";
-import excellent_add from "./components/group/excellent-add";
-import excellent_edit from "./components/group/excellent-edit";
+/** 职工之家 */
+import staff_list from "./components/union/staff-list";
+import staff_add from "./components/union/staff-add";
+import staff_edit from "./components/union/staff-edit";
+/** 二中安法 */
+import safe_list from "./components/law/safe-list";
+import safe_add from "./components/law/safe-add";
+import safe_edit from "./components/law/safe-edit";
+
 /** 学生天地 */
 import activity_list from "./components/student/activity-list";
 import activity_add from "./components/student/activity-add";
@@ -253,77 +252,72 @@ export default [
 				component: honor_edit
 			},
 			{
-				path: "party-list",
-				name: "partyList",
-				meta: { auth: true, code: "admin_group_party" },
-				component: party_list
-			},
-			{
-				path: "party-add",
-				name: "partyAdd",
-				meta: { auth: true, code: "admin_group_party" },
-				component: party_add
-			},
-			{
-				path: "party-edit",
-				name: "partyEdit",
-				meta: { auth: true, code: "admin_group_party" },
-				component: party_edit
+				path: "admin-group",
+				redirect: "ccyl-list"
 			},
 			{
 				path: "ccyl-list",
 				name: "ccylList",
-				meta: { auth: true, code: "admin_group_ccyl" },
+				meta: { auth: true, code: "admin_group" },
 				component: ccyl_list
 			},
 			{
 				path: "ccyl-add",
 				name: "ccylAdd",
-				meta: { auth: true, code: "admin_group_ccyl" },
+				meta: { auth: true, code: "admin_group" },
 				component: ccyl_add
 			},
 			{
 				path: "ccyl-edit",
 				name: "ccylEdit",
-				meta: { auth: true, code: "admin_group_ccyl" },
+				meta: { auth: true, code: "admin_group" },
 				component: ccyl_edit
 			},
 			{
-				path: "union-list",
-				name: "unionList",
-				meta: { auth: true, code: "admin_group_union" },
-				component: union_list
+				path: "admin-union",
+				redirect: "staff-list"
 			},
 			{
-				path: "union-add",
-				name: "unionAdd",
-				meta: { auth: true, code: "admin_group_union" },
-				component: union_add
+				path: "staff-list",
+				name: "staffList",
+				meta: { auth: true, code: "admin_union" },
+				component: staff_list
 			},
 			{
-				path: "union-edit",
-				name: "unionEdit",
-				meta: { auth: true, code: "admin_group_union" },
-				component: union_edit
+				path: "staff-add",
+				name: "staffAdd",
+				meta: { auth: true, code: "admin_union" },
+				component: staff_add
 			},
 			{
-				path: "excellent-list",
-				name: "excellentList",
-				meta: { auth: true, code: "admin_group_excellent" },
-				component: excellent_list
+				path: "staff-edit",
+				name: "staffEdit",
+				meta: { auth: true, code: "admin_union" },
+				component: staff_edit
 			},
 			{
-				path: "excellent-add",
-				name: "excellentAdd",
-				meta: { auth: true, code: "admin_group_excellent" },
-				component: excellent_add
+				path: "admin-law",
+				redirect: "safe-list"
 			},
 			{
-				path: "excellent-edit",
-				name: "excellentEdit",
-				meta: { auth: true, code: "admin_group_excellent" },
-				component: excellent_edit
+				path: "safe-list",
+				name: "safeList",
+				meta: { auth: true, code: "admin_law" },
+				component: safe_list
 			},
+			{
+				path: "safe-add",
+				name: "staffAdd",
+				meta: { auth: true, code: "admin_law" },
+				component: safe_add
+			},
+			{
+				path: "safe-edit",
+				name: "safeEdit",
+				meta: { auth: true, code: "admin_law" },
+				component: safe_edit
+			},
+
 			{
 				path: "admin-education",
 				redirect: "research-list"

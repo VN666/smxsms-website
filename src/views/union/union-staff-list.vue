@@ -1,5 +1,5 @@
 <template>
-	<div class="unionList">
+	<div class="staffList">
 		<div class="list">
 			<div class="list-item" v-for="(item, index) in listData" :key="index" @click="goDetail(item.id)">
 				<img src="@/src/assets/icons/list-icon.png" />
@@ -25,7 +25,7 @@
 <script>
 
 export default {
-	name: "unionList",
+	name: "staffList",
 	data () {
 		return {
 			page: {
@@ -43,7 +43,7 @@ export default {
 		requestData () {
 			this.$http({
 				method: "post",
-				url: this.$api.group_union_queryList,
+				url: this.$api.union_staff_queryList,
 				data: {
 					pageNo: this.page.pageNo,
 					pageSize: this.page.pageSize
@@ -63,7 +63,7 @@ export default {
             this.requestData();
         },
         goDetail (id) {
-        	this.$router.push({ path: "/group/union-detail", query: {id: id, index: 2}});
+        	this.$router.push({ path: "/union/staff-detail", query: {id: id, index: 0}});
         }
 	}
 }
@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.unionList {
+.staffList {
 	position: relative;
 	width: 100%;
 	height: auto;

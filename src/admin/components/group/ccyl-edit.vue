@@ -1,7 +1,7 @@
 <template>
 	<div class="ccyl-edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '党团工会', '团建工作', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '二中团建', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">
@@ -226,8 +226,8 @@ export default {
 		position: relative;
 		width: 100%;
 		height: 100%;
-		box-sizing: border-box;
 		overflow: auto;
+		box-sizing: border-box;
 		.breadcrumb_wrap {
 			position: relative;
 			height: 48px;

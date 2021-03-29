@@ -1,5 +1,5 @@
 <template>
-	<div class="excellentDetail">
+	<div class="staffDetail">
 		<div class="detail-source">
 			<div class="item timecreate"><span>发布日期 </span><span>{{content.timecreate}}</span></div>
 			<div class="item department" v-if="content.department"><span>部门 </span><span>{{content.department}}</span></div>
@@ -11,7 +11,7 @@
 		<div class="detail-download" v-if="content.fileListSrc.length">
 			<div class="download-des">附件</div>
 			<div class="download-file">
-				<div class="download-item" v-for="(item, index) in content.fileListSrc" @click="downLoad(item)"><img src="@/src/assets/icons/download-icon.png" />{{ item.match(/group\/(\S*)(\s*)-oss-/)[1] + "." + $utils.getFileExt(item) }}</div>
+				<div class="download-item" v-for="(item, index) in content.fileListSrc" @click="downLoad(item)"><img src="@/src/assets/icons/download-icon.png" />{{ item.match(/\-\d{2}\/(\S*)-oss-/)[1] + "." + $utils.getFileExt(item) }}</div>
 			</div>
 		</div>
 	</div>
@@ -20,7 +20,7 @@
 <script>
 
 export default {
-	name: "excellentDetail",
+	name: "staffDetail",
 	data () {
 		return {
 			id: "",
@@ -37,7 +37,7 @@ export default {
 		requestData () {
 			this.$http({
 				method: "post",
-				url: this.$api.group_excellent_queryById,
+				url: this.$api.union_staff_queryById,
 				data: {
 					id: this.id,
 					addViews: true
@@ -56,7 +56,7 @@ export default {
 
 <style lang="scss" scoped>
 
-.excellentDetail {
+.staffDetail {
 	position: relative;
 	width: 100%;
 	margin-top: 16px;

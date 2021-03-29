@@ -1,7 +1,7 @@
 <template>
-	<div class="union-add">
+	<div class="safe-add">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '党团工会', '工会活动', '新增']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '二中安法', '新增']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">
@@ -83,14 +83,14 @@
 <script>
 
 export default {
-	name: "union-add",
+	name: "safe-add",
 	data () {
 		return {
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
 			addForm: {
 				headline: "",
-				department: "三门峡市二中",
+				department: "三门峡第二中学",
 				author: "",
 				publisher: localStorage.getItem("username"),
 				timecreate: this.$utils.timeFormate(new Date()),
@@ -129,13 +129,13 @@ export default {
 			this.tempSrc.push(src);
 		},
 		goBack () {
-			this.$router.push({ path: "union-list" });
+			this.$router.push({ path: "safe-list" });
 		},
 		async submit () {
 			this.isSaving = true;
 			this.$http({
 				method: "post",
-				url: this.$api.group_union_add,
+				url: this.$api.law_safe_add,
 				data: this.addForm
 			}).then((res) => {
 				this.isSaving = false;
@@ -200,7 +200,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	.union-add {
+	.safe-add {
 		position: relative;
 		width: 100%;
 		height: 100%;
@@ -240,7 +240,7 @@ export default {
 </style>
 
 <style>
-	.union-add .file-upload .el-upload-list {
+	.safe-add .file-upload .el-upload-list {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -248,12 +248,12 @@ export default {
 		align-items: center;
 		margin-left: 16px;
 	}
-	.union-add .file-upload .el-upload-list li {
+	.safe-add .file-upload .el-upload-list li {
 		margin-right: 8px;
 		width: 200px;
 		background: #F5F7FA;
 	}
-	.union-add .file-upload .el-upload-list li:first-child {
+	.safe-add .file-upload .el-upload-list li:first-child {
 		margin-top: 0px;
 	}
 </style>

@@ -98,63 +98,14 @@ const menu = [
 			}
 		]
 	},
-
 	{
-		title: "新闻动态",
-		router: "/news",
-		code: "smxsmx_news",
-		children: [
-			{
-				title: "新闻快讯",
-				router: "/news/campus-list",
-				code: ""
-			},
-			{
-				title: "通知公告",
-				router: "/news/notice-list",
-				code: ""
-			},
-			{
-				title: "媒体报道",
-				router: "/news/media-list",
-				code: ""
-			},
-			{
-				title: "招生信息",
-				router: "/news/enroll-list",
-				code: ""
-			}
-		]
-	},
-	{
-		title: "党团工会",
+		title: "二中团建",
 		router: "/group",
 		code: "smxsmx_group",
-		children: [
-			{
-				title: "党建动态",
-				router: "/group/party-list",
-				code: ""
-			},
-			{
-				title: "团建工作",
-				router: "/group/ccyl-list",
-				code: ""
-			},
-			{
-				title: "工会活动",
-				router: "/group/union-list",
-				code: ""
-			},
-			{
-				title: "创先争优",
-				router: "/group/excellent-list",
-				code: ""
-			}
-		]
+		children: []
 	},
 	{
-		title: "家长学校",
+		title: "二中党建",
 		router: "/parent",
 		code: "smxsmx_parent",
 		children: [
@@ -176,7 +127,13 @@ const menu = [
 		]
 	},
 	{
-		title: "幸福教育",
+		title: "职工之家",
+		router: "/union",
+		code: "smxsmx_union",
+		children: []
+	},
+	{
+		title: "二中创建",
 		router: "/happy",
 		code: "smxsmx_happy",
 		children: [
@@ -198,26 +155,10 @@ const menu = [
 		]
 	},
 	{
-		title: "幸福教育",
-		router: "/happy",
-		code: "smxsmx_happy",
-		children: [
-			{
-				title: "幸福理念",
-				router: "/happy/idea-list",
-				code: ""
-			},
-			{
-				title: "幸福感言",
-				router: "/happy/speech-list",
-				code: ""
-			},
-			{
-				title: "幸福教育活动",
-				router: "/happy/exercise-list",
-				code: ""
-			}
-		]
+		title: "二中安法",
+		router: "/law",
+		code: "smxsmx_law",
+		children: []
 	}
 ];
 

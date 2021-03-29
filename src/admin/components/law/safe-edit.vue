@@ -1,7 +1,7 @@
 <template>
-	<div class="excellent-add">
+	<div class="safe-edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '党团工会', '创优争先', '新增']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '二中安法', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">
@@ -65,6 +65,7 @@
 								:height="hTinymceHeight"
 								ref="hTinymce"
 								v-model="addForm.content"
+								v-if="showTinymce"
 								@getPicSrc="getPicSrc"
 							></h-tinymce>
 						</div>
@@ -83,24 +84,27 @@
 <script>
 
 export default {
-	name: "excellent-add",
+	name: "safe-edit",
 	data () {
 		return {
+			labelPosition: "left",
 			hTinymceHeight: 0,
 			hTinymceWidth: 0,
+			showTinymce: false,
 			addForm: {
+				id: "",
 				headline: "",
 				department: "三门峡市二中",
 				author: "",
 				publisher: localStorage.getItem("username"),
-				timecreate: this.$utils.timeFormate(new Date()),
-				isTop: false,
+				timecreate: "",
+				isTop: "",
 				content: "",
 				picSrc: [],
 				fileList: [],
 				fileListSrc: [],
 				removeSrc: [],
-				checked: true
+				checked: ""
 			},
 			rules: {
 				headline: [
@@ -117,32 +121,21 @@ export default {
 				]
 			},
 			isSaving: false,
+			id: "",
 			tempSrc: []
 		};
 	},
+	mounted () {
+		this.resize();
+		window.addEventListener("resize", this.resize, false);
+		this.id = this.$route.params.id || localStorage.getItem("detailId");
+		localStorage.setItem("detailId", this.id);
+		this.requestData(this.id);
+	},
+	beforeDestroy () {
+		window.removeEventListener("resize", this.resize, false);
+	},
 	methods: {
-		resize () {
-			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row3.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
-			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
-		},
-		getPicSrc (src) {
-			this.tempSrc.push(src);
-		},
-		goBack () {
-			this.$router.push({ path: "excellent-list" });
-		},
-		async submit () {
-			this.isSaving = true;
-			this.$http({
-				method: "post",
-				url: this.$api.group_excellent_add,
-				data: this.addForm
-			}).then((res) => {
-				this.isSaving = false;
-				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
-				else this.$message({ message: res.msg, type: "error", duration: 2000 });
-			}).catch((err) => this.isSaving = false);
-		},
 		beforeUpload (file, fileList) {
 			if (file.size > 10485760) {
 				fileList.pop();
@@ -178,6 +171,16 @@ export default {
 				return temp !== file.name;
 			});
 		},
+		getPicSrc (src) {
+			this.tempSrc.push(src);
+		},
+		resize () {
+			this.hTinymceHeight = this.$el.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.row1.$el.clientHeight - this.$refs.row2.$el.clientHeight - this.$refs.row3.$el.clientHeight - this.$refs.row4.$el.clientHeight - 56;
+			this.hTinymceWidth = this.$CST.TINYMCE_WIDTH;
+		},
+		goBack () {
+			this.$router.push({ path: "safe-list" });
+		},
 		beforeSubmit () {
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
@@ -186,25 +189,45 @@ export default {
 					this.submit();
 				} else return false;
 			});
+		},
+		async submit () {
+			this.isSaving = true;
+			this.$http({
+				method: "post",
+				url: this.$api.law_safe_edit,
+				data: this.addForm
+			}).then((res) => {
+				this.isSaving = false;
+				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: this.goBack });
+				else this.$message({ message: res.msg, type: "error", duration: 2000 });
+			}).catch((err) => this.isSaving = false);
+		},
+		requestData (id) {
+			this.$http({
+				method: "post",
+				url: this.$api.law_safe_queryById,
+				data: { id: id, addViews: false }
+			}).then((res) => {
+				this.addForm = res.data;
+				this.addForm.removeSrc = [];
+				this.tempSrc = res.data.picSrc.slice(0);
+				this.showTinymce = true;
+			}).catch((err) => {
+				this.$message({	message: err, type: "error", duration: 2000	});
+			});
 		}
-	},
-	mounted () {
-		this.resize();
-		window.addEventListener("resize", this.resize, false);
-	},
-	beforeDestroy () {
-		window.removeEventListener("resize", this.resize, false);
 	}
 }
 
 </script>
 
 <style lang="scss" scoped>
-	.excellent-add {
+	.safe-edit {
 		position: relative;
 		width: 100%;
 		height: 100%;
 		overflow: auto;
+		box-sizing: border-box;
 		.breadcrumb_wrap {
 			position: relative;
 			height: 48px;
@@ -240,7 +263,7 @@ export default {
 </style>
 
 <style>
-	.excellent-add .file-upload .el-upload-list {
+	.safe-edit .file-upload .el-upload-list {
 		display: flex;
 		flex-direction: row;
 		justify-content: flex-start;
@@ -248,12 +271,12 @@ export default {
 		align-items: center;
 		margin-left: 16px;
 	}
-	.excellent-add .file-upload .el-upload-list li {
+	.safe-edit .file-upload .el-upload-list li {
 		margin-right: 8px;
 		width: 200px;
 		background: #F5F7FA;
 	}
-	.excellent-add .file-upload .el-upload-list li:first-child {
+	.safe-edit .file-upload .el-upload-list li:first-child {
 		margin-top: 0px;
 	}
 </style>

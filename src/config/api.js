@@ -151,16 +151,7 @@ const api = {
 
 
 
-
-	/** 党团工会-党建动态 */
-	group_party_add: "/api/group/party/add",
-	group_party_query: "/api/group/party/query",
-	group_party_changeIsTop: "/api/group/party/changeIsTop",
-	group_party_del: "/api/group/party/del",
-	group_party_queryById: "/api/group/party/queryById",
-	group_party_edit: "/api/group/party/edit",
-	group_party_queryList: "/api/group/party/queryList",
-	/** 党团工会-团建工作 */
+	/** 二中团建 */
 	group_ccyl_add: "/api/group/ccyl/add",
 	group_ccyl_query: "/api/group/ccyl/query",
 	group_ccyl_changeIsTop: "/api/group/ccyl/changeIsTop",
@@ -168,22 +159,30 @@ const api = {
 	group_ccyl_queryById: "/api/group/ccyl/queryById",
 	group_ccyl_edit: "/api/group/ccyl/edit",
 	group_ccyl_queryList: "/api/group/ccyl/queryList",
-	/** 党团工会-工会活动 */
-	group_union_add: "/api/group/union/add",
-	group_union_query: "/api/group/union/query",
-	group_union_changeIsTop: "/api/group/union/changeIsTop",
-	group_union_del: "/api/group/union/del",
-	group_union_queryById: "/api/group/union/queryById",
-	group_union_edit: "/api/group/union/edit",
-	group_union_queryList: "/api/group/union/queryList",
-	/** 党团工会-创优争先 */
-	group_excellent_add: "/api/group/excellent/add",
-	group_excellent_query: "/api/group/excellent/query",
-	group_excellent_changeIsTop: "/api/group/excellent/changeIsTop",
-	group_excellent_del: "/api/group/excellent/del",
-	group_excellent_queryById: "/api/group/excellent/queryById",
-	group_excellent_edit: "/api/group/excellent/edit",
-	group_excellent_queryList: "/api/group/excellent/queryList",
+
+
+
+	/** 职工之家 */
+	union_staff_add: "/api/union/staff/add",
+	union_staff_query: "/api/union/staff/query",
+	union_staff_changeIsTop: "/api/union/staff/changeIsTop",
+	union_staff_del: "/api/union/staff/del",
+	union_staff_queryById: "/api/union/staff/queryById",
+	union_staff_edit: "/api/union/staff/edit",
+	union_staff_queryList: "/api/union/staff/queryList",
+
+
+
+
+	/** 二中安法 */
+	law_safe_add: "/api/law/safe/add",
+	law_safe_query: "/api/law/safe/query",
+	law_safe_changeIsTop: "/api/law/safe/changeIsTop",
+	law_safe_del: "/api/law/safe/del",
+	law_safe_queryById: "/api/law/safe/queryById",
+	law_safe_edit: "/api/law/safe/edit",
+	law_safe_queryList: "/api/law/safe/queryList",
+
 
 	/** 学生天地-班级活动 */
 	student_activity_add: "/api/student/activity/add",

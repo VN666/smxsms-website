@@ -43,6 +43,19 @@ import service_computer_list from "@/src/views/service/service-computer-list";
 import service_computer_detail from "@/src/views/service/service-computer-detail";
 import service_guarantee_list from "@/src/views/service/service-guarantee-list";
 import service_guarantee_detail from "@/src/views/service/service-guarantee-detail";
+/** 二中团建 */
+import group from "@/src/views/group/index";
+import group_ccyl_list from  "@/src/views/group/group-ccyl-list";
+import group_ccyl_detail from "@/src/views/group/group-ccyl-detail";
+/** 职工之家 */
+import union from "@/src/views/union/index";
+import union_staff_list from "@/src/views/union/union-staff-list";
+import union_staff_detail from "@/src/views/union/union-staff-detail";
+/** 二中安法 */
+import law from "@/src/views/law/index";
+import law_safe_list from "@/src/views/law/law-safe-list";
+import law_safe_detail from "@/src/views/law/law-safe-detail";
+
 /** 新闻动态 */
 import news from "@/src/views/news/index";
 import news_campus_list from "@/src/views/news/news-campus-list";
@@ -53,16 +66,7 @@ import news_media_list from "@/src/views/news/news-media-list";
 import news_media_detail from "@/src/views/news/news-media-detail";
 import news_enroll_list from "@/src/views/news/news-enroll-list";
 import news_enroll_detail from "@/src/views/news/news-enroll-detail";
-/** 党团工会 */
-import group from "@/src/views/group/index";
-import group_party_list from "@/src/views/group/group-party-list";
-import group_party_detail from "@/src/views/group/group-party-detail";
-import group_ccyl_list from  "@/src/views/group/group-ccyl-list";
-import group_ccyl_detail from "@/src/views/group/group-ccyl-detail";
-import group_union_list from "@/src/views/group/group-union-list";
-import group_union_detail from "@/src/views/group/group-union-detail";
-import group_excellent_list from "@/src/views/group/group-excellent-list";
-import group_excellent_detail from "@/src/views/group/group-excellent-detail";
+
 /** 家长学校 */
 import parent from "@/src/views/parent/index";
 import parent_communication_list from "@/src/views/parent/parent-communication-list";
@@ -318,6 +322,76 @@ const fe_router = [
 		]
 	},
 	{
+		path: "/group",
+		component: group,
+		meta: { auth: false, code: "" },
+		children: [
+			{
+				path: "",
+				redirect: "ccyl-list"
+			},
+			{
+				path: "ccyl-list",
+				name: "groupCcylList",
+				component: group_ccyl_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "ccyl-detail",
+				name: "groupCcylDetail",
+				component: group_ccyl_detail,
+				meta: { auth: false, code: "" }
+			}
+		]
+	},
+	{
+		path: "/union",
+		component: union,
+		meta: {  auth: false, code: ""},
+		children: [
+			{
+				path: "",
+				redirect: "staff-list"
+			},
+			{
+				path: "staff-list",
+				name: "unionStaffList",
+				component: union_staff_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "staff-detail",
+				name: "unionStaffDetail",
+				component: union_staff_detail,
+				meta: { auth: false, code: "" }
+			}
+		]
+	},
+	{
+		path: "/law",
+		component: law,
+		meta: { auth: false, code: "" },
+		children: [
+			{
+				path: "",
+				redirect: "safe-list"
+			},
+			{
+				path: "safe-list",
+				name: "lawSafeList",
+				component: law_safe_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "safe-detail",
+				name: "lawSafeDetail",
+				component: law_safe_detail,
+				mata: { auth: false, code: "" }
+			}
+		]
+	},
+
+	{
 		path: "/news",
 		component: news,
 		meta: { auth: false, code: "" },
@@ -376,65 +450,7 @@ const fe_router = [
 			}
 		]
 	},
-	{
-		path: "/group",
-		component: group,
-		meta: { auth: false, code: "" },
-		children: [
-			{
-				path: "",
-				redirect: "party-list"
-			},
-			{
-				path: "party-list",
-				name: "groupPartyList",
-				component: group_party_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "party-detail",
-				name: "groupPartyDetail",
-				component: group_party_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "ccyl-list",
-				name: "groupCcylList",
-				component: group_ccyl_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "ccyl-detail",
-				name: "groupCcylDetail",
-				component: group_ccyl_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "union-list",
-				name: "groupUnionList",
-				component: group_union_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "union-detail",
-				name: "groupUnionDetail",
-				component: group_union_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "excellent-list",
-				name: "groupExcellentList",
-				component: group_excellent_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "excellent-detail",
-				name: "groupExcellentDetail",
-				component: group_excellent_detail,
-				meta: { auth: false, code: "" }
-			}
-		]
-	},
+
 	// {
 	// 	path: "/student",
 	// 	component: student,

@@ -118,6 +118,26 @@ export const menu = [
 		]
 	},
 	{
+		title: "二中团建",
+		code: "admin_group",
+		path: "admin-group",
+		icon: "el-icon-data-analysis"
+	},
+	{
+		title: "职工之家",
+		code: "admin_union",
+		path: "admin-union",
+		icon: "el-icon-user"
+	},
+	{
+		title: "二中安法",
+		code: "admin_law",
+		path: "admin-law",
+		icon: "el-icon-star-off"
+	},
+
+
+	{
 		title: "新闻动态",
 		code: "admin_news",
 		icon: "el-icon-notebook-2",

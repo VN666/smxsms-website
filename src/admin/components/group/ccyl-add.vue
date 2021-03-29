@@ -1,7 +1,7 @@
 <template>
 	<div class="ccyl-add">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '党团工会', '团建工作', '新增']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '二中团建', '新增']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">
@@ -90,7 +90,7 @@ export default {
 			hTinymceWidth: 0,
 			addForm: {
 				headline: "",
-				department: "三门峡市二中",
+				department: "三门峡第二中学",
 				author: "",
 				publisher: localStorage.getItem("username"),
 				timecreate: this.$utils.timeFormate(new Date()),
