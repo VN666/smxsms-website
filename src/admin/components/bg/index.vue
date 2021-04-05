@@ -123,7 +123,7 @@ export default {
 					this.$message({	message: "删除成功", type: "success", duration: 3000 });
 					this.bgImgsData = this.bgImgsData.filter((item) => item.id !== id);
 				} else {
-					this.$message({	message: "删除失败", type: "error", duration: 3000 });
+					this.$message({	message: res.msg, type: "error", duration: 3000 });
 				}
 			});
 		},
@@ -163,7 +163,7 @@ export default {
 		},
 		requestData () {
 			this.loading = true;
-			this.$http({ method: "post", url: this.$api.bg_imgs_query, data: { pageNo: 1, pageSize: 50 }}).then((res) => {
+			this.$http({ method: "post", url: this.$api.bg_imgs_query2, data: { pageNo: 1, pageSize: 50 }}).then((res) => {
 				this.loading = false;
 				this.bgImgsData = res.data.list;
 			});

@@ -18,9 +18,10 @@
 				<el-table-column label="姓名" prop="name" width="120" show-overflow-tooltip></el-table-column>
 				<el-table-column label="职务" prop="job" width="150" show-overflow-tooltip></el-table-column>
 				<el-table-column label="简介" prop="introduction" min-width="220" show-overflow-tooltip></el-table-column>
-				<el-table-column label="阅读数" prop="views" width="150"></el-table-column>
 				<el-table-column label="发布人" prop="publisher" width="150"></el-table-column>
+				<el-table-column label="发布人部门" prop="publisherDepartmentName" width="120"></el-table-column>
 				<el-table-column label="发布日期" prop="timecreate" width="200"></el-table-column>
+				<el-table-column label="阅读数" prop="views" width="150"></el-table-column>
 				<el-table-column label="操作" width="210">
 					<template slot-scope="scope">
 				        <el-button type="text" size="mini" @click="goEdit(scope.row, scope.$index)">编辑</el-button>

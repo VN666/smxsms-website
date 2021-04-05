@@ -4,24 +4,24 @@
 		<h-navigator></h-navigator>
 		<div class="main">
 			<div class="wPicRoll"><h-bgImgs></h-bgImgs></h-picRoll></div>
-			<div class="wNotice">
-				<span class="title">通知公告</span>
+			<div class="wHonor">
+				<span class="title">学校荣誉</span>
 				<span class="content">
-					<h-notice :notices="noticeData|filterNotice" v-if="noticeData.length" @noticeClick="noticeClick"></h-notice>
+					<h-honor :honors="honorData|filterHonor" v-if="honorData.length" @honorClick="honorClick"></h-honor>
 				</span>
-				<span class="more" @click="goPathQuery('/news/notice-list', '', 1)"><img src="@/src/assets/icons/share-square-o.png" /></span>
+				<span class="more" @click="goPathQuery('/about/honor-list', '', 4)"><img src="@/src/assets/icons/share-square-o.png" /></span>
 			</div>
 			<div class="wNews">
-				<div class="newsPic" v-if="newsData.length">
-					<h-picRoll :imgs="newsData|filterNews" :customStyle="picRollStyle" :isBtn="false" :isCirBtn="false" :interval="3000" :transitionStyle="'fade'" @itemClick="itemClick"></h-picRoll>
+				<div class="newsPic" v-if="researchData.length">
+					<h-picRoll :imgs="researchData|filterNews" :customStyle="picRollStyle" :isBtn="false" :isCirBtn="false" :interval="3000" :transitionStyle="'fade'" @itemClick="itemClick"></h-picRoll>
 				</div>
 				<div class="newsContent">
 					<div class="title">
-						<span class="word">教学动态</span>
-						<span class="icon" @click="goPathQuery('/education', '', 0)">>> more</span>
+						<span class="word">校本研修</span>
+						<span class="icon" @click="goPathQuery('/training', '', 0)">>> more</span>
 					</div>
 					<ul class="newsUl">
-						<li v-for="(item,index) in newsData" v-if="index<8" @click="goPathQuery('/education/research-detail', item.id, 0)">
+						<li v-for="(item,index) in studyData" v-if="index<8" @click="goPathQuery('/training/study-detail', item.id, 0)">
 							<img src="../../assets/icons/angle-right.png" />
 							<span class="itemTitle">{{item.headline}}</span>
 							<span class="itemDate">{{item.timecreate | timeCut}}</span>
@@ -32,13 +32,13 @@
 
 			<div class="wLine1">
 				<div class="wLineL">
-					<h-panel class="panel" title="党建动态" :content="partyData|filterParty" @moreClick="partyMore" @itemClick="partyItem" :max="5"></h-panel>
-					<h-panel class="panel" title="教研动态" :content="researchData|filterResearch" @moreClick="researchMore" @itemClick="researchItem" :max="5"></h-panel>
+					<h-panel class="panel" title="二中党建" :content="partyData|filterParty" @moreClick="partyMore" @itemClick="partyItem" :max="5"></h-panel>
+					<h-panel class="panel" title="二中团建" :content="groupData|filterGroup" @moreClick="groupMore" @itemClick="groupItem" :max="5"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
 						<span class="word">校长寄语</span>
-						<span class="icon" @click="goPathQuery('/about/proverb-content', '', 2)">>> more</span>
+						<span class="icon" @click="goPathQuery('/about/proverb-content', '', 3)">>> more</span>
 					</div>
 					<p class="proverb">
 						<img :src="proverbData.headSrc" />
@@ -50,8 +50,8 @@
 
 			<div class="wLine2">
 				<div class="wLineL">
-					<h-panel class="panel" title="班级活动" :content="activityData|filterActivity" @moreClick="activityMore" @itemClick="activityItem" :max="6"></h-panel>
-					<h-panel class="panel" title="七彩校园" :content="displayData|filterDisplay" @moreClick="displayMore" @itemClick="displayItem" :max="6"></h-panel>
+					<h-panel class="panel" title="二中安法" :content="lawData|filterLaw" @moreClick="lawMore" @itemClick="lawItem" :max="6"></h-panel>
+					<h-panel class="panel" title="二中创建" :content="establishData|filterEstablish" @moreClick="establishMore" @itemClick="establishItem" :max="6"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
@@ -87,7 +87,7 @@
 					<ul>
 						<!-- <li @click="goWebsite()">公众号</li> -->
 						<li @click="goWebsite(weibo)">微博</li>
-						<li @click="goPath('admin/campus-list')">管理员入口</li>
+						<li @click="goAdmin()">管理员入口</li>
 					</ul>
 					<div class="line"></div>
 
@@ -138,7 +138,7 @@ export default {
 			});
 			return val.filter((val) => val.picSrc[0]);
 		},
-		filterNotice (val) {
+		filterHonor (val) {
 			val.forEach((item) => {
 				item.title = item.headline;
 			});
@@ -153,19 +153,19 @@ export default {
 			});
 			return val;
 		},
-		filterResearch (val) {
+		filterGroup (val) {
 			val.forEach((item) => {
 				item.title = item.headline;
 			});
 			return val;
 		},
-		filterActivity (val) {
+		filterLaw (val) {
 			val.forEach((item) => {
 				item.title = item.headline;
 			});
 			return val;
 		},
-		filterDisplay (val) {
+		filterEstablish (val) {
 			val.forEach((item) => {
 				val.forEach((item) => {
 					item.title = item.headline;
@@ -176,20 +176,20 @@ export default {
 	},
 	data () {
 		return {
-			newsData: [],
-			noticeData: [],
+			honorData: [],
+			researchData: [],
+			studyData: [],
+			partyData: [],
+			groupData: [],
+			proverbData: [],
+			lawData: [],
+			establishData: [],
 			contactData: {
 				phone: "",
 				email: "",
 				address: "",
 				postCode: ""
 			},
-			proverbData: "",
-			partyData: [],
-			researchData: [],
-			activityData: [],
-			displayData: [],
-
 			linkMenu: null,
 
 			picRollStyle: {
@@ -205,28 +205,29 @@ export default {
 	},
 	methods: {
 		partyMore () {
-			this.goPathQuery("/group/party-list", "", 0);
+			this.goPathQuery("/party/theory-list", "", 0);
 		},
-		researchMore () {
-			this.goPathQuery("/education/research-list", "", 0);
+		groupMore () {
+			this.goPathQuery("/group/ccyl-list", "", 0);
 		},
-		activityMore () {
-			this.goPathQuery("/student/activity-list", "", 0);
+
+		establishMore () {
+			this.goPathQuery("/establish/meeting-list", "", 0);
 		},
-		displayMore () {
-			this.goPathQuery("/school/display-list", "", 0);
+		lawMore () {
+			this.goPathQuery("/school/safe-list", "", 0);
 		},
 		partyItem (item) {
-			this.goPathQuery("/group/party-detail", item.id, 0);
+			this.goPathQuery("/party/theory-detail", item.id, 0);
 		},
-		researchItem (item) {
-			this.goPathQuery("/education/research-detail", item.id, 0);
+		groupItem (item) {
+			this.goPathQuery("/group/ccyl-detail", item.id, 0);
 		},
-		activityItem (item) {
-			this.goPathQuery("/student/activity-detail", item.id, 0);
+		establishItem (item) {
+			this.goPathQuery("/establish/meeting-detail", item.id, 0);
 		},
-		displayItem (item) {
-			this.goPathQuery("/school/display-detail", item.id, 0);
+		lawItem (item) {
+			this.goPathQuery("/law/safe-detail", item.id, 0);
 		},
 		goPath (path) {
 			this.$router.push({ path: path });
@@ -235,36 +236,48 @@ export default {
 			this.$router.push({ path: path, query: {id: id, index: index }});
 		},
 		itemClick (id) {
-			this.goPathQuery("/news/campus-detail", id, 0);
+			this.goPathQuery("/education/research-detail", id, 0);
 		},
-		noticeClick (notice) {
-			this.goPathQuery("/news/notice-detail", notice.id, 1);
+		honorClick (honor) {
+			this.goPathQuery("/about/honor-detail", honor.id, 4);
 		},
 		async requestData () {
-			let [ newsData, noticeData, contactData, proverbData, partyData, researchData, activityData, displayData ] = await Promise.all([
-				this.requestNews(),
-				this.requestNotice(),
-				this.requestContact(),
-				this.requestProverb(),
-				this.requestParty(),
+			let [ honorData, researchData, studyData, partyData, groupData, proverbData, lawData, establishData, contactData ] = await Promise.all([
+				this.requestHonor(),
 				this.requestResearch(),
-				this.requestActivity(),
-				this.requestDisplay()
+				this.requestStudy(),
+				this.requestParty(),
+				this.requestGroup(),
+				this.requestProverb(),
+				this.requestLaw(),
+				this.requestEstablish(),
+				this.requestContact()
 			]);
-			this.newsData = newsData.data.list;
-			this.noticeData = noticeData.data.list;
-			this.contactData = contactData.data;
-			this.proverbData = proverbData.data;
-			this.partyData = partyData.data.list;
+			this.honorData = honorData.data.list;
 			this.researchData = researchData.data.list;
-			this.activityData = activityData.data.list;
-			this.displayData = displayData.data.list;
+			this.studyData = studyData.data.list;
+			this.partyData = partyData.data.list;
+			this.groupData = groupData.data.list;
+			this.proverbData = proverbData.data;
+			this.lawData = lawData.data.list;
+			this.establishData = establishData.data.list;
+			this.contactData  = contactData.data;
 			this.$store.commit("SET_PHONE", this.contactData.phone);
 			this.$store.commit("SET_EMAIL", this.contactData.email);
 			this.$store.commit("SET_ADDRESS", this.contactData.address);
 			this.$store.commit("SET_POSTCODE", this.contactData.postCode);
 		},
-		requestNews () {
+		requestHonor () {
+			return this.$http({
+				method: "post",
+				url: this.$api.about_honor_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
+			})
+		},
+		requestResearch () {
 			return this.$http({
 				method: "post",
 				url: this.$api.education_research_queryList,
@@ -274,20 +287,34 @@ export default {
 				}
 			});
 		},
-		requestNotice () {
+		requestStudy () {
 			return this.$http({
 				method: "post",
-				url: this.$api.news_notice_queryList,
+				url: this.$api.training_study_queryList,
 				data: {
 					pageNo: 1,
 					pageSize: 20
 				}
-			})
+			});
 		},
-		requestContact () {
+		requestParty () {
 			return this.$http({
 				method: "post",
-				url: this.$api.news_contact_query
+				url: this.$api.party_theory_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
+			});
+		},
+		requestGroup () {
+			return this.$http({
+				method: "post",
+				url: this.$api.group_ccyl_queryList,
+				data: {
+					pageNo: 1,
+					pageSize: 20
+				}
 			});
 		},
 		requestProverb () {
@@ -297,48 +324,43 @@ export default {
 				data: { addViews: false }
 			});
 		},
-		requestParty () {
+		requestLaw () {
 			return this.$http({
 				method: "post",
-				url: this.$api.group_party_queryList,
+				url: this.$api.law_safe_queryList,
 				data: {
 					pageNo: 1,
 					pageSize: 20
 				}
 			});
 		},
-		requestResearch () {
+		requestEstablish () {
 			return this.$http({
 				method: "post",
-				url: this.$api.education_research_queryList,
+				url: this.$api.establish_meeting_queryList,
 				data: {
 					pageNo: 1,
 					pageSize: 20
 				}
 			});
 		},
-		requestActivity () {
+		requestContact () {
 			return this.$http({
 				method: "post",
-				url: this.$api.student_activity_queryList,
-				data: {
-					pageNo: 1,
-					pageSize: 20
-				}
-			});
-		},
-		requestDisplay () {
-			return this.$http({
-				method: "post",
-				url: this.$api.school_display_queryList,
-				data: {
-					pageNo: 1,
-					pageSize: 20
-				}
+				url: this.$api.news_contact_query
 			});
 		},
 		goWebsite (path) {
 			window.open(path, "_blank");
+		},
+		goAdmin () {
+			const auths = this.$store.state.auths;
+			if (auths.length === 0) this.$router.push({ path: "/login"});
+			else {
+				const temp = auths[0].split("_");
+				if (temp.length === 2) this.$router.push({ path: `/admin/${temp[0]}-${temp[1]}` });
+				if (temp.length === 3) this.$router.push({ path: `/admin/${temp[1]}-${temp[2]}` });
+			}
 		}
 	},
 	created () {
@@ -367,7 +389,7 @@ export default {
 				height: 360px;
 				margin: 0px auto;
 			}
-			.wNotice {
+			.wHonor {
 				position: relative;
 				width: 1280px;
 				height: 48px;
@@ -466,7 +488,7 @@ export default {
 					.newsUl {
 						position: relative;
 						height: 280px;
-						padding: 0 5px;
+						padding: 0px;
 						margin: 8px 0px;
 						overflow: hidden;
 						li {
@@ -496,9 +518,10 @@ export default {
 								max-width: 300px;
 							}
 							.itemDate {
-								font-size: 13px;
+								font-size: 14px;
 								text-align: right;
 								flex: 1;
+								font-family: "Times New Roman";
 							}
 						}
 					}

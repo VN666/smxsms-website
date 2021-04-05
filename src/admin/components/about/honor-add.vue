@@ -7,9 +7,14 @@
 		<div class="content_wrap">
 			<el-form ref="addForm" :form="addForm" :model="addForm" :rules="rules" label-position="right" label-width="70px">
 				<el-row :gutter="32" ref="row1">
-					<el-col :span="16">
+					<el-col :span="8">
 						<el-form-item label="标题" prop="headline">
 							<el-input v-model="addForm.headline"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="8">
+						<el-form-item label="部门">
+							<el-input v-model="departmentName" disabled></el-input>
 						</el-form-item>
 					</el-col>
 				</el-row>
@@ -17,7 +22,7 @@
 				<el-row :gutter="32" ref="row2">
 					<el-col :span="8">
 						<el-form-item label="发布人">
-							<el-input v-model="addForm.publisher" disabled></el-input>
+							<el-input v-model="publisher" disabled></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="5">
@@ -70,7 +75,6 @@ export default {
 			addForm: {
 				headline: "",
 				timecreate: this.$utils.timeFormate(new Date()),
-				publisher: localStorage.getItem("username"),
 				isTop: false,
 				content: "",
 				picSrc: [],
@@ -92,6 +96,12 @@ export default {
 	computed: {
 		hTinymceMinHeight () {
 			return Math.max(this.hTinymceHeight, 400);
+		},
+		publisher () {
+			return this.$store.state.username;
+		},
+		departmentName () {
+			return this.$store.state.departmentName;
 		}
 	},
 	mounted () {

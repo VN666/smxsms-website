@@ -4,20 +4,11 @@ import Vue from "vue";
 const baseUrl = "https://192.168.0.103:7777/"
 
 const api = {
-	/** 新闻动态-新闻快讯 */
-	news_campus_add: "/api/news/campus/add",
-	news_campus_query: "/api/news/campus/query",
-	news_campus_changeIsTop: "/api/news/campus/changeIsTop",
-	news_campus_del: "/api/news/campus/del",
-	news_campus_edit: "/api/news/campus/edit",
-	news_campus_queryById: "/api/news/campus/queryById",
-	news_campus_queryList: "/api/news/campus/queryList",
-
-
 
 	/** 背景封面 */
 	bg_imgs_add: "/api/bg/add",
 	bg_imgs_query: "/api/bg/query",
+	bg_imgs_query2: "/api/bg/query2",
 	bg_imgs_getTotal: "/api/bg/getTotal",
 	bg_imgs_del: "/api/bg/del",
 	bg_imgs_move: "/api/bg/move",
@@ -28,8 +19,6 @@ const api = {
 	imgs_delete: "/api/upload/delete_img",
 	media_upload: "/api/upload/media",
 	files_delete: "/api/upload/delete_file",
-
-
 
 	/** 二中概况-学校简介 */
 	about_profile_queryById: "/api/about/profile/queryById",
@@ -57,8 +46,6 @@ const api = {
 	about_honor_queryById: "/api/about/honor/queryById",
 	about_honor_queryList: "/api/about/honor/queryList",
 
-
-
 	/** 教学动态 */
 	education_research_add: "/api/education/research/add",
 	education_research_query: "/api/education/research/query",
@@ -67,8 +54,6 @@ const api = {
 	education_research_queryById: "/api/education/research/queryById",
 	education_research_edit: "/api/education/research/edit",
 	education_research_queryList: "/api/education/research/queryList",
-
-
 
 	/** 德育教育-德育规划 */
 	activity_planning_add: "/api/activity/planning/add",
@@ -119,8 +104,6 @@ const api = {
 	activity_gym_edit: "/api/activity/gym/edit",
 	activity_gym_queryList: "/api/activity/gym/queryList",
 
-
-
 	/** 校本研修 */
 	training_study_add: "/api/training/study/add",
 	training_study_query: "/api/training/study/query",
@@ -129,8 +112,6 @@ const api = {
 	training_study_queryById: "/api/training/study/queryById",
 	training_study_edit: "/api/training/study/edit",
 	training_study_queryList: "/api/training/study/queryList",
-
-
 
 	/** 为您服务-后勤保障 */
 	service_guarantee_add: "/api/service/guarantee/add",
@@ -149,8 +130,6 @@ const api = {
 	service_computer_edit: "/api/service/computer/edit",
 	service_computer_queryList: "/api/service/computer/queryList",
 
-
-
 	/** 二中团建 */
 	group_ccyl_add: "/api/group/ccyl/add",
 	group_ccyl_query: "/api/group/ccyl/query",
@@ -160,7 +139,62 @@ const api = {
 	group_ccyl_edit: "/api/group/ccyl/edit",
 	group_ccyl_queryList: "/api/group/ccyl/queryList",
 
-
+	/** 二中党建-理论学习 */
+	party_theory_add: "/api/party/theory/add",
+	party_theory_query: "/api/party/theory/query",
+	party_theory_changeIsTop: "/api/party/theory/changeIsTop",
+	party_theory_del: "/api/party/theory/del",
+	party_theory_queryById: "/api/party/theory/queryById",
+	party_theory_edit: "/api/party/theory/edit",
+	party_theory_queryList: "/api/party/theory/queryList",
+	/** 二中党建-组织建设 */
+	party_construct_add: "/api/party/construct/add",
+	party_construct_query: "/api/party/construct/query",
+	party_construct_changeIsTop: "/api/party/construct/changeIsTop",
+	party_construct_del: "/api/party/construct/del",
+	party_construct_queryById: "/api/party/construct/queryById",
+	party_construct_edit: "/api/party/construct/edit",
+	party_construct_queryList: "/api/party/construct/queryList",
+	/** 二中党建-组织生活 */
+	party_life_add: "/api/party/life/add",
+	party_life_query: "/api/party/life/query",
+	party_life_changeIsTop: "/api/party/life/changeIsTop",
+	party_life_del: "/api/party/life/del",
+	party_life_queryById: "/api/party/life/queryById",
+	party_life_edit: "/api/party/life/edit",
+	party_life_queryList: "/api/party/life/queryList",
+	/** 二中党建-制度建设 */
+	party_institution_add: "/api/party/institution/add",
+	party_institution_query: "/api/party/institution/query",
+	party_institution_changeIsTop: "/api/party/institution/changeIsTop",
+	party_institution_del: "/api/party/institution/del",
+	party_institution_queryById: "/api/party/institution/queryById",
+	party_institution_edit: "/api/party/institution/edit",
+	party_institution_queryList: "/api/party/institution/queryList",
+	/** 二中党建-台账管理 */
+	party_book_add: "/api/party/book/add",
+	party_book_query: "/api/party/book/query",
+	party_book_changeIsTop: "/api/party/book/changeIsTop",
+	party_book_del: "/api/party/book/del",
+	party_book_queryById: "/api/party/book/queryById",
+	party_book_edit: "/api/party/book/edit",
+	party_book_queryList: "/api/party/book/queryList",
+	/** 二中党建-活动项目 */
+	party_project_add: "/api/party/project/add",
+	party_project_query: "/api/party/project/query",
+	party_project_changeIsTop: "/api/party/project/changeIsTop",
+	party_project_del: "/api/party/project/del",
+	party_project_queryById: "/api/party/project/queryById",
+	party_project_edit: "/api/party/project/edit",
+	party_project_queryList: "/api/party/project/queryList",
+	/** 二中党建-阵地建设 */
+	party_position_add: "/api/party/position/add",
+	party_position_query: "/api/party/position/query",
+	party_position_changeIsTop: "/api/party/position/changeIsTop",
+	party_position_del: "/api/party/position/del",
+	party_position_queryById: "/api/party/position/queryById",
+	party_position_edit: "/api/party/position/edit",
+	party_position_queryList: "/api/party/position/queryList",
 
 	/** 职工之家 */
 	union_staff_add: "/api/union/staff/add",
@@ -171,8 +205,54 @@ const api = {
 	union_staff_edit: "/api/union/staff/edit",
 	union_staff_queryList: "/api/union/staff/queryList",
 
-
-
+	/** 二中党建-创建会议 */
+	establish_meeting_add: "/api/establish/meeting/add",
+	establish_meeting_query: "/api/establish/meeting/query",
+	establish_meeting_changeIsTop: "/api/establish/meeting/changeIsTop",
+	establish_meeting_del: "/api/establish/meeting/del",
+	establish_meeting_queryById: "/api/establish/meeting/queryById",
+	establish_meeting_edit: "/api/establish/meeting/edit",
+	establish_meeting_queryList: "/api/establish/meeting/queryList",
+	/** 二中党建-学习大讲堂 */
+	establish_classroom_add: "/api/establish/classroom/add",
+	establish_classroom_query: "/api/establish/classroom/query",
+	establish_classroom_changeIsTop: "/api/establish/classroom/changeIsTop",
+	establish_classroom_del: "/api/establish/classroom/del",
+	establish_classroom_queryById: "/api/establish/classroom/queryById",
+	establish_classroom_edit: "/api/establish/classroom/edit",
+	establish_classroom_queryList: "/api/establish/classroom/queryList",
+	/** 二中党建-志愿者风采 */
+	establish_volunteer_add: "/api/establish/volunteer/add",
+	establish_volunteer_query: "/api/establish/volunteer/query",
+	establish_volunteer_changeIsTop: "/api/establish/volunteer/changeIsTop",
+	establish_volunteer_del: "/api/establish/volunteer/del",
+	establish_volunteer_queryById: "/api/establish/volunteer/queryById",
+	establish_volunteer_edit: "/api/establish/volunteer/edit",
+	establish_volunteer_queryList: "/api/establish/volunteer/queryList",
+	/** 二中党建-结对帮扶 */
+	establish_two_add: "/api/establish/two/add",
+	establish_two_query: "/api/establish/two/query",
+	establish_two_changeIsTop: "/api/establish/two/changeIsTop",
+	establish_two_del: "/api/establish/two/del",
+	establish_two_queryById: "/api/establish/two/queryById",
+	establish_two_edit: "/api/establish/two/edit",
+	establish_two_queryList: "/api/establish/two/queryList",
+	/** 二中党建-新时代文明时间活动 */
+	establish_practice_add: "/api/establish/practice/add",
+	establish_practice_query: "/api/establish/practice/query",
+	establish_practice_changeIsTop: "/api/establish/practice/changeIsTop",
+	establish_practice_del: "/api/establish/practice/del",
+	establish_practice_queryById: "/api/establish/practice/queryById",
+	establish_practice_edit: "/api/establish/practice/edit",
+	establish_practice_queryList: "/api/establish/practice/queryList",
+	/** 二中党建-文明之声 */
+	establish_voice_add: "/api/establish/voice/add",
+	establish_voice_query: "/api/establish/voice/query",
+	establish_voice_changeIsTop: "/api/establish/voice/changeIsTop",
+	establish_voice_del: "/api/establish/voice/del",
+	establish_voice_queryById: "/api/establish/voice/queryById",
+	establish_voice_edit: "/api/establish/voice/edit",
+	establish_voice_queryList: "/api/establish/voice/queryList",
 
 	/** 二中安法 */
 	law_safe_add: "/api/law/safe/add",
@@ -182,96 +262,6 @@ const api = {
 	law_safe_queryById: "/api/law/safe/queryById",
 	law_safe_edit: "/api/law/safe/edit",
 	law_safe_queryList: "/api/law/safe/queryList",
-
-
-	/** 学生天地-班级活动 */
-	student_activity_add: "/api/student/activity/add",
-	student_activity_query: "/api/student/activity/query",
-	student_activity_changeIsTop: "/api/student/activity/changeIsTop",
-	student_activity_del: "/api/student/activity/del",
-	student_activity_queryById: "/api/student/activity/queryById",
-	student_activity_edit: "/api/student/activity/edit",
-	student_activity_queryList: "/api/student/activity/queryList",
-	/** 学生天地-荣誉表彰 */
-	student_prize_add: "/api/student/prize/add",
-	student_prize_query: "/api/student/prize/query",
-	student_prize_changeIsTop: "/api/student/prize/changeIsTop",
-	student_prize_del: "/api/student/prize/del",
-	student_prize_queryById: "/api/student/prize/queryById",
-	student_prize_edit: "/api/student/prize/edit",
-	student_prize_queryList: "/api/student/prize/queryList",
-	/** 学生天地-纪律卫生 */
-	student_flag_add: "/api/student/flag/add",
-	student_flag_query: "/api/student/flag/query",
-	student_flag_changeIsTop: "/api/student/flag/changeIsTop",
-	student_flag_del: "/api/student/flag/del",
-	student_flag_queryById: "/api/student/flag/queryById",
-	student_flag_edit: "/api/student/flag/edit",
-	student_flag_queryList: "/api/student/flag/queryList",
-	/** 学生天地-学生作品 */
-	student_exhibition_add: "/api/student/exhibition/add",
-	student_exhibition_query: "/api/student/exhibition/query",
-	student_exhibition_changeIsTop: "/api/student/exhibition/changeIsTop",
-	student_exhibition_del: "/api/student/exhibition/del",
-	student_exhibition_queryById: "/api/student/exhibition/queryById",
-	student_exhibition_edit: "/api/student/exhibition/edit",
-	student_exhibition_queryList: "/api/student/exhibition/queryList",
-	/** 学生天地-毕业留念 */
-	student_graduation_add: "/api/student/graduation/add",
-	student_graduation_query: "/api/student/graduation/query",
-	student_graduation_changeIsTop: "/api/student/graduation/changeIsTop",
-	student_graduation_del: "/api/student/graduation/del",
-	student_graduation_queryById: "/api/student/graduation/queryById",
-	student_graduation_edit: "/api/student/graduation/edit",
-	student_graduation_queryList: "/api/student/graduation/queryList",
-	/** 家长学校-活动掠影 */
-	parent_pratice_add: "/api/parent/pratice/add",
-	parent_pratice_query: "/api/parent/pratice/query",
-	parent_pratice_changeIsTop: "/api/parent/pratice/changeIsTop",
-	parent_pratice_del: "/api/parent/pratice/del",
-	parent_pratice_queryById: "/api/parent/pratice/queryById",
-	parent_pratice_edit: "/api/parent/pratice/edit",
-	parent_pratice_queryList: "/api/parent/pratice/queryList",
-	/** 家长学校-家教知识 */
-	parent_knowledge_add: "/api/parent/knowledge/add",
-	parent_knowledge_query: "/api/parent/knowledge/query",
-	parent_knowledge_changeIsTop: "/api/parent/knowledge/changeIsTop",
-	parent_knowledge_del: "/api/parent/knowledge/del",
-	parent_knowledge_queryById: "/api/parent/knowledge/queryById",
-	parent_knowledge_edit: "/api/parent/knowledge/edit",
-	parent_knowledge_queryList: "/api/parent/knowledge/queryList",
-	/** 家长学校-学校沟通 */
-	parent_communication_add: "/api/parent/communication/add",
-	parent_communication_query: "/api/parent/communication/query",
-	parent_communication_changeIsTop: "/api/parent/communication/changeIsTop",
-	parent_communication_del: "/api/parent/communication/del",
-	parent_communication_queryById: "/api/parent/communication/queryById",
-	parent_communication_edit: "/api/parent/communication/edit",
-	parent_communication_queryList: "/api/parent/communication/queryList",
-	/** 幸福教育-幸福理念 */
-	happy_idea_add: "/api/happy/idea/add",
-	happy_idea_query: "/api/happy/idea/query",
-	happy_idea_changeIsTop: "/api/happy/idea/changeIsTop",
-	happy_idea_del: "/api/happy/idea/del",
-	happy_idea_queryById: "/api/happy/idea/queryById",
-	happy_idea_edit: "/api/happy/idea/edit",
-	happy_idea_queryList: "/api/happy/idea/queryList",
-	/** 幸福教育-幸福感言 */
-	happy_speech_add: "/api/happy/speech/add",
-	happy_speech_query: "/api/happy/speech/query",
-	happy_speech_changeIsTop: "/api/happy/speech/changeIsTop",
-	happy_speech_del: "/api/happy/speech/del",
-	happy_speech_queryById: "/api/happy/speech/queryById",
-	happy_speech_edit: "/api/happy/speech/edit",
-	happy_speech_queryList: "/api/happy/speech/queryList",
-	/** 幸福教育-幸福教育活动 */
-	happy_exercise_add: "/api/happy/exercise/add",
-	happy_exercise_query: "/api/happy/exercise/query",
-	happy_exercise_changeIsTop: "/api/happy/exercise/changeIsTop",
-	happy_exercise_del: "/api/happy/exercise/del",
-	happy_exercise_queryById: "/api/happy/exercise/queryById",
-	happy_exercise_edit: "/api/happy/exercise/edit",
-	happy_exercise_queryList: "/api/happy/exercise/queryList",
 
 
 	/** 登录相关 */
@@ -302,30 +292,6 @@ const api = {
 	system_account_isOne: "/api/system/account/isOne",
 	system_account_userData: "/api/system/account/getAccountData",
 
-	/** 新闻动态-通知公告 */
-	news_notice_add: "/api/news/notice/add",
-	news_notice_query: "/api/news/notice/query",
-	news_notice_changeIsTop: "/api/news/notice/changeIsTop",
-	news_notice_del: "/api/news/notice/del",
-	news_notice_queryById: "/api/news/notice/queryById",
-	news_notice_edit: "/api/news/notice/edit",
-	news_notice_queryList: "/api/news/notice/queryList",
-	/** 新闻动态-媒体报道 */
-	news_media_add: "/api/news/media/add",
-	news_media_query: "/api/news/media/query",
-	news_media_changeIsTop: "/api/news/media/changeIsTop",
-	news_media_edit: "/api/news/media/edit",
-	news_media_queryById: "/api/news/media/queryById",
-	news_media_del: "/api/news/media/del",
-	news_media_queryList: "/api/news/media/queryList",
-	/** 新闻动态-招生信息 */
-	news_enroll_add: "/api/news/enroll/add",
-	news_enroll_query: "/api/news/enroll/query",
-	news_enroll_changeIsTop: "/api/news/enroll/changeIsTop",
-	news_enroll_del: "/api/news/enroll/del",
-	news_enroll_queryById: "/api/news/enroll/queryById",
-	news_enroll_edit: "/api/news/enroll/edit",
-	news_enroll_queryList: "/api/news/enroll/queryList",
 	/** 联系我们 */
 	news_contact_query: "/api/contact/query",
 	news_contact_update: "/api/contact/update"

@@ -58,11 +58,11 @@
 						{{ (scope.$index + 1) + (page.pageNo - 1) * page.pageSize }}
 					</template>
 				</el-table-column>
-				<el-table-column label="标题" prop="headline" min-width="100" show-overflow-tooltip></el-table-column>
-				<el-table-column label="来源" prop="department" width="150" show-overflow-tooltip></el-table-column>
-				<el-table-column label="阅读数" prop="views" width="150"></el-table-column>
-				<el-table-column label="发布人" prop="publisher" width="150" show-overflow-tooltip></el-table-column>
+				<el-table-column label="标题" prop="headline" min-width="150" show-overflow-tooltip></el-table-column>
+				<el-table-column label="发布人" prop="publisher" width="180"></el-table-column>
+				<el-table-column label="发布人部门" prop="publisherDepartmentName" width="180"></el-table-column>
 				<el-table-column label="发布日期" prop="timecreate" width="200"></el-table-column>
+				<el-table-column label="阅读数" prop="views" width="200"></el-table-column>
 				<el-table-column label="操作" width="210">
 					<template slot-scope="scope">
 				        <el-button type="text" size="mini" @click="goEdit(scope.row.id)">编辑</el-button>

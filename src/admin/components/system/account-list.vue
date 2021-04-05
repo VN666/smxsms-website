@@ -57,11 +57,13 @@
 				</el-table-column>
 				<el-table-column label="用户名" prop="username" width="180" show-overflow-tooltip></el-table-column>
 				<el-table-column label="部门" prop="departmentName" width="200" show-overflow-tooltip></el-table-column>
-				<el-table-column label="权限" prop="auth" min-width="400" show-overflow-tooltip></el-table-column>
+				<el-table-column label="权限" min-width="400" show-overflow-tooltip>
+					<template slot-scope="scope">{{ scope.row.authNames.join(",") }}</template>
+				</el-table-column>
 				<el-table-column label="创建时间" prop="timecreate" width="220" show-overflow-tooltip></el-table-column>
 				<el-table-column label="操作" width="210">
 					<template slot-scope="scope">
-				        <el-button type="text" size="mini" @click="goEdit(scope.row, scope.$index)">编辑</el-button>
+				        <el-button type="text" size="mini" @click="goReset(scope.row, scope.$index)">重置密码</el-button>
 				        <el-button type="text" size="mini" @click="beforeDel(scope.row, scope.$index)">删除</el-button>
 				     </template>
 				</el-table-column>
@@ -78,6 +80,32 @@
 	      		:total="page.total">
 	    	</el-pagination>
 		</div>
+
+		<el-dialog
+	  		title="重置密码"
+	  		:modal="false"
+	  		:close-on-click-modal="false"
+	  		:visible.sync="dialogReset"
+	  		width="560px">
+	  		<div class="dialogResetPassword">
+		  		<el-form :model="addForm" label-position="right" label-width="80px" :rules="rules" ref="addForm">
+					<el-row>
+						<el-form-item label="密码" prop="password">
+							<el-input v-model="addForm.password" placeholder="请输入密码" show-password></el-input>
+						</el-form-item>
+					</el-row>
+					<el-row>
+						<el-form-item label="密码确认" prop="confirmPassword">
+							<el-input v-model="addForm.confirmPassword" placeholder="请确认密码" show-password></el-input>
+						</el-form-item>
+					</el-row>
+		  		</el-form>
+	  		</div>
+	  		<span slot="footer" class="dialog-footer">
+		    	<el-button @click="dialogReset = false">取 消</el-button>
+		    	<el-button type="primary" @click="beforeSubmit" :loading="isSaving">确 定</el-button>
+	  		</span>
+		</el-dialog>
 	</div>
 </template>
 
@@ -86,6 +114,14 @@
 export default {
 	name: "account_list",
 	data () {
+		const validPassword = (rule, value, callback) => {
+			if (!/[a-z]/.test(value)) callback(new Error("密码必须至少包含一个小写字母"));
+			if (!/[A-Z]/.test(value)) callback(new Error("密码必须至少包含一个大写字母"));
+			if (!/[0-9]/.test(value)) callback(new Error("密码必须至少包含一个数字"));
+			if (!/[\~\!\@\#\$\%\^\&\*\(\)\_\+\=\-\<\>\?]/.test(value)) callback(new Error("密码必须至少包含~!@#$%^&*()_+=-<>?中一个特殊字母"));
+			callback();
+		};
+		const validConfirm = (rule, value, callback) => this.addForm.confirmPassword === this.addForm.password ? callback() : callback(new Error("两次输入密码不一致"));
 		return {
 			loading: true,
 			tableData: [],
@@ -107,10 +143,43 @@ export default {
 				startTime: "",
 				endTime: ""
 			},
-			departments: []
+			departments: [],
+			dialogReset: false,
+			addForm: {
+				password: "",
+				confirmPassword: ""
+			},
+			rules: {
+				password: [
+					{ required: true, message: "密码不能为空", trigger: "blur" },
+					{ min: 6, message: "密码不能少于6位", trigger: "blur"  },
+					{ max: 18, message: "密码不能超过18位", trigger: "blur" },
+					{ validator: validPassword, trigger: "blur" }
+				],
+				confirmPassword: [
+					{ validator: validConfirm, trigger: "blur" }
+				]
+			},
+			isSaving: false,
+			currentId: ""
 		};
 	},
 	methods: {
+		beforeSubmit () {
+			this.$refs["addForm"].validate((valid) => !!valid ? this.submit() : "");
+		},
+		submit () {
+			this.isSaving = true;
+			this.$http({
+				method: "post",
+				url: this.$api.system_account_edit,
+				data: { id: this.currentId, password: this.addForm.password }
+			}).then((res) => {
+				this.isSaving = false;
+				if (res.code === 200) this.$message({ message: res.msg, type: "success", duration: 2000, onClose: () => this.dialogReset = false });
+				else this.$message({ message: res.msg, type: "error", duration: 2000 });
+			}).catch((err) => this.isSaving = false);
+		},
 		tiggerFilter () {
         	this.showFilter = !this.showFilter;
         	this.$nextTick(() => this.resize());
@@ -126,8 +195,32 @@ export default {
 			this.requestData();
 		},
 		showDialogAdd () {},
-		goEdit () {},
-		beforeDel () {},
+		goReset (row, id) {
+			this.addForm.password = "";
+			this.addForm.confirmPassword = "";
+			this.currentId = row.uid;
+			this.dialogReset = true;
+		},
+		beforeDel (row, index) {
+        	this.$confirm("是否删除该条信息，删除后将无法恢复", "提示", {
+        		confirmButtonText: "确定",
+        		cancelButtonText: "取消",
+        		type: "warning"
+        	}).then(() => this.deleteRow(row, index));
+        },
+        deleteRow (row, index) {
+        	this.$http({
+				method: "post",
+				url: this.$api.system_account_del,
+				data: { id: row.uid }
+			}).then((res) => {
+				if (res.code === 200) {
+        			this.$message({ message: res.msg, type: "success", duration: 2000 });
+			        if (index === 0) this.page.pageNo = this.page.pageNo > 1 ? this.page.pageNo - 1 : this.page.pageNo;
+			        this.requestData();
+        		} else this.$message({ message: res.msg, type: "error", duration: 2000 });
+			});
+        },
 		resize () {
 			this.tableMaxHeight = this.$el.clientHeight - this.$refs.option_wrap.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.page_wrap.clientHeight - 16;
 		},
@@ -234,7 +327,7 @@ export default {
 		align-items: center;
 		box-sizing: border-box;
 	}
-	.dialogAddContent {
+	.dialogResetPassword {
 		position: relative;
 		width: 480px;
 		height: 100%;

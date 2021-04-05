@@ -25,12 +25,6 @@
 						</el-form-item>
 					</el-col>
 
-					<el-col :span="4">
-						<el-form-item label="部门">
-							<el-input v-model="filters.origin" placeholder="来源" size="mini" clearable></el-input>
-						</el-form-item>
-					</el-col>
-
 					<el-col :span="8" >
 						<el-form-item label="发布日期">
 							<el-date-picker
@@ -66,9 +60,9 @@
 				</el-table-column>
 				<el-table-column label="标题" prop="headline" min-width="100" show-overflow-tooltip></el-table-column>
 				<el-table-column label="作者" prop="author" width="150" show-overflow-tooltip></el-table-column>
-				<el-table-column label="部门" prop="department" width="150" show-overflow-tooltip></el-table-column>
-				<el-table-column label="阅读数" prop="views" width="150"></el-table-column>
 				<el-table-column label="发布人" prop="publisher" width="150" show-overflow-tooltip></el-table-column>
+				<el-table-column label="发布人部门" prop="publisherDepartmentName" width="150" show-overflow-tooltip></el-table-column>
+				<el-table-column label="阅读数" prop="views" width="150"></el-table-column>
 				<el-table-column label="发布日期" prop="timecreate" width="200"></el-table-column>
 				<el-table-column label="操作" width="210">
 					<template slot-scope="scope">
@@ -106,7 +100,6 @@ export default {
 			filters: {
 				headline: "",
 				author: "",
-				department: "",
 				startTime: "",
 				endTime: ""
 			},
@@ -118,6 +111,7 @@ export default {
 			},
 			tableData: [],
 			tableMaxHeight: 0,
+			loading: true
 		};
 	},
 	methods: {
@@ -139,7 +133,6 @@ export default {
         			pageSize: this.page.pageSize,
         			headline: this.filters.headline,
         			author: this.filters.author,
-        			department: this.filters.origin,
         			startTime: this.filters.startTime,
         			endTime: this.filters.endTime
         		}

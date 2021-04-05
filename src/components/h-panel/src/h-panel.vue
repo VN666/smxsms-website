@@ -8,7 +8,7 @@
 			<ul class="contentUl">
 				<li v-for="(item,index) in content" v-if="index<max" @click="itemClick(item)">
 					<span class="itemTitle">{{item.title}}</span>
-					<span class="itemDate">{{item.date}}</span>
+					<span class="itemDate">{{item.timecreate.substr(2, 8)}}</span>
 				</li>
 			</ul>
 		</div>
@@ -117,6 +117,7 @@ export default {
 				&:hover {
 					opacity: 0.7;
 					text-decoration: underline;
+					color: #2080F7;
 				}
 				img {
 					margin-right: 0;
@@ -127,12 +128,14 @@ export default {
 					text-overflow: ellipsis;
 					text-align: left;
 					flex: 4;
-					max-width: 300px;
+
+					width: 320px;
 				}
 				.itemDate {
-					font-size: 13px;
+					font-size: 14px;
 					text-align: right;
 					flex: 1;
+					font-family: "Times New Roman";
 				}
 			}
 		}

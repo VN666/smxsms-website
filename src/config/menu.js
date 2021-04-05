@@ -106,22 +106,42 @@ const menu = [
 	},
 	{
 		title: "二中党建",
-		router: "/parent",
-		code: "smxsmx_parent",
+		router: "/party",
+		code: "smxsmx_party",
 		children: [
 			{
-				title: "活动掠影",
-				router: "/parent/pratice-list",
+				title: "理论学习",
+				router: "/party/theory-list",
 				code: ""
 			},
 			{
-				title: "家教知识",
-				router: "/parent/knowledge-list",
+				title: "组织建设",
+				router: "/party/construct-list",
 				code: ""
 			},
 			{
-				title: "学校沟通",
-				router: "/parent/communication-list",
+				title: "组织生活",
+				router: "/party/life-list",
+				code: ""
+			},
+			{
+				title: "制度建设",
+				router: "/party/institution-list",
+				code: ""
+			},
+			{
+				title: "台账管理",
+				router: "/party/book-list",
+				code: ""
+			},
+			{
+				title: "活动项目",
+				router: "/party/project-list",
+				code: ""
+			},
+			{
+				title: "阵地建设",
+				router: "/party/position-list",
 				code: ""
 			}
 		]
@@ -134,22 +154,37 @@ const menu = [
 	},
 	{
 		title: "二中创建",
-		router: "/happy",
-		code: "smxsmx_happy",
+		router: "/establish",
+		code: "smxsmx_establish",
 		children: [
 			{
-				title: "幸福理念",
-				router: "/happy/idea-list",
+				title: "创建会议",
+				router: "/establish/meeting-list",
 				code: ""
 			},
 			{
-				title: "幸福感言",
-				router: "/happy/speech-list",
+				title: "学习大讲堂",
+				router: "/establish/classroom-list",
 				code: ""
 			},
 			{
-				title: "幸福教育活动",
-				router: "/happy/exercise-list",
+				title: "志愿者风采",
+				router: "/establish/volunteer-list",
+				code: ""
+			},
+			{
+				title: "结对帮扶",
+				router: "/establish/two-list",
+				code: ""
+			},
+			{
+				title: "文明实践活动",
+				router: "/establish/practice-list",
+				code: ""
+			},
+			{
+				title: "文明之声",
+				router: "/establish/voice-list",
 				code: ""
 			}
 		]

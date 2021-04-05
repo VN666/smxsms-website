@@ -97,7 +97,18 @@ export default {
 				this.loginForm.slideCode = ""
 				if (res.code === 200) {
 					this.$message({ message: res.msg, type: "success", duration: 3000 });
-					this.$router.push({ path: "/admin" });
+					localStorage.setItem("username", res.result.username);
+					this.$store.commit("SET_USERNAME", res.result.username);
+					this.$store.commit("SET_AUTHS", res.result.auths);
+					this.$store.commit("SET_DEPARTMENTID", res.result.departmentId);
+					this.$store.commit("SET_DEPARTMENTNAME", res.result.departmentName);
+					const auths = this.$store.state.auths;
+					if (auths.length === 0) this.$router.push({ path: "/login"});
+					else {
+						const temp = auths[0].split("_");
+						if (temp.length === 2) this.$router.push({ path: `/admin/${temp[0]}-${temp[1]}` });
+						if (temp.length === 3) this.$router.push({ path: `/admin/${temp[1]}-${temp[2]}` });
+					}
 				} else {
 					if (this.$refs.slideCheck) this.$refs.slideCheck.reload();
 					if (res.code === 405) {

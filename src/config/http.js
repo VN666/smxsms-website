@@ -2,6 +2,7 @@ import axios from "axios";
 import Vue from "vue";
 import whiteList from "./whiteList.js";
 import router from "../router/index.js";
+import store from "@/src/store/index.js";
 
 const _this = Vue.prototype;
 

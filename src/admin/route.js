@@ -1,17 +1,5 @@
 import admin from "./index";
-/** 新闻快讯 */
-import campus_list from "./components/news/campus-list";
-import campus_add from "./components/news/campus-add";
-import campus_edit from "./components/news/campus-edit";
-import notice_list from "./components/news/notice-list";
-import notice_add from "./components/news/notice-add";
-import notice_edit from "./components/news/notice-edit";
-import media_list from "./components/news/media-list";
-import media_add from "./components/news/media-add";
-import media_edit from "./components/news/media-edit";
-import enroll_list from "./components/news/enroll-list";
-import enroll_edit from "./components/news/enroll-edit";
-import enroll_add from "./components/news/enroll-add";
+
 /** 封面背景 */
 import admin_bg from "./components/bg/index";
 /** 联系我们 */
@@ -60,58 +48,59 @@ import computer_edit from "./components/service/computer-edit";
 import ccyl_list from "./components/group/ccyl-list";
 import ccyl_add from "./components/group/ccyl-add";
 import ccyl_edit from "./components/group/ccyl-edit";
+/** 二中党建 */
+import theory_list from "./components/party/theory-list";
+import theory_add from "./components/party/theory-add";
+import theory_edit from "./components/party/theory-edit";
+import construct_list from "./components/party/construct-list";
+import construct_add from "./components/party/construct-add";
+import construct_edit from "./components/party/construct-edit";
+import life_list from "./components/party/life-list";
+import life_add from "./components/party/life-add";
+import life_edit from "./components/party/life-edit";
+import institution_list from "./components/party/institution-list";
+import institution_add from "./components/party/institution-add";
+import institution_edit from "./components/party/institution-edit";
+import book_list from "./components/party/book-list";
+import book_add from "./components/party/book-add";
+import book_edit from "./components/party/book-edit";
+import project_list from "./components/party/project-list";
+import project_add from "./components/party/project-add";
+import project_edit from "./components/party/project-edit";
+import position_list from "./components/party/position-list";
+import position_add from "./components/party/position-add";
+import position_edit from "./components/party/position-edit";
 /** 职工之家 */
 import staff_list from "./components/union/staff-list";
 import staff_add from "./components/union/staff-add";
 import staff_edit from "./components/union/staff-edit";
+/** 二中创建 */
+import meeting_list from "./components/establish/meeting-list";
+import meeting_add from "./components/establish/meeting-add";
+import meeting_edit from "./components/establish/meeting-edit";
+import classroom_list from "./components/establish/classroom-list";
+import classroom_add from "./components/establish/classroom-add";
+import classroom_edit from "./components/establish/classroom-edit";
+import volunteer_list from "./components/establish/volunteer-list";
+import volunteer_add from "./components/establish/volunteer-add";
+import volunteer_edit from "./components/establish/volunteer-edit";
+import two_list from "./components/establish/two-list";
+import two_add from "./components/establish/two-add";
+import two_edit from "./components/establish/two-edit";
+import practice_list from "./components/establish/practice-list";
+import practice_add from "./components/establish/practice-add";
+import practice_edit from "./components/establish/practice-edit";
+import voice_list from "./components/establish/voice-list";
+import voice_add from "./components/establish/voice-add";
+import voice_edit from "./components/establish/voice-edit";
 /** 二中安法 */
 import safe_list from "./components/law/safe-list";
 import safe_add from "./components/law/safe-add";
 import safe_edit from "./components/law/safe-edit";
-
-/** 学生天地 */
-import activity_list from "./components/student/activity-list";
-import activity_add from "./components/student/activity-add";
-import activity_edit from "./components/student/activity-edit";
-import prize_list from "./components/student/prize-list";
-import prize_add from "./components/student/prize-add";
-import prize_edit from "./components/student/prize-edit";
-import flag_list from "./components/student/flag-list";
-import flag_add from "./components/student/flag-add";
-import flag_edit from "./components/student/flag-edit";
-import exhibition_list from "./components/student/exhibition-list";
-import exhibition_add from "./components/student/exhibition-add";
-import exhibition_edit from "./components/student/exhibition-edit";
-import graduation_list from "./components/student/graduation-list";
-import graduation_add from "./components/student/graduation-add";
-import graduation_edit from "./components/student/graduation-edit";
-/** 家长学校 */
-import pratice_list from "./components/parent/pratice-list";
-import pratice_add from "./components/parent/pratice-add";
-import pratice_edit from "./components/parent/pratice-edit";
-import knowledge_list from "./components/parent/knowledge-list";
-import knowledge_add from "./components/parent/knowledge-add";
-import knowledge_edit from "./components/parent/knowledge-edit";
-import communication_list from "./components/parent/communication-list";
-import communication_add from "./components/parent/communication-add";
-import communication_edit from "./components/parent/communication-edit";
-
-/** 幸福教育 */
-import idea_list from "./components/happy/idea-list";
-import idea_add from "./components/happy/idea-add";
-import idea_edit from "./components/happy/idea-edit";
-import speech_list from "./components/happy/speech-list";
-import speech_add from "./components/happy/speech-add";
-import speech_edit from "./components/happy/speech-edit";
-import exercise_list from "./components/happy/exercise-list";
-import exercise_add from "./components/happy/exercise-add";
-import exercise_edit from "./components/happy/exercise-edit";
-
 /** 网站管理 */
 import department_list from "./components/system/department-list";
 import account_list from "./components/system/account-list";
 import account_add from "./components/system/account-add";
-import account_edit from "./components/system/account-edit";
 
 
 export default [
@@ -125,24 +114,6 @@ export default [
 				redirect: "campus-list",
 			},
 			{
-				path: "campus-list",
-				name: "campusList",
-				meta: { auth: true, code: "admin_news_campus" },
-				component: campus_list
-			},
-			{
-				path: "campus-add",
-				name: "campusAdd",
-				meta: { auth: true, code: "admin_news_campus" },
-				component: campus_add
-			},
-			{
-				path: "campus-edit",
-				name: "campusEdit",
-				meta: { auth: true, code: "admin_news_campus" },
-				component: campus_edit
-			},
-			{
 				path: "admin-bg",
 				name: "adminBg",
 				meta: { auth: true, code: "admin_bg" },
@@ -151,62 +122,8 @@ export default [
 			{
 				path: "admin-contact",
 				name: "adminContact",
-				meta: { auth: true, code: "admin_service_contact" },
+				meta: { auth: true, code: "admin_contact" },
 				component: admin_contact
-			},
-			{
-				path: "notice-list",
-				name: "noticeList",
-				meta: { auth: true, code: "admin_news_notice" },
-				component: notice_list
-			},
-			{
-				path: "notice-edit",
-				name: "noticeEdit",
-				meta: { auth: true, code: "admin_news_notice" },
-				component: notice_edit
-			},
-			{
-				path: "notice-add",
-				name: "noticeAdd",
-				code: "admin_news_notice",
-				component: notice_add
-			},
-			{
-				path: "media-list",
-				name: "mediaList",
-				meta: { auth: true, code: "admin_news_media" },
-				component: media_list
-			},
-			{
-				path: "media-edit",
-				name: "mediaEdit",
-				meta: { auth: true, code: "admin_news_media" },
-				component: media_edit
-			},
-			{
-				path: "media-add",
-				name: "mediaAdd",
-				meta: { auth: true, code: "admin_news_media" },
-				component: media_add
-			},
-			{
-				path: "enroll-list",
-				name: "enrollList",
-				meta: { auth: true, code: "admin_news_enroll" },
-				component: enroll_list
-			},
-			{
-				path: "enroll-edit",
-				name: "enrollEdit",
-				meta: { auth: true, code: "admin_news_enroll" },
-				component: enroll_edit
-			},
-			{
-				path: "enroll-add",
-				name: "enrollAdd",
-				meta: { auth: true, code: "admin_news_enroll" },
-				component: enroll_add
 			},
 			{
 				path: "profile-content",
@@ -251,73 +168,6 @@ export default [
 				meta: { auth: true, code: "admin_about_honor" },
 				component: honor_edit
 			},
-			{
-				path: "admin-group",
-				redirect: "ccyl-list"
-			},
-			{
-				path: "ccyl-list",
-				name: "ccylList",
-				meta: { auth: true, code: "admin_group" },
-				component: ccyl_list
-			},
-			{
-				path: "ccyl-add",
-				name: "ccylAdd",
-				meta: { auth: true, code: "admin_group" },
-				component: ccyl_add
-			},
-			{
-				path: "ccyl-edit",
-				name: "ccylEdit",
-				meta: { auth: true, code: "admin_group" },
-				component: ccyl_edit
-			},
-			{
-				path: "admin-union",
-				redirect: "staff-list"
-			},
-			{
-				path: "staff-list",
-				name: "staffList",
-				meta: { auth: true, code: "admin_union" },
-				component: staff_list
-			},
-			{
-				path: "staff-add",
-				name: "staffAdd",
-				meta: { auth: true, code: "admin_union" },
-				component: staff_add
-			},
-			{
-				path: "staff-edit",
-				name: "staffEdit",
-				meta: { auth: true, code: "admin_union" },
-				component: staff_edit
-			},
-			{
-				path: "admin-law",
-				redirect: "safe-list"
-			},
-			{
-				path: "safe-list",
-				name: "safeList",
-				meta: { auth: true, code: "admin_law" },
-				component: safe_list
-			},
-			{
-				path: "safe-add",
-				name: "staffAdd",
-				meta: { auth: true, code: "admin_law" },
-				component: safe_add
-			},
-			{
-				path: "safe-edit",
-				name: "safeEdit",
-				meta: { auth: true, code: "admin_law" },
-				component: safe_edit
-			},
-
 			{
 				path: "admin-education",
 				redirect: "research-list"
@@ -496,208 +346,306 @@ export default [
 				meta: { auth: true, code: "admin_service_computer" },
 				component: computer_edit
 			},
-
-
-
 			{
-				path: "activity-list",
-				name: "activityList",
-				meta: { auth: true, code: "admin_student_activity" },
-				component: activity_list
+				path: "admin-group",
+				redirect: "ccyl-list"
 			},
 			{
-				path: "activity-add",
-				name: "activityAdd",
-				meta: { auth: true, code: "admin_student_activity" },
-				component: activity_add
+				path: "ccyl-list",
+				name: "ccylList",
+				meta: { auth: true, code: "admin_group" },
+				component: ccyl_list
 			},
 			{
-				path: "activity-edit",
-				name: "activityEdit",
-				meta: { auth: true, code: "admin_student_activity" },
-				component: activity_edit
+				path: "ccyl-add",
+				name: "ccylAdd",
+				meta: { auth: true, code: "admin_group" },
+				component: ccyl_add
 			},
 			{
-				path: "prize-list",
-				name: "prizeList",
-				meta: { auth: true, code: "admin_student_prize" },
-				component: prize_list
+				path: "ccyl-edit",
+				name: "ccylEdit",
+				meta: { auth: true, code: "admin_group" },
+				component: ccyl_edit
 			},
 			{
-				path: "prize-add",
-				name: "prizeAdd",
-				meta: { auth: true, code: "admin_student_prize" },
-				component: prize_add
+				path: "theory-list",
+				name: "theoryList",
+				meta: { auth: true, code: "admin_party_theory" },
+				component: theory_list
 			},
 			{
-				path: "prize-edit",
-				name: "prizeEdit",
-				meta: { auth: true, code: "admin_student_prize" },
-				component: prize_edit
+				path: "theory-add",
+				name: "theoryAdd",
+				meta: { auth: true, code: "admin_party_theory" },
+				component: theory_add
 			},
 			{
-				path: "flag-list",
-				name: "flagList",
-				meta: { auth: true, code: "admin_student_flag" },
-				component: flag_list
+				path: "theory-edit",
+				name: "theoryEdit",
+				meta: { auth: true, code: "admin_party_theory" },
+				component: theory_edit
 			},
 			{
-				path: "flag-add",
-				name: "flagAdd",
-				meta: { auth: true, code: "admin_student_flag" },
-				component: flag_add
+				path: "construct-list",
+				name: "constructList",
+				meta: { auth: true, code: "admin_party_construct" },
+				component: construct_list
 			},
 			{
-				path: "flag-edit",
-				name: "flagEdit",
-				meta: { auth: true, code: "admin_student_flag" },
-				component: flag_edit
+				path: "construct-add",
+				name: "constructAdd",
+				meta: { auth: true, code: "admin_party_construct" },
+				component: construct_add
 			},
 			{
-				path: "exhibition-list",
-				name: "exhibitionList",
-				meta: { auth: true, code: "admin_student_exhibition" },
-				component: exhibition_list
+				path: "construct-edit",
+				name: "constructEdit",
+				meta: { auth: true, code: "admin_party_construct" },
+				component: construct_edit
 			},
 			{
-				path: "exhibition-add",
-				name: "exhibitionAdd",
-				meta: { auth: true, code: "admin_student_exhibition" },
-				component: exhibition_add
+				path: "life-list",
+				name: "lifeList",
+				meta: { auth: true, code: "admin_party_life" },
+				component: life_list
 			},
 			{
-				path: "exhibition-edit",
-				name: "exhibitionEdit",
-				meta: { auth: true, code: "admin_student_exhibition" },
-				component: exhibition_edit
+				path: "life-add",
+				name: "lifeAdd",
+				meta: { auth: true, code: "admin_party_life" },
+				component: life_add
 			},
 			{
-				path: "graduation-list",
-				name: "graduationList",
-				meta: { auth: true, code: "admin_student_graduation" },
-				component: graduation_list
+				path: "life-edit",
+				name: "lifeEdit",
+				meta: { auth: true, code: "admin_party_life" },
+				component: life_edit
 			},
 			{
-				path: "graduation-add",
-				name: "graduationAdd",
-				meta: { auth: true, code: "admin_student_graduation" },
-				component: graduation_add
+				path: "institution-list",
+				name: "institutionList",
+				meta: { auth: true, code: "admin_party_institution" },
+				component: institution_list
 			},
 			{
-				path: "graduation-edit",
-				name: "graduationEdit",
-				meta: { auth: true, code: "admin_student_graduation" },
-				component: graduation_edit
+				path: "institution-add",
+				name: "institutionAdd",
+				meta: { auth: true, code: "admin_party_institution" },
+				component: institution_add
 			},
 			{
-				path: "pratice-list",
-				name: "praticeList",
-				meta: { auth: true, code: "admin_parent_pratice" },
-				component: pratice_list
+				path: "institution-edit",
+				name: "institutionEdit",
+				meta: { auth: true, code: "admin_party_institution" },
+				component: institution_edit
 			},
 			{
-				path: "pratice-add",
-				name: "praticeAdd",
-				meta: { auth: true, code: "admin_parent_pratice" },
-				component: pratice_add
+				path: "book-list",
+				name: "bookList",
+				meta: { auth: true, code: "admin_party_book" },
+				component: book_list
 			},
 			{
-				path: "pratice-edit",
-				name: "praticeEdit",
-				meta: { auth: true, code: "admin_parent_pratice" },
-				component: pratice_edit
+				path: "book-add",
+				name: "bookAdd",
+				meta: { auth: true, code: "admin_party_book" },
+				component: book_add
 			},
 			{
-				path: "knowledge-list",
-				name: "knowledgeList",
-				meta: { auth: true, code: "admin_parent_knowledge" },
-				component: knowledge_list
+				path: "book-edit",
+				name: "bookEdit",
+				meta: { auth: true, code: "admin_party_book" },
+				component: book_edit
 			},
 			{
-				path: "knowledge-add",
-				name: "knowledgeAdd",
-				meta: { auth: true, code: "admin_parent_knowledge" },
-				component: knowledge_add
+				path: "project-list",
+				name: "projectList",
+				meta: { auth: true, code: "admin_party_project" },
+				component: project_list
 			},
 			{
-				path: "knowledge-edit",
-				name: "knowledgeEdit",
-				meta: { auth: true, code: "admin_parent_knowledge" },
-				component: knowledge_edit
+				path: "project-add",
+				name: "projectAdd",
+				meta: { auth: true, code: "admin_party_project" },
+				component: project_add
 			},
 			{
-				path: "communication-list",
-				name: "communicationList",
-				meta: { auth: true, code: "admin_parent_communication" },
-				component: communication_list
+				path: "project-edit",
+				name: "projectEdit",
+				meta: { auth: true, code: "admin_party_project" },
+				component: project_edit
 			},
 			{
-				path: "communication-add",
-				name: "communicationAdd",
-				meta: { auth: true, code: "admin_parent_communication" },
-				component: communication_add
+				path: "position-list",
+				name: "positionList",
+				meta: { auth: true, code: "admin_party_position" },
+				component: position_list
 			},
 			{
-				path: "communication-edit",
-				name: "communicationEdit",
-				meta: { auth: true, code: "admin_parent_communication" },
-				component: communication_edit
+				path: "position-add",
+				name: "positionAdd",
+				meta: { auth: true, code: "admin_party_position" },
+				component: position_add
 			},
 			{
-				path: "idea-list",
-				name: "ideaList",
-				meta: { auth: true, code: "admin_happy_idea" },
-				component: idea_list
+				path: "position-edit",
+				name: "positionEdit",
+				meta: { auth: true, code: "admin_party_position" },
+				component: position_edit
 			},
 			{
-				path: "idea-add",
-				name: "ideaAdd",
-				meta: { auth: true, code: "admin_happy_idea" },
-				component: idea_add
+				path: "admin-union",
+				redirect: "staff-list"
 			},
 			{
-				path: "idea-edit",
-				name: "ideaEdit",
-				meta: { auth: true, code: "admin_happy_idea" },
-				component: idea_edit
+				path: "staff-list",
+				name: "staffList",
+				meta: { auth: true, code: "admin_union" },
+				component: staff_list
 			},
 			{
-				path: "speech-list",
-				name: "speechList",
-				meta: { auth: true, code: "admin_happy_speech" },
-				component: speech_list
+				path: "staff-add",
+				name: "staffAdd",
+				meta: { auth: true, code: "admin_union" },
+				component: staff_add
 			},
 			{
-				path: "speech-add",
-				name: "speechAdd",
-				meta: { auth: true, code: "admin_happy_speech" },
-				component: speech_add
+				path: "staff-edit",
+				name: "staffEdit",
+				meta: { auth: true, code: "admin_union" },
+				component: staff_edit
 			},
 			{
-				path: "speech-edit",
-				name: "speechEdit",
-				meta: { auth: true, code: "admin_happy_speech" },
-				component: speech_edit
+				path: "meeting-list",
+				name: "meetingList",
+				meta: { auth: true, code: "admin_establish_meeting" },
+				component: meeting_list
 			},
 			{
-				path: "exercise-list",
-				name: "exerciseList",
-				meta: { auth: true, code: "admin_happy_exercise" },
-				component: exercise_list
+				path: "meeting-add",
+				name: "meetingAdd",
+				meta: { auth: true, code: "admin_establish_meeting" },
+				component: meeting_add
 			},
 			{
-				path: "exercise-add",
-				name: "exerciseAdd",
-				meta: { auth: true, code: "admin_happy_exercise" },
-				component: exercise_add
+				path: "meeting-edit",
+				name: "meetingEdit",
+				meta: { auth: true, code: "admin_establish_meeting" },
+				component: meeting_edit
 			},
 			{
-				path: "exercise-edit",
-				name: "exerciseEdit",
-				meta: { auth: true, code: "admin_happy_exercise" },
-				component: exercise_edit
+				path: "classroom-list",
+				name: "classroomList",
+				meta: { auth: true, code: "admin_establish_classroom" },
+				component: classroom_list
 			},
-
+			{
+				path: "classroom-add",
+				name: "classroomAdd",
+				meta: { auth: true, code: "admin_establish_classroom" },
+				component: classroom_add
+			},
+			{
+				path: "classroom-edit",
+				name: "classroomEdit",
+				meta: { auth: true, code: "admin_establish_classroom" },
+				component: classroom_edit
+			},
+			{
+				path: "volunteer-list",
+				name: "volunteerList",
+				meta: { auth: true, code: "admin_establish_volunteer" },
+				component: volunteer_list
+			},
+			{
+				path: "volunteer-add",
+				name: "volunteerAdd",
+				meta: { auth: true, code: "admin_establish_volunteer" },
+				component: volunteer_add
+			},
+			{
+				path: "volunteer-edit",
+				name: "volunteerEdit",
+				meta: { auth: true, code: "admin_establish_volunteer" },
+				component: volunteer_edit
+			},
+			{
+				path: "two-list",
+				name: "twoList",
+				meta: { auth: true, code: "admin_establish_two" },
+				component: two_list
+			},
+			{
+				path: "two-add",
+				name: "twoAdd",
+				meta: { auth: true, code: "admin_establish_two" },
+				component: two_add
+			},
+			{
+				path: "two-edit",
+				name: "twoEdit",
+				meta: { auth: true, code: "admin_establish_two" },
+				component: two_edit
+			},
+			{
+				path: "practice-list",
+				name: "practiceList",
+				meta: { auth: true, code: "admin_establish_practice" },
+				component: practice_list
+			},
+			{
+				path: "practice-add",
+				name: "practiceAdd",
+				meta: { auth: true, code: "admin_establish_practice" },
+				component: practice_add
+			},
+			{
+				path: "practice-edit",
+				name: "practiceEdit",
+				meta: { auth: true, code: "admin_establish_practice" },
+				component: practice_edit
+			},
+			{
+				path: "voice-list",
+				name: "voiceList",
+				meta: { auth: true, code: "admin_establish_voice" },
+				component: voice_list
+			},
+			{
+				path: "voice-add",
+				name: "voiceAdd",
+				meta: { auth: true, code: "admin_establish_voice" },
+				component: voice_add
+			},
+			{
+				path: "voice-edit",
+				name: "voiceEdit",
+				meta: { auth: true, code: "admin_establish_voice" },
+				component: voice_edit
+			},
+			{
+				path: "admin-law",
+				redirect: "safe-list"
+			},
+			{
+				path: "safe-list",
+				name: "safeList",
+				meta: { auth: true, code: "admin_law" },
+				component: safe_list
+			},
+			{
+				path: "safe-add",
+				name: "staffAdd",
+				meta: { auth: true, code: "admin_law" },
+				component: safe_add
+			},
+			{
+				path: "safe-edit",
+				name: "safeEdit",
+				meta: { auth: true, code: "admin_law" },
+				component: safe_edit
+			},
 			{
 				path: "department-list",
 				name: "departmentList",
@@ -715,13 +663,6 @@ export default [
 				name: "accountAdd",
 				meta: { auth: true, code: "admin_system_account" },
 				component: account_add
-			},
-			{
-				path: "account-edit",
-				name: "accountEdit",
-				meta: { auth: true, code: "admin_system_account" },
-				code: "",
-				component: account_edit
 			}
 		]
 	}

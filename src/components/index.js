@@ -1,6 +1,6 @@
 import hBgImgs from "./h-bgImgs"
 import hDropDownList from "./h-dropDownList"
-import hNotice from "./h-notice"
+import hHonor from "./h-honor"
 import hPicRoll2 from "./h-picRoll2"
 import hBlock from "./h-block"
 import hHeader from "./h-header"
@@ -14,7 +14,7 @@ import hSlide from "./h-slide";
 const components = [
     hBgImgs,
     hDropDownList,
-    hNotice,
+    hHonor,
     hPicRoll,
     hPicRoll2,
     hBlock,

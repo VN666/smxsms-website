@@ -12,21 +12,21 @@
 							<el-input v-model="addForm.headline"></el-input>
 						</el-form-item>
 					</el-col>
-					<el-col :span="8">
-						<el-form-item label="部门" prop="department">
-							<el-input v-model="addForm.department"></el-input>
+					<el-col :span="5">
+						<el-form-item label="部门">
+							<el-input v-model="departmentName" disabled></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="5">
+						<el-form-item label="发布人">
+							<el-input v-model="publisher" disabled></el-input>
 						</el-form-item>
 					</el-col>
 				</el-row>
 				<el-row :gutter="32" ref="row2">
-					<el-col :span="4">
+					<el-col :span="8">
 						<el-form-item label="作者" prop="author">
 							<el-input v-model="addForm.author"></el-input>
-						</el-form-item>
-					</el-col>
-					<el-col :span="4">
-						<el-form-item label="发布人">
-							<el-input v-model="addForm.publisher" disabled></el-input>
 						</el-form-item>
 					</el-col>
 					<el-col :span="5">
@@ -95,9 +95,7 @@ export default {
 			addForm: {
 				id: "",
 				headline: "",
-				department: "三门峡市第二中学",
 				author: "",
-				publisher: localStorage.getItem("username"),
 				timecreate: "",
 				isTop: "",
 				content: "",
@@ -125,6 +123,14 @@ export default {
 			id: "",
 			tempSrc: []
 		};
+	},
+	computed: {
+		publisher () {
+			return this.$store.state.username;
+		},
+		departmentName () {
+			return this.$store.state.departmentName;
+		}
 	},
 	mounted () {
 		this.resize();

@@ -12,15 +12,15 @@
 		      		:unique-opened="true"
 					:router="true"
 		      		active-text-color="#FFD04B">
-		      		<el-submenu v-for="(item, key) in menu" :index="item.code" v-if="item.children" :key="item.code">
+		      		<el-submenu v-for="(item, key) in menu" :index="item.menuCode" v-if="item.children" :key="item.code">
 		      			<template slot="title">
 		      				<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
 		      			</template>
-						<el-menu-item v-for="(subItem, subKey) in item.children" :index="subItem.code" :key="subItem.code" @click="goPath(subItem.path)">
+						<el-menu-item v-for="(subItem, subKey) in item.children" :index="subItem.menuCode" :key="subItem.code" @click="goPath(subItem.path)">
 							{{ subItem.title }}
 						</el-menu-item>
 		      		</el-submenu>
-		      		<el-menu-item v-else :index="item.code" @click="goHome(item)">
+		      		<el-menu-item v-else :index="item.menuCode" @click="goHome(item)">
 		      			<i :class="item.icon" style="color:#FFFFFF;"></i><span>{{item.title}}</span>
 		      		</el-menu-item>
 		    	</el-menu>
@@ -57,13 +57,13 @@ export default {
 			h: 0,
 			w: 0,
 			menu: [],
-			username: ""
 		};
 	},
 	created () {
 		this.resize();
 		window.addEventListener("resize", this.resize, false);
-		this.requestUserInfo();
+		this.menu = [menu[0], ...this.generateMenu(menu, this.$store.state.auths)];
+		// this.requestUserInfo();
 	},
 	beforeDestroy () {
 		window.removeEventListener("resize", this.resize, false);
@@ -81,7 +81,6 @@ export default {
 				this.$store.commit("SET_USERNAME", res.result.username);
 				this.$store.commit("SET_AUTHS", res.result.auths);
 				this.$store.commit("SET_DEPARTMENTID", res.result.departmentId);
-				this.menu = [menu[0], ...this.generateMenu(menu, this.$store.state.auths)];
 			})
 		},
 		resize () {
@@ -109,7 +108,11 @@ export default {
 	},
 	computed: {
 		defaultActive () {
-			return this.$route.path.split("/")[2].split("-")[0];
+			const suffix =  this.$route.path.substring(this.$route.path.lastIndexOf("/") + 1);
+			return suffix.includes("admin") ? suffix.split("-")[1] : suffix.split("-")[0];
+		},
+		username () {
+			return this.$store.state.username;
 		}
 	},
 }

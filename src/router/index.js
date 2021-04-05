@@ -47,42 +47,47 @@ import service_guarantee_detail from "@/src/views/service/service-guarantee-deta
 import group from "@/src/views/group/index";
 import group_ccyl_list from  "@/src/views/group/group-ccyl-list";
 import group_ccyl_detail from "@/src/views/group/group-ccyl-detail";
+/** 二中党建 */
+import party from "@/src/views/party/index";
+import party_theory_list from "@/src/views/party/party-theory-list";
+import party_theory_detail from "@/src/views/party/party-theory-detail";
+import party_construct_list from "@/src/views/party/party-construct-list";
+import party_construct_detail from "@/src/views/party/party-construct-detail";
+import party_life_list from "@/src/views/party/party-life-list";
+import party_life_detail from "@/src/views/party/party-life-detail";
+import party_institution_list from "@/src/views/party/party-institution-list";
+import party_institution_detail from "@/src/views/party/party-institution-detail";
+import party_book_list from "@/src/views/party/party-book-list";
+import party_book_detail from "@/src/views/party/party-book-detail";
+import party_project_list from "@/src/views/party/party-project-list";
+import party_project_detail from "@/src/views/party/party-project-detail";
+import party_position_list from "@/src/views/party/party-position-list";
+import party_position_detail from "@/src/views/party/party-position-detail";
 /** 职工之家 */
 import union from "@/src/views/union/index";
 import union_staff_list from "@/src/views/union/union-staff-list";
 import union_staff_detail from "@/src/views/union/union-staff-detail";
+/** 二中创建 */
+import establish from "@/src/views/establish/index";
+import establish_meeting_list from "@/src/views/establish/establish-meeting-list";
+import establish_meeting_detail from "@/src/views/establish/establish-meeting-detail";
+import establish_classroom_list from "@/src/views/establish/establish-classroom-list";
+import establish_classroom_detail from "@/src/views/establish/establish-classroom-detail";
+import establish_volunteer_list from "@/src/views/establish/establish-volunteer-list";
+import establish_volunteer_detail from "@/src/views/establish/establish-volunteer-detail";
+import establish_two_list from "@/src/views/establish/establish-two-list";
+import establish_two_detail from "@/src/views/establish/establish-two-detail";
+import establish_practice_list from "@/src/views/establish/establish-practice-list";
+import establish_practice_detail from "@/src/views/establish/establish-practice-detail";
+import establish_voice_list from "@/src/views/establish/establish-voice-list";
+import establish_voice_detail from "@/src/views/establish/establish-voice-detail";
+
+
 /** 二中安法 */
 import law from "@/src/views/law/index";
 import law_safe_list from "@/src/views/law/law-safe-list";
 import law_safe_detail from "@/src/views/law/law-safe-detail";
 
-/** 新闻动态 */
-import news from "@/src/views/news/index";
-import news_campus_list from "@/src/views/news/news-campus-list";
-import news_campus_detail from "@/src/views/news/news-campus-detail";
-import news_notice_list from "@/src/views/news/news-notice-list";
-import news_notice_detail from "@/src/views/news/news-notice-detail";
-import news_media_list from "@/src/views/news/news-media-list";
-import news_media_detail from "@/src/views/news/news-media-detail";
-import news_enroll_list from "@/src/views/news/news-enroll-list";
-import news_enroll_detail from "@/src/views/news/news-enroll-detail";
-
-/** 家长学校 */
-import parent from "@/src/views/parent/index";
-import parent_communication_list from "@/src/views/parent/parent-communication-list";
-import parent_communication_detail from "@/src/views/parent/parent-communication-detail";
-import parent_knowledge_list from "@/src/views/parent/parent-knowledge-list";
-import parent_knowledge_detail from "@/src/views/parent/parent-knowledge-detail";
-import parent_pratice_list from "@/src/views/parent/parent-pratice-list";
-import parent_pratice_detail from "@/src/views/parent/parent-pratice-detail";
-/** 幸福教育 */
-import happy from "@/src/views/happy/index";
-import happy_exercise_list from "@/src/views/happy/happy-exercise-list";
-import happy_exercise_detail from "@/src/views/happy/happy-exercise-detail";
-import happy_idea_list from "@/src//views/happy/happy-idea-list";
-import happy_idea_detail from "@/src/views/happy/happy-idea-detail";
-import happy_speech_list from "@/src/views/happy/happy-speech-list";
-import happy_speech_detail from "@/src/views/happy/happy-speech-detail";
 
 const fe_router = [
 	{
@@ -345,6 +350,101 @@ const fe_router = [
 		]
 	},
 	{
+		path: "/party",
+		component: party,
+		meta: { auth: false, code: "" },
+		children: [
+			{
+				path: "",
+				redirect: "theory-list"
+			},
+			{
+				path: "theory-list",
+				name: "partyTheoryList",
+				component: party_theory_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "theory-detail",
+				name: "partyTheoryDetail",
+				component: party_theory_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "construct-list",
+				name: "partyConstructList",
+				component: party_construct_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "construct-detail",
+				name: "partyConstructDetail",
+				component: party_construct_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "life-list",
+				name: "partyLifeList",
+				component: party_life_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "life-detail",
+				name: "partyLifeDetail",
+				component: party_life_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "institution-list",
+				name: "partyInstitutionList",
+				component: party_institution_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "institution-detail",
+				name: "partyInstitutionDetail",
+				component: party_institution_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "book-list",
+				name: "partyBookList",
+				component: party_book_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "book-detail",
+				name: "partyBookDetail",
+				component: party_book_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "project-list",
+				name: "partyProjectList",
+				component: party_project_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "project-detail",
+				name: "partyProjectDetail",
+				component :party_project_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "position-list",
+				name: "partyPositionList",
+				component: party_position_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "position-detail",
+				name: "partyPositionDetail",
+				component: party_position_detail,
+				meta: { auth: false, code: "" }
+			}
+		]
+	},
+	{
 		path: "/union",
 		component: union,
 		meta: {  auth: false, code: ""},
@@ -363,6 +463,89 @@ const fe_router = [
 				path: "staff-detail",
 				name: "unionStaffDetail",
 				component: union_staff_detail,
+				meta: { auth: false, code: "" }
+			}
+		]
+	},
+	{
+		path: "/establish",
+		component: establish,
+		meta: { auth: false, code: "" },
+		children: [
+			{
+				path: "",
+				redirect: "meeting-list"
+			},
+			{
+				path: "meeting-list",
+				name: "establishMeetingList",
+				component: establish_meeting_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "meeting-detail",
+				name: "establishMeetingDetail",
+				component: establish_meeting_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "classroom-list",
+				name: "establishClassroomList",
+				component: establish_classroom_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "classroom-detail",
+				name: "establishClassroomDetail",
+				component: establish_classroom_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "volunteer-list",
+				name: "establishVolunteerList",
+				component: establish_volunteer_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "volunteer-detail",
+				name: "establishVolunteerDetail",
+				component: establish_volunteer_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "two-list",
+				name: "establishTwoList",
+				component: establish_two_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "two-detail",
+				name: "establishTwoDetail",
+				component: establish_two_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "practice-list",
+				name: "establishPracticeList",
+				component: establish_practice_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "practice-detail",
+				name: "establishPracticeDetail",
+				component: establish_practice_detail,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "voice-list",
+				name: "establishVoiceList",
+				component: establish_voice_list,
+				meta: { auth: false, code: "" }
+			},
+			{
+				path: "voice-detail",
+				name: "establishVoiceDetail",
+				component: establish_voice_detail,
 				meta: { auth: false, code: "" }
 			}
 		]
@@ -388,232 +571,6 @@ const fe_router = [
 				component: law_safe_detail,
 				mata: { auth: false, code: "" }
 			}
-		]
-	},
-
-	{
-		path: "/news",
-		component: news,
-		meta: { auth: false, code: "" },
-		children: [
-			{
-				path: "",
-				redirect: "campus-list"
-			},
-			{
-				path: "campus-list",
-				name: "newsCampusList",
-				component: news_campus_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "campus-detail",
-				name: "newsCampusDetail",
-				component: news_campus_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "notice-list",
-				name: "newsNoticeList",
-				component: news_notice_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "notice-detail",
-				name: "newsNoticeDetail",
-				component: news_notice_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "media-list",
-				name: "newsMediaList",
-				component: news_media_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "media-detail",
-				name: "newsMediaDetail",
-				component: news_media_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "enroll-list",
-				name: "newsEnrollList",
-				component: news_enroll_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "enroll-detail",
-				name: "newsEnrollDetail",
-				component: news_enroll_detail,
-				meta: { auth: false, code: "" }
-			}
-		]
-	},
-
-	// {
-	// 	path: "/student",
-	// 	component: student,
-	// 	meta: { auth: false, code: "" },
-	// 	children: [
-	// 		{
-	// 			path: "",
-	// 			redirect: "activity-list"
-	// 		},
-	// 		{
-	// 			path: "activity-list",
-	// 			name: "studentActivityList",
-	// 			component: student_activity_list,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "activity-detail",
-	// 			name: "studentActivityDetail",
-	// 			component: student_activity_detail,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "exhibition-list",
-	// 			name: "studentExhibitionList",
-	// 			component: student_exhibition_list,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "exhibition-detail",
-	// 			name: "studentExhibitionDetail",
-	// 			component: student_exhibition_detail,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "flag-list",
-	// 			name: "studentFlagList",
-	// 			component: student_flag_list,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "flag-detail",
-	// 			name: "studentFlagDetail",
-	// 			component: student_flag_detail,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "graduation-list",
-	// 			name: "studentGraduationList",
-	// 			component: student_graduation_list,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "graduation-detail",
-	// 			name: "studentGraduationDetail",
-	// 			component: student_graduation_detail,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "prize-list",
-	// 			name: "studentPrizeList",
-	// 			component: student_prize_list,
-	// 			meta: { auth: false, code: "" }
-	// 		},
-	// 		{
-	// 			path: "prize-detail",
-	// 			name: "studentPrizeDetail",
-	// 			component: student_prize_detail,
-	// 			meta: { auth: false, code: "" }
-	// 		}
-	// 	]
-	// },
-	{
-		path: "/parent",
-		component: parent,
-		meta: { auth: false, code: "" },
-		children: [
-			{
-				path: "",
-				redirect: "pratice-list"
-			},
-			{
-				path: "pratice-list",
-				name: "parentPraticeList",
-				component: parent_pratice_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "pratice-detail",
-				name: "parentPraticeDetail",
-				component: parent_pratice_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "communication-list",
-				name: "parentCommunicationList",
-				component: parent_communication_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "communication-detail",
-				name: "parentCommunicationDetail",
-				component: parent_communication_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "knowledge-list",
-				name: "parentKnowledgeList",
-				component: parent_knowledge_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "knowledge-detail",
-				name: "parentKnowledgeDetail",
-				component: parent_knowledge_detail,
-				meta: { auth: false, code: "" }
-			},
-		]
-	},
-	{
-		path: "/happy",
-		component: happy,
-		meta: { auth: false, code: "" },
-		children: [
-			{
-				path: "",
-				redirect: "idea-list"
-			},
-			{
-				path: "idea-list",
-				name: "happyIdeaList",
-				component: happy_idea_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "idea-detail",
-				name: "happyIdeaDetail",
-				component: happy_idea_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "speech-list",
-				name: "happySpeechList",
-				component: happy_speech_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "speech-detail",
-				name: "happySpeechDetail",
-				component: happy_speech_detail,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "exercise-list",
-				name: "happyExerciseList",
-				component: happy_exercise_list,
-				meta: { auth: false, code: "" }
-			},
-			{
-				path: "exercise-detail",
-				name: "happyExerciseDetail",
-				component: happy_exercise_detail,
-				meta: { auth: false, code: "" }
-			},
 		]
 	}
 ];

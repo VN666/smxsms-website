@@ -10,7 +10,7 @@
 						<el-input v-model="addForm.username"></el-input>
 					</el-form-item>
 					<el-form-item label="科室" prop="departmentId">
-						<el-select v-model="addForm.departmentId" placeholder="请选择" clearable>
+						<el-select v-model="addForm.departmentId" placeholder="请选择" clearable @change="handleChange">
 						    <el-option v-for="item in departments" :key="item.value" :label="item.label" :value="item.value"></el-option>
 					  	</el-select>
 					</el-form-item>
@@ -21,7 +21,7 @@
 						<el-input v-model="addForm.confirmPassword" show-password></el-input>
 					</el-form-item>
 					<el-form-item label="权限" prop="auths">
-						<el-tree  show-checkbox node-key="code" default-expand-all
+						<el-tree  show-checkbox node-key="code" default-expand-all check-on-click-node :expand-on-click-node="false"
 							style="margin-top:8px;"
 							ref="authTree"
 							:props="props"
@@ -87,7 +87,8 @@ export default {
 			},
 			props: {
 				label: "title",
-				children: "children"
+				children: "children",
+				disabled: (data, node) => data.code.includes("system") && this.addForm.departmentId !== 0 ? true : false
 			},
 			departments: [],
 			auths: [],
@@ -122,6 +123,9 @@ export default {
 		},
 		goBack () {
 			this.$router.push({ path: "account-list" });
+		},
+		handleChange (value) {
+			if (value !== 0) this.$refs["authTree"].setCheckedKeys(this.$refs["authTree"].getCheckedNodes(false, true).filter((item) => !item.code.includes("system")));
 		}
 	},
 	mounted () {

@@ -11,7 +11,8 @@ const state = {
 	postCode: "",
 	username: "",
 	auths: "",
-	departmentId: ""
+	departmentId: "",
+	departmentName: ""
 };
 
 const mutations = {
@@ -35,6 +36,9 @@ const mutations = {
     },
     SET_DEPARTMENTID (state, id) {
     	state.departmentId = id;
+    },
+    SET_DEPARTMENTNAME (state, name) {
+    	state.departmentName = name;
     }
 };
 

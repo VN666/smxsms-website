@@ -33,7 +33,7 @@
 					<ul>
 						<!-- <li @click="goWebsite()">公众号</li> -->
 						<li @click="goWebsite(weibo)">微博</li>
-						<li @click="$router.push({ path: '/login'})">管理员入口</li>
+						<li @click="goAdmin()">管理员入口</li>
 					</ul>
 					<div class="line"></div>
 					<!-- <img src="@/src/assets/icons/qq.png" /> -->
@@ -87,6 +87,15 @@ export default {
 		this.currentIndex = parseInt(this.$route.query.index);
 	},
 	methods: {
+		goAdmin () {
+			const auths = this.$store.state.auths;
+			if (auths.length === 0) this.$router.push({ path: "/login"});
+			else {
+				const temp = auths[0].split("_");
+				if (temp.length === 2) this.$router.push({ path: `/admin/${temp[0]}-${temp[1]}` });
+				if (temp.length === 3) this.$router.push({ path: `/admin/${temp[1]}-${temp[2]}` });
+			}
+		},
 		subTitleClick (path, index) {
 			if (this.$route.path !== path)
 				this.$router.push({path: path, query: {index: index }});
