@@ -94,6 +94,10 @@ export default {
 				type: "warning"
 			}).then(() => {
 				this.$utils.delCookie("Authorization");
+				this.$store.commit("SET_USERNAME", "");
+				this.$store.commit("SET_AUTHS", []);
+				this.$store.commit("SET_DEPARTMENTID", "");
+				this.$store.commit("SET_DEPARTMENTNAME", "");
 				this.$router.push({ path: "/" });
 			}).catch(() => {
 				console.log("取消");

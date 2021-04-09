@@ -35,16 +35,23 @@ let router = new VueRouter({
 	mode: "history"
 });
 
+const adminIndex = Array.from(routes).findIndex((route) => route.name === "admin");
+const adminRoutes = Array.from(routes)[adminIndex].children;
+const adminRoutesLen = adminRoutes.length;
+
+
+
 router.beforeEach((to, from, next) => {
-    // console.log(from);
-    // console.log(to);
-    next();
-    // if (!to.meta.auth) next();
-   	// else {
-   	// 	console.log(store.state.auths.includes(to.meta.code));
-   	// 	if (store.state.auths.includes(to.meta.code)) next();
-   	// 	else next (to);
-   	// }
+	if (!to.meta.auth) next();
+	else if (!!to.meta && !!to.meta.code && store.state.auths.includes(to.meta.code)) next();
+	else  {
+		for (let i = 0; i < adminRoutesLen; i++) {
+			if (!!adminRoutes[i].meta && !!adminRoutes[i].meta.code && store.state.auths.includes(adminRoutes[i].meta.code)) {
+				next(`/admin/${adminRoutes[i].path}`);
+				break;
+			}
+		}
+	}
 })
 
 /* eslint-disable no-new */

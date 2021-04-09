@@ -60,14 +60,14 @@ export const menu = [
 		title: "教研动态",
 		code: "admin_education",
 		path: "admin-education",
-		icon: "el-icon-data-analysis",
+		icon: "el-icon-reading",
 		menuCode: "research"
 	},
 	{
 		title: "德育活动",
 		code: "admin_activity",
 		path: "admin-activity",
-		icon: "el-icon-orange",
+		icon: "el-icon-bangzhu",
 		menuCode: "activity",
 		children: [
 			{
@@ -112,7 +112,7 @@ export const menu = [
 		title: "校本研修",
 		code: "admin_training",
 		path: "admin-training",
-		icon: "el-icon-data-analysis",
+		icon: "el-icon-thumb",
 		menuCode: "study"
 	},
 	{
@@ -140,14 +140,14 @@ export const menu = [
 		title: "二中团建",
 		code: "admin_group",
 		path: "admin-group",
-		icon: "el-icon-data-analysis",
+		icon: "el-icon-brush",
 		menuCode: "ccyl"
 	},
 	{
 		title: "二中党建",
 		code: "admin_party",
 		path: "admin-party",
-		icon: "el-icon-help",
+		icon: "el-icon-sunny",
 		menuCode: "party",
 		children: [
 			{
@@ -198,14 +198,14 @@ export const menu = [
 		title: "职工之家",
 		code: "admin_union",
 		path: "admin-union",
-		icon: "el-icon-user",
+		icon: "el-icon-refrigerator",
 		menuCode: "staff"
 	},
 	{
 		title: "二中创建",
 		code: "admin_establish",
 		path: "admin-establish",
-		icon: "el-icon-help",
+		icon: "el-icon-aim",
 		menuCode: "establish",
 		children: [
 			{
@@ -250,7 +250,7 @@ export const menu = [
 		title: "二中安法",
 		code: "admin_law",
 		path: "admin-law",
-		icon: "el-icon-star-off",
+		icon: "el-icon-guide",
 		menuCode: "safe"
 	},
 
@@ -259,7 +259,7 @@ export const menu = [
 		path: "admin_contact",
 		icon: "el-icon-phone",
 		path: "admin-contact",
-		code: "admin_service_contact",
+		code: "admin_contact",
 		menuCode: "contact"
 	},
 	{
@@ -278,7 +278,7 @@ export const menu = [
 			{
 				title: "账号管理",
 				path: "account-list",
-				code: "admin_system_accoumnt",
+				code: "admin_system_account",
 				menuCode: "account"
 			}
 		]

@@ -25,6 +25,7 @@
     "vuex-persistedstate": "^3.1.0"
   },
   "devDependencies": {
+    "add-charset-webpack-plugin": "^1.0.4",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",

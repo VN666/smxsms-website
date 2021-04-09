@@ -89,12 +89,13 @@ export default {
 	methods: {
 		goAdmin () {
 			const auths = this.$store.state.auths;
-			if (auths.length === 0) this.$router.push({ path: "/login"});
-			else {
-				const temp = auths[0].split("_");
-				if (temp.length === 2) this.$router.push({ path: `/admin/${temp[0]}-${temp[1]}` });
-				if (temp.length === 3) this.$router.push({ path: `/admin/${temp[1]}-${temp[2]}` });
-			}
+			if (auths.length === 0 || !this.$utils.getCookie("Authorization")) this.$router.push({ path: "/login"});
+			else this.$router.push({ path: "/admin" });
+			// else {
+			// 	const temp = auths[0].split("_");
+			// 	if (temp.length === 2) this.$router.push({ path: `/admin/${temp[0]}-${temp[1]}` });
+			// 	if (temp.length === 3) this.$router.push({ path: `/admin/${temp[1]}-${temp[2]}` });
+			// }
 		},
 		subTitleClick (path, index) {
 			if (this.$route.path !== path)

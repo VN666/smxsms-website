@@ -4,10 +4,10 @@
 			<h1>后台登录</h1>
 			<div class="error" v-if="error"><img src="../../assets/icons/error.png">{{error}}</div>
 			<div class="row row1">
-				<el-input v-model="loginForm.username" placeholder="请输入用户名" @blur="ipCheck" @keyup.enter.native="beforeSubmit"></el-input>
+				<el-input v-model="loginForm.username" placeholder="请输入用户名" @blur="ipCheck" @keyup.enter.native="beforeSubmit" auto-complete="new-password"></el-input>
 			</div>
 			<div class="row row2">
-				<el-input v-model="loginForm.password" placeholder="请输入密码" show-password @blur="ipCheck" @keyup.enter.native="beforeSubmit"></el-input>
+				<el-input v-model="loginForm.password" placeholder="请输入密码" show-password @blur="ipCheck" @keyup.enter.native="beforeSubmit" auto-complete="new-password"></el-input>
 			</div>
 			<div  class="row row3" v-if="isSlide">
 				<h-slide @slide-check="slideCheck" ref="slideCheck"></h-slide>
@@ -104,11 +104,12 @@ export default {
 					this.$store.commit("SET_DEPARTMENTNAME", res.result.departmentName);
 					const auths = this.$store.state.auths;
 					if (auths.length === 0) this.$router.push({ path: "/login"});
-					else {
-						const temp = auths[0].split("_");
-						if (temp.length === 2) this.$router.push({ path: `/admin/${temp[0]}-${temp[1]}` });
-						if (temp.length === 3) this.$router.push({ path: `/admin/${temp[1]}-${temp[2]}` });
-					}
+					else this.$router.push({ path: "/admin" });
+					// else {
+					// 	const temp = auths[0].split("_");
+					// 	if (temp.length === 2) this.$router.push({ path: `/admin/${temp[0]}-${temp[1]}` });
+					// 	if (temp.length === 3) this.$router.push({ path: `/admin/${temp[1]}-${temp[2]}` });
+					// }
 				} else {
 					if (this.$refs.slideCheck) this.$refs.slideCheck.reload();
 					if (res.code === 405) {

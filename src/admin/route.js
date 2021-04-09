@@ -106,13 +106,11 @@ import account_add from "./components/system/account-add";
 export default [
 	{
 		path: "/admin",
+		name: "admin",
 		component: admin,
 		meta: { auth: false, code: "" },
+		redirect: "/admin/admin-bg",
 		children: [
-			{
-				path: "",
-				redirect: "campus-list",
-			},
 			{
 				path: "admin-bg",
 				name: "adminBg",
