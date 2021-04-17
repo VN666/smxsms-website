@@ -69,7 +69,6 @@ export default {
 			this.requestData();
 		},
 		beforeSubmit () {
-			console.log(this.addForm.content);
 			this.$refs["addForm"].validate((valid) => {
 				if (valid) {
 					this.addForm.picSrc = this.$utils.sweepPicsrc(this.addForm.content, this.tempSrc).picSrc;

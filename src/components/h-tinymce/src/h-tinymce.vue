@@ -105,6 +105,16 @@ export default {
 					editor.on("change", () => {
 						this.$emit('input', Tinymce.get(this.id).getContent({formate: "html"}));
 					});
+					editor.on("paste", (e) => {
+						let remoteImages = [];
+					    const doc = editor.getDoc();
+					    const doms = doc.getElementsByTagName('img');
+					    setTimeout(() => {
+					    	for (let i = 0; i < doms.length; i++) {
+					    		this.$emit("getPicSrc", doms[i].getAttribute("src"));
+					    	}
+					    });
+					});
 				},
 				width: this.width,
 				height: this.height,
