@@ -262,6 +262,8 @@ export default {
 			this.lawData = lawData.data.list;
 			this.establishData = establishData.data.list;
 			this.contactData  = contactData.data;
+			// const loading = document.getElementById("loading");
+  	// 		if (loading) loading.parentNode.removeChild(loading);
 			this.$store.commit("SET_PHONE", this.contactData.phone);
 			this.$store.commit("SET_EMAIL", this.contactData.email);
 			this.$store.commit("SET_ADDRESS", this.contactData.address);

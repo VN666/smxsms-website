@@ -6,7 +6,19 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  watch: {
+  	$route: {
+  		handler (route) {
+  			if (route.path !== "/index") {
+  				// const loading = document.getElementById("loading");
+  				// if (loading) loading.parentNode.removeChild(loading);
+  			}
+  		},
+  		deep: true,
+  		immediate: true
+  	}
+  }
 }
 </script>
 
