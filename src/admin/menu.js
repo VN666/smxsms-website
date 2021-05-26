@@ -57,7 +57,7 @@ export const menu = [
 		]
 	},
 	{
-		title: "教研动态",
+		title: "教学动态",
 		code: "admin_education",
 		path: "admin-education",
 		icon: "el-icon-reading",
@@ -269,6 +269,12 @@ export const menu = [
 		icon: "el-icon-monitor",
 		menuCode: "system",
 		children: [
+			{
+				title: "操作日志",
+				path: "log-list",
+				code: "admin_system_log",
+				menuCode: "log"
+			},
 			{
 				title: "科室管理",
 				path: "department-list",

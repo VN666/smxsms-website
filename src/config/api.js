@@ -292,6 +292,10 @@ const api = {
 	system_account_isOne: "/api/system/account/isOne",
 	system_account_userData: "/api/system/account/getAccountData",
 
+	/** 网站管理-操作日志 */
+	system_log_query: "/api/system/log/query",
+	system_log_export: "/api/system/log/export",
+
 	/** 联系我们 */
 	news_contact_query: "/api/contact/query",
 	news_contact_update: "/api/contact/update"

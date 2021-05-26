@@ -101,6 +101,7 @@ import safe_edit from "./components/law/safe-edit";
 import department_list from "./components/system/department-list";
 import account_list from "./components/system/account-list";
 import account_add from "./components/system/account-add";
+import log_list from "./components/system/log-list";
 
 
 export default [
@@ -661,6 +662,12 @@ export default [
 				name: "accountAdd",
 				meta: { auth: true, code: "admin_system_account" },
 				component: account_add
+			},
+			{
+				path: "log-list",
+				name: "logList",
+				meta: { auth: true, code: "admin_system_log" },
+				component: log_list
 			}
 		]
 	}

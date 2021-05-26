@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="search_wrap" ref="search_wrap" v-if="showFilter">
-			<el-form :inline="true" :model="filters" label-position="right" label-width="80px">
+			<el-form :model="filters" label-position="right" label-width="80px">
 				<el-row>
 					<el-col :span="5">
 						<el-form-item label="用户名">

@@ -11,15 +11,15 @@ x<template>
 		</div>
 
 		<div class="search_wrap" ref="search_wrap" v-if="showFilter">
-			<el-form :inline="true" :model="filters" label-position="right" label-width="80px">
+			<el-form :model="filters" label-position="right" label-width="80px">
 				<el-row>
-					<el-col :span="4">
+					<el-col :span="6">
 						<el-form-item label="标题">
 							<el-input v-model="filters.headline" placeholder="新闻标题" size="mini" clearable></el-input>
 						</el-form-item>
 					</el-col>
 
-					<el-col :span="4">
+					<el-col :span="6">
 						<el-form-item label="作者">
 							<el-input v-model="filters.author" placeholder="作者" size="mini" clearable></el-input>
 						</el-form-item>
