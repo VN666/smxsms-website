@@ -43,11 +43,11 @@ import service_computer_list from "@/src/views/service/service-computer-list";
 import service_computer_detail from "@/src/views/service/service-computer-detail";
 import service_guarantee_list from "@/src/views/service/service-guarantee-list";
 import service_guarantee_detail from "@/src/views/service/service-guarantee-detail";
-/** 二中团建 */
+/** 团建活动 */
 import group from "@/src/views/group/index";
 import group_ccyl_list from  "@/src/views/group/group-ccyl-list";
 import group_ccyl_detail from "@/src/views/group/group-ccyl-detail";
-/** 二中党建 */
+/** 学校党建 */
 import party from "@/src/views/party/index";
 import party_theory_list from "@/src/views/party/party-theory-list";
 import party_theory_detail from "@/src/views/party/party-theory-detail";
@@ -67,7 +67,7 @@ import party_position_detail from "@/src/views/party/party-position-detail";
 import union from "@/src/views/union/index";
 import union_staff_list from "@/src/views/union/union-staff-list";
 import union_staff_detail from "@/src/views/union/union-staff-detail";
-/** 二中创建 */
+/** 文明创建 */
 import establish from "@/src/views/establish/index";
 import establish_meeting_list from "@/src/views/establish/establish-meeting-list";
 import establish_meeting_detail from "@/src/views/establish/establish-meeting-detail";
@@ -83,7 +83,7 @@ import establish_voice_list from "@/src/views/establish/establish-voice-list";
 import establish_voice_detail from "@/src/views/establish/establish-voice-detail";
 
 
-/** 二中安法 */
+/** 平安校园 */
 import law from "@/src/views/law/index";
 import law_safe_list from "@/src/views/law/law-safe-list";
 import law_safe_detail from "@/src/views/law/law-safe-detail";

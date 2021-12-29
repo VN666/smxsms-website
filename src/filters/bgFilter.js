@@ -23,3 +23,7 @@ export const removeHtmlTag = (htmlStr) => {
 	const reg = /<\/?.+?\/?>/g;
 	return htmlStr.replace(reg, "").replace(/&nbsp;/g, "");
 }
+
+export const subText = (html) => {
+	return html.substr(200) + "..."
+}

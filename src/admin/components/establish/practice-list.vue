@@ -1,7 +1,7 @@
 x<template>
 	<div class="practice-list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中创建', '新时代文明实践活动', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '文明创建', '新时代文明实践活动', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">

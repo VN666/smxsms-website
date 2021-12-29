@@ -1,7 +1,7 @@
 <template>
 	<div class="construct-list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中党建', '组织建设', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '学校党建', '组织建设', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">

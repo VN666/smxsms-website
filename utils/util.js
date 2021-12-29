@@ -30,27 +30,6 @@ const getFileOriginalname = (file) => file.substring(file.lastIndexOf("/") + 1);
 
 const getFileExt = (file) => file.substring(file.lastIndexOf(".") + 1, file.length);
 
-// downLoadFile (blob, fileName) {
-//         if ("download" in document.createElement("a")) {
-//             let downloadElement = document.createElement("a");
-//             let href = "";
-//             if (window.URL)
-//                 href = window.URL.createObjectURL(blob);
-//             else
-//                 href = window.webkitURL.createObjectURL(blob);
-//             downloadElement.href = href;
-//             downloadElement.download = fileName;
-//             document.body.appendChild(downloadElement);
-//             downloadElement.click();
-//             if (window.URL)
-//                 window.URL.revokeObjectURL(href);
-//             else
-//                 document.body.removeChild(downloadElement);
-//         } else {
-//             navigator.msSaveBlob(blob, fileName);
-//         }
-//     },
-
 const downloadFile = (filePath) => {
 	const message = _this.$message({ message: "正在下载，请耐心等待", duration: 0, type: "success" });
 	_this.$http({

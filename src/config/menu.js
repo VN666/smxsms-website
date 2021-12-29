@@ -6,7 +6,7 @@ const menu = [
 		children: []
 	},
 	{
-		title: "二中概况",
+		title: "学校概况",
 		router: "/about",
 		code: "smxsmx_about",
 		children: [
@@ -99,13 +99,13 @@ const menu = [
 		]
 	},
 	{
-		title: "二中团建",
+		title: "团建活动",
 		router: "/group",
 		code: "smxsmx_group",
 		children: []
 	},
 	{
-		title: "二中党建",
+		title: "学校党建",
 		router: "/party",
 		code: "smxsmx_party",
 		children: [
@@ -153,7 +153,7 @@ const menu = [
 		children: []
 	},
 	{
-		title: "二中创建",
+		title: "文明创建",
 		router: "/establish",
 		code: "smxsmx_establish",
 		children: [
@@ -190,7 +190,7 @@ const menu = [
 		]
 	},
 	{
-		title: "二中安法",
+		title: "平安校园",
 		router: "/law",
 		code: "smxsmx_law",
 		children: []

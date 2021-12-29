@@ -1,11 +1,11 @@
 <template>
 	<div class="log-list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中团建', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '团建活动', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">
-			<el-button type="success" size="mini" @click="goExport" disabled><i class="el-icon-plus el-icon--left"></i>导出</el-button>
+			<el-button type="success" size="mini" @click="goExport"><i class="el-icon-plus el-icon--left"></i>导出</el-button>
 			<svg @click="tiggerFilter" v-if="!showFilter" t="1568566044267" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10102" width="32" height="32"><path d="M764.3136 270.6944l-167.5776 201.3184v316.0064a135.8848 135.8848 0 1 1-271.7696 0V472.0128L157.3888 270.6944A89.1904 89.1904 0 0 1 225.9456 124.416h469.8112a89.1904 89.1904 0 0 1 68.5568 146.2784z" fill="#666666" p-id="10103"></path><path d="M844.8 533.2992h-179.2a30.72 30.72 0 0 1 0-61.44h179.2a30.72 30.72 0 0 1 0 61.44zM844.8 651.3664h-179.2a30.72 30.72 0 0 1 0-61.44h179.2a30.72 30.72 0 0 1 0 61.44zM844.8 769.4336h-179.2a30.72 30.72 0 0 1 0-61.44h179.2a30.72 30.72 0 0 1 0 61.44z" fill="#666666" p-id="10104"></path></svg>
 			<svg @click="tiggerFilter" v-else t="1568566398017" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10362" width="32" height="32"><path d="M776.4992 176.4864a88.2688 88.2688 0 0 0-80.7424-51.2H225.9456A89.2416 89.2416 0 0 0 157.3888 271.36l167.5776 201.3696v316.0576a135.8848 135.8848 0 0 0 271.7696 0V472.7296L764.3136 271.36a88.3712 88.3712 0 0 0 12.1856-94.8736z m-59.392 55.6032l-174.6944 209.92a30.72 30.72 0 0 0-7.1168 19.6608v327.168a74.4448 74.4448 0 0 1-148.8896 0V461.6192a30.72 30.72 0 0 0-7.0656-19.6608L204.8 232.0896a27.7504 27.7504 0 0 1 21.2992-45.5168h469.8112a27.7504 27.7504 0 0 1 21.3504 45.5168z" fill="#666666" p-id="10363"></path><path d="M634.88 503.3472a30.72 30.72 0 0 0 30.72 30.72h179.2a30.72 30.72 0 0 0 0-61.44h-179.2a30.72 30.72 0 0 0-30.72 30.72zM844.8 590.6944h-179.2a30.72 30.72 0 0 0 0 61.44h179.2a30.72 30.72 0 0 0 0-61.44zM844.8 708.7616h-179.2a30.72 30.72 0 0 0 0 61.44h179.2a30.72 30.72 0 0 0 0-61.44z" fill="#666666" p-id="10364"></path></svg>
 		</div>
@@ -37,7 +37,7 @@
 						<el-form-item label="发布日期">
 							<el-date-picker
 						      	v-model="timeValue"
-						      	:editable="false"
+						      	:editable="true"
 						      	type="datetimerange"
 						      	range-separator="-"
 						      	start-placeholder="开始日期"
@@ -197,28 +197,53 @@ export default {
             this.requestData();
         },
         goExport (path) {
-        	this.$router.push({ path: path });
-        },
-        resize () {
-        	this.tableMaxHeight = this.$el.clientHeight - this.$refs.option_wrap.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.page_wrap.clientHeight - 16;
-        	if (this.showFilter) {
-        		this.tableMaxHeight -= this.$refs.search_wrap.clientHeight;
-        	}
-        },
-        goExport () {
-        	this.$http({
-        		method: "post", url:
-        		this.$api.system_log_export,
+        	if (this.timeValue && this.timeValue.length !== 0) {
+				this.filters.startTime = this.timeValue[0];
+				this.filters.endTime = this.timeValue[1];
+			} else {
+				this.filters.startTime = dayjs(new Date()).format("YYYY-MM-DD") + " 00:00:00";
+				this.filters.endTime = dayjs(new Date()).format("YYYY-MM-DD") + " 23:59:59";
+			}
+			this.$http({
+        		method: "post",
+        		url: this.$api.system_log_export,
         		data: {
-        			pageNo: this.page.pageNo,
-        			pageSize: this.page.pageSize,
+        			type: 0,
         			username: this.filters.username,
         			opType: this.filters.opType,
         			modulename: this.filters.module.join("-"),
         			startTime: this.filters.startTime,
         			endTime: this.filters.endTime
         		}
+        	}).then((res) => {
+        		if (res.code !== 200) {
+        			this.$message.error(res.msg);
+        			return;
+        		}
+        		const blob = new Blob([Buffer.from(res.result, "binary")]);
+        		if ("download" in document.createElement("a")) {
+		            let downloadElement = document.createElement("a");
+		            let href = "";
+		            if (window.URL) href = window.URL.createObjectURL(blob);
+		            else href = window.webkitURL.createObjectURL(blob);
+		            downloadElement.href = href;
+		            downloadElement.download = "operate_log.xlsx";
+		            document.body.appendChild(downloadElement);
+		            downloadElement.click();
+		            if (window.URL)
+		                window.URL.revokeObjectURL(href);
+		            else
+		                document.body.removeChild(downloadElement);
+		        } else {
+		            navigator.msSaveBlob(blob, fileName);
+		        }
         	});
+        },
+        resize () {
+        	this.tableMaxHeight = this.$el.clientHeight - this.$refs.option_wrap.clientHeight - this.$refs.breadcrumb_wrap.clientHeight - this.$refs.page_wrap.clientHeight - 16;
+        	if (this.showFilter) {
+        		this.tableMaxHeight -= this.$refs.search_wrap.clientHeight;
+        	}
         }
     },
 	mounted () {

@@ -32,8 +32,8 @@
 
 			<div class="wLine1">
 				<div class="wLineL">
-					<h-panel class="panel" title="二中党建" :content="partyData|filterParty" @moreClick="partyMore" @itemClick="partyItem" :max="5"></h-panel>
-					<h-panel class="panel" title="二中团建" :content="groupData|filterGroup" @moreClick="groupMore" @itemClick="groupItem" :max="5"></h-panel>
+					<h-panel class="panel" title="学校党建" :content="partyData|filterParty" @moreClick="partyMore" @itemClick="partyItem" :max="5"></h-panel>
+					<h-panel class="panel" title="团建活动" :content="groupData|filterGroup" @moreClick="groupMore" @itemClick="groupItem" :max="5"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
@@ -43,15 +43,14 @@
 					<p class="proverb">
 						<img :src="proverbData.headSrc" />
 						<span v-html="$options.filters.picText($options.filters.removeHtmlTag(proverbData.content))"></span>
-						<!-- {{proverbData.content | removeHtmlTag | picText}} -->
 					</p>
 				</div>
 			</div>
 
 			<div class="wLine2">
 				<div class="wLineL">
-					<h-panel class="panel" title="二中安法" :content="lawData|filterLaw" @moreClick="lawMore" @itemClick="lawItem" :max="6"></h-panel>
-					<h-panel class="panel" title="二中创建" :content="establishData|filterEstablish" @moreClick="establishMore" @itemClick="establishItem" :max="6"></h-panel>
+					<h-panel class="panel" title="平安校园" :content="lawData|filterLaw" @moreClick="lawMore" @itemClick="lawItem" :max="6"></h-panel>
+					<h-panel class="panel" title="文明创建" :content="establishData|filterEstablish" @moreClick="establishMore" @itemClick="establishItem" :max="6"></h-panel>
 				</div>
 				<div class="wLineR">
 					<div class="title">
@@ -145,7 +144,7 @@ export default {
 			return val;
 		},
 		picText (text) {
-			return text.substring(0, 155) + "...";
+			return text.substring(0, 140) + "...";
 		},
 		filterParty (val) {
 			val.forEach((item) => {
@@ -215,7 +214,7 @@ export default {
 			this.goPathQuery("/establish/meeting-list", "", 0);
 		},
 		lawMore () {
-			this.goPathQuery("/school/safe-list", "", 0);
+			this.goPathQuery("/law/safe-list", "", 0);
 		},
 		partyItem (item) {
 			this.goPathQuery("/party/theory-detail", item.id, 0);
@@ -302,11 +301,8 @@ export default {
 		requestParty () {
 			return this.$http({
 				method: "post",
-				url: this.$api.party_theory_queryList,
-				data: {
-					pageNo: 1,
-					pageSize: 20
-				}
+				url: this.$api.party_all,
+				data: {}
 			});
 		},
 		requestGroup () {
@@ -339,11 +335,8 @@ export default {
 		requestEstablish () {
 			return this.$http({
 				method: "post",
-				url: this.$api.establish_meeting_queryList,
-				data: {
-					pageNo: 1,
-					pageSize: 20
-				}
+				url: this.$api.establish_all,
+				data: {}
 			});
 		},
 		requestContact () {

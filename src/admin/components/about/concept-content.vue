@@ -1,7 +1,7 @@
 <template>
 	<div class="concept_content">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中概况', '办学理念', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '学校概况', '办学理念', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

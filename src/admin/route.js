@@ -4,7 +4,7 @@ import admin from "./index";
 import admin_bg from "./components/bg/index";
 /** 联系我们 */
 import admin_contact from "./components/contact/index";
-/** 二中概况 */
+/** 学校概况 */
 import profile_content from "./components/about/profile-content";
 import concept_content from "./components/about/concept-content";
 import proverb_content from "./components/about/proverb-content";
@@ -44,11 +44,11 @@ import guarantee_edit from "./components/service/guarantee-edit";
 import computer_list from "./components/service/computer-list";
 import computer_add from "./components/service/computer-add";
 import computer_edit from "./components/service/computer-edit";
-/** 二中团建 */
+/** 团建活动 */
 import ccyl_list from "./components/group/ccyl-list";
 import ccyl_add from "./components/group/ccyl-add";
 import ccyl_edit from "./components/group/ccyl-edit";
-/** 二中党建 */
+/** 学校党建 */
 import theory_list from "./components/party/theory-list";
 import theory_add from "./components/party/theory-add";
 import theory_edit from "./components/party/theory-edit";
@@ -74,7 +74,7 @@ import position_edit from "./components/party/position-edit";
 import staff_list from "./components/union/staff-list";
 import staff_add from "./components/union/staff-add";
 import staff_edit from "./components/union/staff-edit";
-/** 二中创建 */
+/** 文明创建 */
 import meeting_list from "./components/establish/meeting-list";
 import meeting_add from "./components/establish/meeting-add";
 import meeting_edit from "./components/establish/meeting-edit";
@@ -93,7 +93,7 @@ import practice_edit from "./components/establish/practice-edit";
 import voice_list from "./components/establish/voice-list";
 import voice_add from "./components/establish/voice-add";
 import voice_edit from "./components/establish/voice-edit";
-/** 二中安法 */
+/** 平安校园 */
 import safe_list from "./components/law/safe-list";
 import safe_add from "./components/law/safe-add";
 import safe_edit from "./components/law/safe-edit";

@@ -1,7 +1,7 @@
 <template>
 	<div class="volunteer-add">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中创建', '志愿者风采', '新增']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '文明创建', '志愿者风采', '新增']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

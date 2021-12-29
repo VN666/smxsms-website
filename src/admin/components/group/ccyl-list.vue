@@ -1,7 +1,7 @@
 <template>
 	<div class="ccyl-list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中团建', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '团建活动', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">

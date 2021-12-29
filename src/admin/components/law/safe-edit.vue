@@ -1,7 +1,7 @@
 <template>
 	<div class="safe-edit">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中安法', '编辑']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '平安校园', '编辑']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">

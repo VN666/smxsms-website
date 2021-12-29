@@ -18,7 +18,7 @@ export const menu = [
 		menuCode: "bg",
 	},
 	{
-		title: "二中概况",
+		title: "学校概况",
 		code: "admin_about",
 		path: "admin-about",
 		icon: "el-icon-school",
@@ -137,14 +137,14 @@ export const menu = [
 		]
 	},
 	{
-		title: "二中团建",
+		title: "团建活动",
 		code: "admin_group",
 		path: "admin-group",
 		icon: "el-icon-brush",
 		menuCode: "ccyl"
 	},
 	{
-		title: "二中党建",
+		title: "学校党建",
 		code: "admin_party",
 		path: "admin-party",
 		icon: "el-icon-sunny",
@@ -202,7 +202,7 @@ export const menu = [
 		menuCode: "staff"
 	},
 	{
-		title: "二中创建",
+		title: "文明创建",
 		code: "admin_establish",
 		path: "admin-establish",
 		icon: "el-icon-aim",
@@ -247,7 +247,7 @@ export const menu = [
 		]
 	},
 	{
-		title: "二中安法",
+		title: "平安校园",
 		code: "admin_law",
 		path: "admin-law",
 		icon: "el-icon-guide",

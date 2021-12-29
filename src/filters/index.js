@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { bgFilter, removeHtmlTag } from "./bgFilter.js";
+import { bgFilter, removeHtmlTag, subText } from "./bgFilter.js";
 import { timeCut } from "./timeCut.js";
 
 Vue.filter("bgFilter", bgFilter);

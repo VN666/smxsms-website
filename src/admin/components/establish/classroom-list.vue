@@ -1,7 +1,7 @@
 <template>
 	<div class="classroom-list">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中创建', '学习大讲堂', '列表']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '文明创建', '学习大讲堂', '列表']"></h-breadcrumb>
 		</div>
 
 		<div class="option_wrap" ref="option_wrap">

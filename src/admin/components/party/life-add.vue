@@ -1,7 +1,7 @@
 <template>
 	<div class="life-add">
 		<div class="breadcrumb_wrap" ref="breadcrumb_wrap">
-			<h-breadcrumb :bread="['后台管理', '二中党建', '组织生活', '新增']"></h-breadcrumb>
+			<h-breadcrumb :bread="['后台管理', '学校党建', '组织生活', '新增']"></h-breadcrumb>
 		</div>
 
 		<div class="content_wrap">
